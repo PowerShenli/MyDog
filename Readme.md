@@ -38,8 +38,14 @@ MyDog - 开发者最忠实的朋友.
 编译成功将看到 ``BUILD SUCCESS`` 
 
 #### 3. 修改配置
+  * 配置文件说明
+  
 用任何编辑器打开 ``/tmp/mydog/Mydog/mydog-shell/demo.json``
 这是一个纯JSON格式文件，请小心编辑，不要破坏格式。
+
+其实demo.json 即元数据定义,更灵活的配置是结合mydog-web进行生成的. 
+这里使用固化的文件仅仅为了演示流程.
+
 
   * 修改输出文件位置
 
