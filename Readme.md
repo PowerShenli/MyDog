@@ -72,7 +72,7 @@ mysql> create database mydog default charset utf8;
 ```
 应该可以看到如下目录
 
-![output files](https://raw.githubusercontent.com/PowerShenli/MyDog/master/mydog-doc/src/main/resources/mydog-shell_1.png)
+![output files](https://raw.githubusercontent.com/PowerShenli/MyDog/master/mydog-doc/src/main/resources/mydog-shell_1.png =300x600)
 
 #### 7. 运行生成后的项目
 
