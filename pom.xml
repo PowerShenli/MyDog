@@ -17,6 +17,7 @@
         <module>mydog-plugin-datasource</module>
         <module>mydog-plugin-entity</module>
         <module>mydog-plugin-entityui</module>
+        <module>mydog-doc</module>
     </modules>
 
     <dependencyManagement>
