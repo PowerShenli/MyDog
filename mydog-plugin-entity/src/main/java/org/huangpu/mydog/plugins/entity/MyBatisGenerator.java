@@ -26,6 +26,7 @@ public class MyBatisGenerator implements Generator {
 
         JSONObject datasource = stringMapMap.get("datasource").get("tomcatDatasource");
         JSONObject connectionProps = datasource.getJSONObject("connectionProps");
+        String driverJarPath = datasource.getString("driverJarPath");
         String driverClassName = connectionProps.getString("spring.datasource.driver-class-name");
         String url = connectionProps.getString("spring.datasource.url");
         String pass = connectionProps.getString("spring.datasource.password");
@@ -41,7 +42,8 @@ public class MyBatisGenerator implements Generator {
 //        String tableName = MyBatisUtils.getTbName(domainObjectName);
 
         MyBatisGeneratorConfig myBConfig = new MyBatisGeneratorConfig();
-        myBConfig.setConnectorJarFilePath("/Users/shenli/mvn/repo/m2/mysql/mysql-connector-java/5.1.40/mysql-connector-java-5.1.40.jar");
+        myBConfig.setConnectorJarFilePath(driverJarPath);
+
         myBConfig.setDriverClass(driverClassName);
         myBConfig.setConnectionURL(url);
         myBConfig.setUserName(user);

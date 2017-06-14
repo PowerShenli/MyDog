@@ -282,7 +282,8 @@
           "spring.datasource.initial-size": "10",
           "spring.datasource.test-while-idle": "true",
           "spring.datasource.validation-query": "SELECT 1"
-        }
+        },
+        "driverJarPath":"/Users/shenli/mvn/repo/m2/mysql/mysql-connector-java/5.1.40/mysql-connector-java-5.1.40.jar"
       },
       "metadataType": "datasource",
       "instanceName": "tomcatDatasource"
