@@ -1,9 +1,0 @@
-{
-  "pluginName":"project",
-  "dependency":[
-    {
-      "meta"  : "project",
-      "props" : ["basePath","outputPath","basePackage"]
-    }
-  ]
-}
