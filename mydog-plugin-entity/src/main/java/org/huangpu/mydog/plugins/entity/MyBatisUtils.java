@@ -21,7 +21,7 @@ public class MyBatisUtils {
     }};
 
     public static String getTbName(String entityName) {
-        return "tbl1"+entityName.replaceAll("[A-Z]", "_$0").toLowerCase();
+        return "tb"+entityName.replaceAll("[A-Z]", "_$0").toLowerCase();
     }
 
     public static String getColumnName(String fieldName){
