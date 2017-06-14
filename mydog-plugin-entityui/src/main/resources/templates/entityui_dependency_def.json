@@ -1,0 +1,9 @@
+{
+  "pluginName":"entityui",
+  "dependency":[
+    {
+      "meta"  : "entity",
+      "props" : []
+    }
+  ]
+}

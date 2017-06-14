@@ -1,0 +1,9 @@
+{
+  "pluginName":"datasource",
+  "dependency":[
+    {
+      "meta":"project",
+      "props": ["basePath","outputPath","basePackage"]
+    }
+  ]
+}

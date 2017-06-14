@@ -1,0 +1,13 @@
+{
+  "pluginName":"entity",
+  "dependency":[
+    {
+      "meta"  : "project",
+      "props" : ["basePath","outputPath","basePackage"]
+    },
+    {
+      "meta" : "datasource",
+      "props": ["driverClassName","url","username","password"]
+    }
+  ]
+}

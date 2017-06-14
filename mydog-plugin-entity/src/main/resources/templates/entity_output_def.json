@@ -1,0 +1,48 @@
+<#assign prj=project["mydogProj"]/>
+{
+  "pluginName":"entity",
+  "outItemsDef": {
+<#list entity?keys as ent>
+<#assign ev=entity[ent]/>
+        "${ent}":[
+            {
+              "itemName": "${ev.entityName}Controller.java",
+              "outputPath": "${prj.outputPath}src/main/java/${prj.basePath}/ctrl/",
+              "genType": "byTemplate",
+              "tmpFilePath": "templates/_Controller.ftl"
+            },
+            {
+              "itemName": "${ev.entityName}Service.java",
+              "outputPath": "${prj.outputPath}src/main/java/${prj.basePath}/service/",
+              "genType": "byTemplate",
+              "tmpFilePath": "templates/_Service.ftl"
+            },
+            {
+              "itemName": "${ev.entityName}DomainAndMapping.mybatis",
+              "outputPath": "${prj.outputPath}src/main/java/${prj.basePath}/",
+              "generator": "org.huangpu.mydog.plugins.entity.MyBatisGenerator",
+              "genType": "byCode",
+              "overwrite": false
+            },
+            {
+              "itemName": "${ev.entityName}_DDL.sql",
+              "outputPath": "${prj.outputPath}sql/",
+              "genType": "byGrammar",
+              "overwrite": false
+            }
+        ]
+<#if ent_has_next>      ,</#if>
+</#list>
+        ,
+      //下面的只用生成一次
+        "Common":[
+            {
+                "itemName": "BootConfig.java",
+                "outputPath": "${prj.outputPath}src/main/java/${prj.basePath}/config/",
+                "genType":"byTemplate",
+                "tmpFilePath": "templates/_boot_config.java.ftl",
+                "overwrite": false
+            }
+        ]
+  }
+}

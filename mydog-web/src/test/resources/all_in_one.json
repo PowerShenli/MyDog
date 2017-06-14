@@ -1,0 +1,291 @@
+{
+  "metadatas": [
+    {
+      "properties": {
+        "entityName": "User",
+        "label":"用户",
+        "id":{
+          "fieldName":"id",
+          "fieldType":"Integer",
+          "generate":"increment"
+        },
+        "idType":"Integer",
+        "packageName": "org.huangpu.mydog.demo",
+        "fields": [
+          {
+            "fieldName": "username",
+            "label":"用户名",
+            "isId": false,
+            "validates": [
+              "@Size(min = 6,max = 18)",
+              "@NotNull",
+              "@Pattern(regexp = \"^[A-Za-z0-9]+$\")"
+            ],
+            "fieldType": "String",
+            "length":"10",
+            "null":false,
+            "viewProp":{
+              "type":"text"
+            }
+          },
+          {
+            "fieldName": "password",
+            "label":"密码",
+            "isId": false,
+            "fieldType": "String",
+            "length":50,
+            "null":false,
+            "validates":[
+              "@NotNull",
+              "@Size(min =6, max=18)",
+              "@Pattern(regexp=\"^[A-Za-z0-9]+$\")"
+            ],
+            "viewProp":{
+              "type":"password"
+            }
+          },
+          {
+            "fieldName": "id",
+            "label":"用户id",
+            "fieldType": "Integer",
+            "isId": true,
+            "length":11,
+            "null": true,
+            "validates":[
+
+            ],
+            "viewProp":{
+              "type":"hidden"
+            }
+          },
+          {
+            "fieldName": "age",
+            "label":"年龄",
+            "fieldType": "Integer",
+            "isId": false,
+            "length": 3,
+            "null": false,
+            "validates":[
+              "@NotNull",
+              "@DecimalMax(value = \"99\")",
+              "@DecimalMin(value = \"18\")"
+            ],
+            "viewProp":{
+              "type":"number"
+            }
+          },
+          {
+            "fieldName": "email",
+            "label":"邮箱",
+            "fieldType": "String",
+            "isId": false,
+            "length": 50,
+            "null": false,
+            "validates":[
+              "@NotNull",
+              "@Pattern(regexp=\"^\\\\s*\\\\w+(?:\\\\.{0,1}[\\\\w-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\\\\.[a-zA-Z]+\\\\s*$\")"
+            ],
+            "viewProp":{
+              "type":"text"
+            }
+          }
+        ],
+        "query":{
+          "alias":["User,u","Role,r","UserRole,ur"],
+          "item":[
+            {
+              "u.username":"like"
+            },{
+              "u.age":"between"
+            },{
+              "u.email":""
+            }
+          ],
+          "innerJoin":[
+            {
+              "on":"u.id,ur.uid",
+              "item":[]
+            },
+            {
+              "on":"ur.rid,r.id",
+              "item":[
+                {"r.name":"distinct:select"}
+              ]
+            }
+          ]
+        }
+      },
+      "metadataType": "entity",
+      "instanceName":"User"
+    },
+    {
+      "properties": {
+        "entityName": "Role",
+        "label":"角色",
+        "id":{
+          "fieldName":"id",
+          "fieldType":"Integer",
+          "generate":"increment"
+        },
+        "idType":"Integer",
+        "packageName": "org.huangpu.mydog.demo",
+        "fields": [
+          {
+            "fieldName": "name",
+            "label":"角色名",
+            "isId": false,
+            "validates": [
+              "@Size(min = 6,max = 18)",
+              "@NotNull",
+              "@Pattern(regexp = \"^[A-Za-z0-9]+$\")"
+            ],
+            "fieldType": "String",
+            "length":"18",
+            "null":false,
+            "viewProp":{
+              "type":"text"
+            }
+          },
+          {
+            "fieldName": "available",
+            "label":"是否启用",
+            "isId": false,
+            "fieldType": "Boolean",
+            "length":1,
+            "null":false,
+            "viewProp":{
+              "type":"redio",
+              "enum":"{\"true\":\"是\",\"false\":\"否\"}"
+            }
+          },
+          {
+            "fieldName": "id",
+            "label":"角色id",
+            "fieldType": "Integer",
+            "isId": true,
+            "length":11,
+            "null": true,
+            "validates":[
+
+            ],
+            "viewProp":{
+              "type":"hidden"
+            }
+          }
+        ]
+      },
+      "metadataType": "entity",
+      "instanceName": "Role"
+    },
+    {
+      "metadataType": "entity",
+      "instanceName": "UserRole",
+      "properties":{
+        "entityName":"UserRole",
+        "label":"用户角色关系",
+        "id":{
+          "fieldName":"id",
+          "fieldType":"Integer",
+          "generate":"increment"
+        },
+        "idType":"Integer",
+        "packageName": "org.huangpu.mydog.demo",
+        "unique":["uid","rid"],
+        "fields": [
+          {
+            "fieldName": "uid",
+            "label":"用户id",
+            "isId": false,
+            "validates": [
+              "@NotNull"
+            ],
+            "fieldType": "Integer",
+            "length":"11",
+            "null":false,
+            "viewProp":{
+              "type":"text"
+            }
+          },
+          {
+            "fieldName": "rid",
+            "label":"角色id",
+            "isId": false,
+            "validates": [
+              "@NotNull"
+            ],
+            "fieldType": "Integer",
+            "length":"11",
+            "null":false,
+            "viewProp":{
+              "type":"text"
+            }
+          },
+          {
+            "fieldName": "id",
+            "label":"用户角色关系id",
+            "fieldType": "Integer",
+            "isId": true,
+            "length":11,
+            "null": true,
+            "validates":[
+
+            ],
+            "viewProp":{
+              "type":"hidden"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "properties":{
+
+      },
+      "metadataType": "entityui",
+      "instanceName": "bootstrap+jquery"
+    },
+    {
+      "properties": {
+        "name":"MyDog测试项目",
+        "springBoot-version": "1.4.2.RELEASE",
+        "project": {
+          "groupId": "com.power.test",
+          "artifactId": "MyDogPrj",
+          "version": "1.0.0-SNAPSHOT"
+        },
+        "basePath": "com/power/test/project",
+        "outputPath": "/tmp/myDog_1/output/",
+        "basePackage": "com.power.test.project",
+        "appProp":{
+          "server.port":"8082",
+          "logging.config":"classpath:logback.xml"
+        }
+      },
+      "metadataType": "project",
+      "instanceName": "mydogProj"
+    },
+    {
+      "properties": {
+        "connectionProps": {
+          "datasourceName":"default",
+          "spring.datasource.url":"jdbc:mysql://localhost:3306/springlesson9?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false",
+          "spring.datasource.username":"root",
+          "spring.datasource.password":"",
+          "spring.datasource.driver-class-name":"com.mysql.jdbc.Driver",
+          "spring.datasource.test-on-borrow": "false",
+          "spring.datasource.max-wait-millis": "30000",
+          "spring.datasource.max-idle": "20",
+          "spring.datasource.min-evictable-idle-time-millis": "600000",
+          "spring.datasource.min-idle": "5",
+          "spring.datasource.test-on-return": "false",
+          "spring.datasource.time-between-eviction-runs-millis": "180000",
+          "spring.datasource.initial-size": "10",
+          "spring.datasource.test-while-idle": "true",
+          "spring.datasource.validation-query": "SELECT 1"
+        }
+      },
+      "metadataType": "datasource",
+      "instanceName": "tomcatDatasource"
+    }
+  ]
+}
