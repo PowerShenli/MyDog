@@ -29,6 +29,8 @@ MyDog - 开发者最忠实的朋友.
 
 首先确保运行环境下已经有maven环境，如果没有，请参考 [install apache maven](http://maven.apache.org/install.html)
 
+另外JDK需要8+
+
 ```
 ~$> cd /tmp/mydog/MyDog
 ~$> mvn install -Dmaven.test.skip=true
