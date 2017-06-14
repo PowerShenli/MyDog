@@ -52,7 +52,7 @@ MyDog - 开发者最忠实的朋友.
 
   * 修改jdbc驱动路径
 
-找到关键字 ``driverJarPath`` ,确认与与数据库匹配，且路径有效
+找到关键字 ``driverJarPath`` ,确认与数据库匹配，且路径有效
 
 #### 4. 创建数据库
 参照第第三步的配置文件中的 ``spring.datasource.url`` 参数，创建数据库。
