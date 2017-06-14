@@ -61,7 +61,7 @@ mysql> create database mydog default charset utf8;
 
 ```
 ~$> cd /tmp/mydog/MyDog/mydog-shell/target
-~$> java -jar mydog-shell-1.0-SNAPSHOT.jar /tmp/mydog/MyDog/mydog-shell/demo.json
+~$> java -jar mydog-shell-1.0-SNAPSHOT.jar ../demo.json
 ```
 
 #### 6. 查看输出
