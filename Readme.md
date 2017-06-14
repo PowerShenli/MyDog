@@ -60,8 +60,8 @@ mysql> create database mydog default charset utf8;
 #### 5. 执行代码生成
 
 ```
-~$> cd /tmp/mydog/MyDog/mydog-shwll/target
-~$> java -jar mydog-shell-1.0-SNAPSHOT.jar /tmp/mydog/MyDog/mydog-shell/demo.json
+~$> cd /tmp/mydog/MyDog/mydog-shell/target
+~$> java -jar mydog-shell-1.0-SNAPSHOT.jar ../demo.json
 ```
 
 #### 6. 查看输出
@@ -72,7 +72,7 @@ mysql> create database mydog default charset utf8;
 ```
 应该可以看到如下目录
 
-<img src=https://raw.githubusercontent.com/PowerShenli/MyDog/master/mydog-doc/src/main/resources/mydog-shell_1.png" width="500"/>
+<img src="https://raw.githubusercontent.com/PowerShenli/MyDog/master/mydog-doc/src/main/resources/mydog-shell_1.png" width="500" height="800"/>
 
 #### 7. 运行生成后的项目
 
