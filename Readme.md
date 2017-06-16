@@ -60,11 +60,8 @@ MyDog - 开发者最忠实的朋友.
 
 <br/>
 
-  * 修改jdbc驱动路径
 
-找到关键字 ``driverJarPath`` ,确认与数据库匹配，且路径有效
-
-#### 4. 创建数据库
+#### 4. 创建数据库,修改配置
 参照第第三步的配置文件中的 ``spring.datasource.url`` 参数，创建数据库。
 使用localhost:3306端口，默认数据库mydog,IP 端口和 数据库名均可修改，但
 数据库目前仅仅支持mysql，后续会支持多种数据库。
@@ -73,6 +70,13 @@ MyDog - 开发者最忠实的朋友.
 ```
 mysql> create database mydog default charset utf8;
 ```
+
+  * 修改数据库相关信息
+  
+找到关键字 ``driverJarPath`` , 修改驱动路径确认与数据库匹配，且路径有效
+找到关键字 ``spring.datasource.url`` 修改为正确的连接信息，如ip端口等
+找到关键子 ``spring.datasource.username`` 和 ``spring.datasource.password`` 修改为正确的用户名和密码
+
 
 #### 5. 执行代码生成
 
