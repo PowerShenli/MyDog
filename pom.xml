@@ -103,6 +103,7 @@
                         <source>1.8</source>
                         <target>1.8</target>
                     </configuration>
+                    <version>3.5.1</version>
                 </plugin>
             </plugins>
         </pluginManagement>
