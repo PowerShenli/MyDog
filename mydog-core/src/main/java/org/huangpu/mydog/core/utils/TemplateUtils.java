@@ -34,6 +34,7 @@ public class TemplateUtils {
         String rst = "";
         try {
             Template temp = cfg.getTemplate(tmpKey);
+            temp.setOutputEncoding("UTF-8");
             Writer out = new StringWriter(2048);
             temp.process(param, out);
             rst = out.toString()/*.replaceAll("[\\n\\r]", "")*/;
