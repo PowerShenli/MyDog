@@ -83,7 +83,9 @@ public class ByCopyPreserver implements Preserver<CopyOutputItem> {
             File outFile = new File(outputPath + entryName.substring(cpFilePath.length()));
             if(!outFile.exists()){
                 if(!outFile.getParentFile().exists()){
+                    LOG.info("parent {} not exists.",outFile.getParentFile().getName());
                     outFile.getParentFile().mkdirs();
+                    LOG.info("completed create dir {}", outFile.getParentFile().getName());
                 }
                 try {
                     outFile.createNewFile();
@@ -104,6 +106,7 @@ public class ByCopyPreserver implements Preserver<CopyOutputItem> {
                 }
             } catch (IOException ioe){
                 LOG.error("copyJarEntry2File failed ",ioe);
+                return;
             }
         }
     }
