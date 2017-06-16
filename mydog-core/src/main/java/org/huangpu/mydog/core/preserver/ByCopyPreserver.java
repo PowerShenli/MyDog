@@ -83,9 +83,9 @@ public class ByCopyPreserver implements Preserver<CopyOutputItem> {
             File outFile = new File(outputPath + entryName.substring(cpFilePath.length()));
             if(!outFile.exists()){
                 if(!outFile.getParentFile().exists()){
-                    LOG.info("parent {} not exists.",outFile.getParentFile().getName());
+                    LOG.info("parent {} not exists.",outFile.getParentFile());
                     outFile.getParentFile().mkdirs();
-                    LOG.info("completed create dir {}", outFile.getParentFile().getName());
+                    LOG.info("completed create dir {}", outFile.getParentFile());
                 }
                 try {
                     outFile.createNewFile();
@@ -109,6 +109,13 @@ public class ByCopyPreserver implements Preserver<CopyOutputItem> {
                 return;
             }
         }
+    }
+
+    public static void main(String[] args) {
+        File f = new File("/tmp/myDog_192/output/src/main/resources/static/css/bootstrap-table.cs");
+        System.out.println("f.exists() = " + f.exists());
+        System.out.println("f.getParentFile() = " + f.getParentFile().getName());
+        System.out.println("f.getParent() = " + f.getParent());
     }
 
 }
