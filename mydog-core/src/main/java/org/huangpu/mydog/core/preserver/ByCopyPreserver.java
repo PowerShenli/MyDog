@@ -81,6 +81,16 @@ public class ByCopyPreserver implements Preserver<CopyOutputItem> {
         if (entryName.startsWith(cpFilePath) && !entryName.endsWith("/")) {
             URL entryUrl = classLoader.getResource(entryName);
             File outFile = new File(outputPath + entryName.substring(cpFilePath.length()));
+            if(!outFile.exists()){
+                if(!outFile.getParentFile().exists()){
+                    outFile.getParentFile().mkdirs();
+                }
+                try {
+                    outFile.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
 
             try(InputStream  is = entryUrl.openConnection().getInputStream();
                 OutputStream os = new FileOutputStream(outFile);
@@ -88,12 +98,7 @@ public class ByCopyPreserver implements Preserver<CopyOutputItem> {
                 byte[] buffer = new byte[1024];
                 int readBytes;
 
-                if(!outFile.exists()){
-                    if(!outFile.getParentFile().exists()){
-                        outFile.getParentFile().mkdirs();
-                    }
-                    outFile.createNewFile();
-                }
+
                 while ((readBytes = is.read(buffer)) != -1) {
                     os.write(buffer, 0, readBytes);
                 }
