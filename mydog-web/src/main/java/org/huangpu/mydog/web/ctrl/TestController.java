@@ -33,15 +33,6 @@ public class TestController {
     @ResponseBody
     public String testCL(){
         MyDogPlugin entityUiPlugin = GenerateContext.getPluginByMetadataType("entityui");
-//        ClassLoader classLoader = entityUiPlugin.getClass().getClassLoader();
-//        URL resource = classLoader.getResource("templates/bootstrap");
-//        System.out.println("resource = " + resource);
-//        File f = new File(resource.getFile());
-//        try {
-//            FileUtils.copyDirectory(f, new File("/tmp/mydogx/"));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
         URL url = entityUiPlugin.getClass().getProtectionDomain().getCodeSource().getLocation();
         ClassLoader classLoader = entityUiPlugin.getClass().getClassLoader();

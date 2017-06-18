@@ -37,7 +37,7 @@ public class TemplateUtils {
             temp.setOutputEncoding("UTF-8");
             Writer out = new StringWriter(2048);
             temp.process(param, out);
-            rst = out.toString()/*.replaceAll("[\\n\\r]", "")*/;
+            rst = out.toString();
             out.flush();
         }catch (IOException| TemplateException e) {
             LOG.error("process templage failed",e);
