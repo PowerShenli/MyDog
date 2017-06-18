@@ -24,7 +24,7 @@ MyDog - 开发者最忠实的朋友.
   *  [mydog-shell.jar](https://github.com/PowerShenli/MyDog/releases/download/0.01/mydog-shell-1.0-SNAPSHOT.jar)
   *  [demo.json](https://github.com/PowerShenli/MyDog/releases/download/0.01/demo.json)
 
-#### 3. 修改配置
+#### 2. 修改配置
 
 * 配置文件说明
   
@@ -48,7 +48,7 @@ MyDog - 开发者最忠实的朋友.
 <br/>
 
 
-#### 4. 创建数据库,修改配置
+#### 3. 创建数据库,修改配置
   * 创建数据库
 
 ```
@@ -62,14 +62,14 @@ mysql> create database mydog default charset utf8;
 找到关键子 ``spring.datasource.username`` 和 ``spring.datasource.password`` 修改为正确的用户名和密码<br/>
 
 
-#### 5. 执行代码生成
+#### 4. 执行代码生成
 
 ```
 ~$> cd /tmp/mydog/MyDog/mydog-shell/target
 ~$> java -jar mydog-shell-1.0-SNAPSHOT.jar ../demo.json
 ```
 
-#### 6. 查看输出
+#### 5. 查看输出
 
 ```
 ~$> cd /tmp/myDog_1/output/
@@ -79,7 +79,7 @@ mysql> create database mydog default charset utf8;
 
 <img src="https://raw.githubusercontent.com/PowerShenli/MyDog/master/mydog-doc/src/main/resources/mydog-shell_1.png" width="500" height="800"/>
 
-#### 7. 运行生成后的项目
+#### 6. 运行生成后的项目
 
 ```
 ~$> cd /tmp/mydog_1/output
@@ -87,7 +87,7 @@ mysql> create database mydog default charset utf8;
 ~$> java -jar target/MyDogPrj-1.0.0-SNAPSHOT.jar
 ```
 
-#### 8. 测试
+#### 7. 测试
 
 访问网页 [http://localhost:8082/index.html](http://localhost:8082/index.html)
 
