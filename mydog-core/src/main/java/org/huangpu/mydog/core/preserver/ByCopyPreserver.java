@@ -52,9 +52,10 @@ public class ByCopyPreserver implements Preserver<CopyOutputItem> {
             } else if (urlConnection instanceof FileURLConnection) {
                 LOG.info("is FileURLConnection, cpFilePath={}", cpFilePath);
                 File source = new File(resourceFolder.getPath());
-                System.out.println("source = " + source);
+                LOG.info("source = {}" , source);
                 if (source.isDirectory()) {
-                    FileUtils.copyDirectory(source, new File(outputPath));
+                    File ss = new File(resourceFolder.getPath() + cpFilePath);
+                    FileUtils.copyDirectory(ss, new File(outputPath));
                 }
                 else if (source.getPath().endsWith(".jar")) {
                     JarFile jarFile = new JarFile(source.getPath());
@@ -100,7 +101,6 @@ public class ByCopyPreserver implements Preserver<CopyOutputItem> {
                 byte[] buffer = new byte[1024];
                 int readBytes;
 
-
                 while ((readBytes = is.read(buffer)) != -1) {
                     os.write(buffer, 0, readBytes);
                 }
@@ -112,7 +112,7 @@ public class ByCopyPreserver implements Preserver<CopyOutputItem> {
     }
 
     public static void main(String[] args) {
-        File f = new File("/tmp/myDog_192/output/src/main/resources/static/css/bootstrap-table.cs");
+        File f = new File("/tmp/myDog_192/output/src/main/resources/static/css/bootstrap-table.css");
         System.out.println("f.exists() = " + f.exists());
         System.out.println("f.getParentFile() = " + f.getParentFile().getName());
         System.out.println("f.getParent() = " + f.getParent());
