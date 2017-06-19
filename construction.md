@@ -47,4 +47,4 @@
 
 ##### 生成代码过程示意图
 
-![代码生成流程图](https://raw.githubusercontent.com/PowerShenli/MyDog/master/mydog-doc/src/main/resources/mydog_gen_flow.png)
+![代码生成流程图](https://raw.githubusercontent.com/PowerShenli/MyDog/master/mydog-doc/src/main/resources/mydog_gen_flow2.png)
