@@ -67,7 +67,6 @@ public class ByCopyPreserver implements Preserver<CopyOutputItem> {
                 else{
                     LOG.error("Can not parse urlConnection : {}", urlConnection);
                 }
-
             }
         } catch (IOException e) {
             e.printStackTrace();
