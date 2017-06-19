@@ -18,17 +18,30 @@ MyDog - 开发者最忠实的朋友.
 
 ## 快速开始
 
-#### 1. 下载Demo文件
+#### 1. 克隆项目到本地（比如 /tmp/mydog/目录）：
 
-下载下面两个文件,并保存在同一个文件夹下:<br/>
-  *  [mydog-shell.jar](https://github.com/PowerShenli/MyDog/releases/download/0.01/mydog-shell-1.0-SNAPSHOT.jar)
-  *  [demo.json](https://github.com/PowerShenli/MyDog/releases/download/0.01/demo.json)
+```
+~$> cd /tmp/mydog
+~$> git clone https://github.com/PowerShenli/MyDog.git
+```
 
-#### 2. 修改配置
+#### 2. 编译源代码
+
+首先确保运行环境下已经有maven环境，如果没有，请参考 [install apache maven](http://maven.apache.org/install.html)
+
+另外JDK需要8+
+
+```
+~$> cd /tmp/mydog/MyDog
+~$> mvn install -Dmaven.test.skip=true
+```
+编译成功将看到 ``BUILD SUCCESS`` 
+
+#### 3. 修改配置
 
 * 配置文件说明
   
-用任何编辑器打开 ``demo.json``
+用任何编辑器打开 ``/tmp/mydog/Mydog/mydog-shell/demo.json``
 这是一个纯JSON格式文件，请小心编辑，不要破坏格式。
 
 其实demo.json 即元数据定义,更灵活的配置是结合mydog-web进行生成的. 
@@ -48,7 +61,7 @@ MyDog - 开发者最忠实的朋友.
 <br/>
 
 
-#### 3. 创建数据库,修改配置
+#### 4. 创建数据库,修改配置
   * 创建数据库
 
 ```
@@ -62,13 +75,14 @@ mysql> create database mydog default charset utf8;
 找到关键子 ``spring.datasource.username`` 和 ``spring.datasource.password`` 修改为正确的用户名和密码<br/>
 
 
-#### 4. 执行代码生成
+#### 5. 执行代码生成
 
 ```
-~$> java -jar mydog-shell-1.0-SNAPSHOT.jar demo.json
+~$> cd /tmp/mydog/MyDog/mydog-shell/target
+~$> java -jar mydog-shell-1.0-SNAPSHOT.jar ../demo.json
 ```
 
-#### 5. 查看输出
+#### 6. 查看输出
 
 ```
 ~$> cd /tmp/myDog_1/output/
@@ -78,7 +92,7 @@ mysql> create database mydog default charset utf8;
 
 <img src="https://raw.githubusercontent.com/PowerShenli/MyDog/master/mydog-doc/src/main/resources/mydog-shell_1.png" width="500" height="800"/>
 
-#### 6. 运行生成后的项目
+#### 7. 运行生成后的项目
 
 ```
 ~$> cd /tmp/mydog_1/output
@@ -86,11 +100,8 @@ mysql> create database mydog default charset utf8;
 ~$> java -jar target/MyDogPrj-1.0.0-SNAPSHOT.jar
 ```
 
-#### 7. 测试
+#### 8. 测试
 
 访问网页 [http://localhost:8082/index.html](http://localhost:8082/index.html)
 
 进行CRUD验证。
-
-
-

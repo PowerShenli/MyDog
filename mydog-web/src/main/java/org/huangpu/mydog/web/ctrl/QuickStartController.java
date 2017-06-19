@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/QuickStart")
 public class QuickStartController {
 
-
     public String index(){
         return "quick_start";
     }
