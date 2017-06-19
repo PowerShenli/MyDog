@@ -51,7 +51,7 @@ public class ByCopyPreserver implements Preserver<CopyOutputItem> {
                 jarFile.close();
             } else if (urlConnection instanceof FileURLConnection) {
                 LOG.info("is FileURLConnection, cpFilePath={}", cpFilePath);
-                File source = new File(resourceFolder.getPath());
+                File source = new File(resourceFolder.getPath() + cpFilePath);
                 System.out.println("source = " + source);
                 if (source.isDirectory()) {
                     FileUtils.copyDirectory(source, new File(outputPath));

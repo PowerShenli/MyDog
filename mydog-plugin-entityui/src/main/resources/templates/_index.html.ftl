@@ -41,8 +41,8 @@
     <script src="js/handlebars-v4.0.5.js"></script>
     <script src="js/main.js"></script>
     <script src="js/index.js"></script>
-    <script src="/js/bootstrapValidator.js"></script>
-    <script src="/js/bootstrap-dialog.js"></script>
+    <script src="js/bootstrapValidator.js"></script>
+    <script src="js/bootstrap-dialog.js"></script>
 </head>
 
 <body>
