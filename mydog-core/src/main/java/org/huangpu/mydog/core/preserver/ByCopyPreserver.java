@@ -52,21 +52,22 @@ public class ByCopyPreserver implements Preserver<CopyOutputItem> {
             } else if (urlConnection instanceof FileURLConnection) {
                 LOG.info("is FileURLConnection, cpFilePath={}", cpFilePath);
                 File source = new File(resourceFolder.getPath() + cpFilePath);
-                System.out.println("source = " + source);
+                LOG.info("source = {}" , source);
                 if (source.isDirectory()) {
                     FileUtils.copyDirectory(source, new File(outputPath));
                 }
-                else if (source.getPath().endsWith(".jar")) {
-                    JarFile jarFile = new JarFile(source.getPath());
+                else if (resourceFolder.getPath().endsWith(".jar")) {
+                    JarFile jarFile = new JarFile(resourceFolder.getPath());
                     Enumeration<JarEntry> entrys = jarFile.entries();
-                    while(entrys.hasMoreElements()){
+                    while (entrys.hasMoreElements()) {
                         JarEntry entry = entrys.nextElement();
-                        copyJarEntry2File(entry,cpFilePath,outputPath,classLoader);
+                        copyJarEntry2File(entry, cpFilePath, outputPath, classLoader);
                     }
                 }
                 else{
                     LOG.error("Can not parse urlConnection : {}", urlConnection);
                 }
+
             }
         } catch (IOException e) {
             e.printStackTrace();

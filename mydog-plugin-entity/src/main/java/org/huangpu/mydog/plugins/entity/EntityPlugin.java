@@ -44,6 +44,11 @@ public class EntityPlugin implements MyDogPlugin {
         return new EntityGeneratorDecorator(generator);
     }
 
+    @Override
+    public JSONObject getViewProps() {
+        return null;
+    }
+
     //TODO: 1 对于非本地运行Web来生成Entity的用户,应该提供DDL文件.(现在默认执行了,却没能让用户下载)
     //TODO: 2 非MySql数据库的支持比如DDL
 }

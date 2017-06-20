@@ -50,5 +50,10 @@ public class ProjectPlugin implements MyDogPlugin {
         };
     }
 
+    @Override
+    public JSONObject getViewProps() {
+        return null;
+    }
+
     //TODO: 支持多种project定义
 }

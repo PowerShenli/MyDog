@@ -16,13 +16,13 @@ public class ShellTools {
             System.err.println("please input the config json path. [java -jar mydog-shell-1.0-SNAPSHOT.jar /xxx/xxx.json]");
             System.exit(1);
         }
-        String configPath = args[0];
-        File cfgFile = new File(configPath);
-        if (!cfgFile.exists()) {
-            System.err.println("the config file [" + configPath + "] is not exist.");
+        String metadataJson = args[0];
+        File metaDataFile = new File(metadataJson);
+        if (!metaDataFile.exists()) {
+            System.err.println("the config file [" + metadataJson + "] is not exist.");
             System.exit(1);
         }
-        String json = FileUtils.readFileToString(cfgFile, "UTF-8");
+        String json = FileUtils.readFileToString(metaDataFile, "UTF-8");
         String s = new FlowController().startGenerate(json);
         System.out.println("execute " + s);
     }

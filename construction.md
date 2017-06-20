@@ -36,6 +36,12 @@
 ### 代码生成过程
 
 关键类在子项目 ``mydog-core`` 的 ``org.huangpu.mydog.core.flow.FlowController``这个类中。
+
+
+##### 生成代码过程示意图
+
+![代码生成流程图](https://raw.githubusercontent.com/PowerShenli/MyDog/master/mydog-doc/src/main/resources/mydog_gen_flow.png)
+
 ##### 生成代码的步骤如下：
 1. 启动系统后初始化插件。这一步系统初始化所有已知的插件定义，并加载插件相关的配置到内存。
 2. 用户通过mydog-web选择所需要的插件，按照需要进行配置（填写元数据）。这里一是选择要什么功能，不要什么功能。二是选择过填写要的插件的具体定义，这里可以做的很强大，比如数据源插件可以支持业界大部分数据源类型，并当用户选择其中一种后，继续让用户填写此种数据源需要填写的元数据，或给出默认配置等等。三是选择最终生成的格式。<br/> 用户选择好后，点击“一键生成”，mydog-web会将生成好的元数据发送给FlowController。
@@ -45,6 +51,63 @@
 6. 迭代元数据列表，找到每个元数据对应的功能插件，通过插件定义找到生成器、输出项，然后调用生成器执行代码生成动作，这一步输出的代码以字符串存储在内存中。
 7. 将生成好的代码按照持久化配置方式进行持久化（目前是简单的写文件，未来可能扩展为war包、jar包、docker 镜像、甚至直接部署至云平台并启动运行  等等）
 
-##### 生成代码过程示意图
 
-![代码生成流程图](https://raw.githubusercontent.com/PowerShenli/MyDog/master/mydog-doc/src/main/resources/mydog_gen_flow2.png)
+
+### 一个插件都包含哪些内容
+* 依赖哪些插件（属性）
+* 对哪些插件产生影响
+* 最终会输出些什么（file？sql？）
+* 用什么生成器生成，怎么生成。
+* 用户都有哪些选择？（对应mydog-web改如何展现）
+
+**这也正是插件接口的定义** ：
+
+```java
+public interface MyDogPlugin {
+
+    /**
+     * 初始化
+     */
+    void init();
+
+    /**
+     * 获取元数据类型
+     * @return 元数据类型
+     */
+    String getMetadataType();
+
+    /**
+     * 获取本插件依赖的其它插件的属性
+     * @return 依赖的属性
+     */
+    JSONObject getDependencyProps();
+
+    /**
+     * 获取元数据属性解析器
+     * @return 元数据的属性解析器
+     */
+    MetaDataPropResolver getPropResolver();
+
+    /**
+     * 获取该插件输出定义
+     * @return 输出定义
+     */
+    OutputDef getOutputDef();
+
+    /**
+     * 获取该插件的元数据相关的装饰器
+     * 该方法是为了让插件可以扩展默认生成器的行为
+     * @return 返回对应装饰器
+     */
+    GeneratorDecorator getGeneratorDecorator(Generator generator);
+
+    /**
+     * 获取用户可选择的内容
+     * @return
+     */
+    JSONObject getViewProps();
+
+}
+```
+
+**这些接口**

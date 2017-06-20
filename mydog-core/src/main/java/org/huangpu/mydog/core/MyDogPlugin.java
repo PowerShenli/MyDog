@@ -45,6 +45,10 @@ public interface MyDogPlugin {
     GeneratorDecorator getGeneratorDecorator(Generator generator);
 
 
-
+    /**
+     * 获取用户可选择的内容
+     * @return
+     */
+    JSONObject getViewProps();
 
 }

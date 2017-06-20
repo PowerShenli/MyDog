@@ -43,6 +43,11 @@ public class EntityUIPlugin implements MyDogPlugin {
         return new EntityUIGeneratorDecorator(generator);
     }
 
+    @Override
+    public JSONObject getViewProps() {
+        return null;
+    }
+
     //TODO: 1 多种UI风格支持
     //TODO: 2 分页支持
 
