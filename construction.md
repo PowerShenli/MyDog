@@ -116,7 +116,7 @@ public interface MyDogPlugin {
 
 我们先看它的代码结构：
 
-![mydog-entityui-codes](https://raw.githubusercontent.com/PowerShenli/MyDog/master/mydog-doc/src/main/resources/mydog-entityui/mydog-plugin-entityui_codes.png)
+<img src="https://raw.githubusercontent.com/PowerShenli/MyDog/master/mydog-doc/src/main/resources/mydog-entityui/mydog-plugin-entityui_codes.png" width="400px"/>
 
  * src/main/resources/templates 
     这里可能会有三种文件
