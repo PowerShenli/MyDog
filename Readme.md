@@ -79,8 +79,10 @@ mysql> create database mydog default charset utf8;
 
 ```
 ~$> cd /tmp/mydog/MyDog/mydog-shell/target
-~$> java -jar mydog-shell-1.0-SNAPSHOT.jar ../demo.json
+~$> java -Dfile.encoding=utf-8 -jar mydog-shell-1.0-SNAPSHOT.jar ../demo.json
 ```
+
+ ``-Dfile.encoding=utf-8`` 是针对windows cmd这种环境编码可能有问题而加上的.
 
 #### 6. 查看输出
 
