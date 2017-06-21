@@ -47,7 +47,19 @@ public interface MyDogPlugin {
 
     /**
      * 获取用户可选择的内容
-     * @return
+     *
+     * 返回JSON中应该包含可选的实例,以及每个实例对应的属性列表.
+     * 属性列表中,应该明确每个属性的类型和对应的UI元素类型,及取值范围.
+     * 比如Entity User 的 sex 属性, 类型是int,对应的UI元素类型是 select
+     * 取值范围是 {"男":1,"女":2}
+     *
+     * mydog-web 会读取所有插件，并获取展示属性(通过本方法)，
+     * mydog-web 会根据通用逻辑进行页面渲染.而不用根据不同插件的属性
+     * 进行定制化的UI开发.
+     *
+     * @return JSONObject
+     * 返回数据中包含了该如何展现数据
+     *
      */
     JSONObject getViewProps();
 

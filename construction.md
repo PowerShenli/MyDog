@@ -44,7 +44,7 @@
 
 ##### 生成代码的步骤如下：
 1. 启动系统后初始化插件。这一步系统初始化所有已知的插件定义，并加载插件相关的配置到内存。
-2. 用户通过mydog-web选择所需要的插件，按照需要进行配置（填写元数据）。这里一是选择要什么功能，不要什么功能。二是选择过填写要的插件的具体定义，这里可以做的很强大，比如数据源插件可以支持业界大部分数据源类型，并当用户选择其中一种后，继续让用户填写此种数据源需要填写的元数据，或给出默认配置等等。三是选择最终生成的格式。<br/> 用户选择好后，点击“一键生成”，mydog-web会将生成好的元数据发送给FlowController。
+2. 用户通过mydog-web选择所需要的插件，按照需要进行配置（填写元数据）。这里一是选择要什么功能，不要什么功能。二是填写选择过的插件的具体定义，这里可以做的很强大，比如数据源插件可以支持业界大部分数据源类型，并当用户选择其中一种后，继续让用户填写此种数据源需要填写的元数据，或给出默认配置等等。三是选择最终生成的格式。<br/> 用户选择好后，点击“一键生成”，mydog-web会将生成好的元数据发送给FlowController。
 3. FlowController 首先检测元数据对应插件的依赖关系，比如datasource依赖Project，那么选择datasource则必须选中project，校验不通过则提示用户。
 4. FlowController 解析``元数据``列表. 这里的元数据可以理解为一系列用户选择的插件生成的功能定义。可以参考 demo.json
 5. 合并元数据属性。这是为了应对新添加的插件对已有插件进行扩展的情况. 比如app.properties 是由 mydog-plugin-project 负责生成的，而mydog-plugin-datasource 插件也需要向 app.properties 中添加属性，则在这一步骤中将需要添加的属性合并到 project插件对应的属性中，最终一并生成。 （这里引入了两个问题：插件的依赖问题 与 属性的可见性问题。后面会说明）
@@ -110,4 +110,130 @@ public interface MyDogPlugin {
 }
 ```
 
-**这些接口**
+**下面举个例子**
+
+比如mydog-plugin-entityui 这个插件
+
+我们先看它的代码结构：
+
+![mydog-entityui-codes](https://raw.githubusercontent.com/PowerShenli/MyDog/master/mydog-doc/src/main/resources/mydog-entityui/mydog-plugin-entityui_codes.png)
+
+ * src/main/resources/templates 
+    这里可能会有三种文件
+    1. 准备直接copy到输出目录的文件（各种后缀）
+    2. 输出文件的模板文件(.ftl）
+    3. 插件依赖定义、输出项的定义文件（.json)
+    
+ * src/main/resource/META-INF/
+    1. SPI 相关配置
+    
+ * src/main/java/
+    1. 插件相关的类，这里至少应该包含一个MyDogPlugin接口实现类
+
+    
+#### 插件依赖定义
+依赖定义文件名默认为 ``${插件名}_dependency_def.json`` <br/>
+默认路径在 src/main/resources/templates 下<br/>
+比如``mydog-plugin-datasource``这个插件，依赖定义文件为<br/> <b>``datasource_dependency_def.json``</b>:
+
+```json
+{
+  "pluginName":"datasource",
+  "dependency":[
+    {
+      "meta":"project",
+      "props": ["basePath","outputPath","basePackage"]
+    }
+  ]
+}
+```
+
+meta 制定的project 即为依赖的插件，
+props 是依赖的project 中的属性，当project插件的这些属性未定义时，
+应该提示用户制定这些属性，否则datasource 插件则不能使用。
+
+#### 插件输出项定义
+
+输出项定义文件名默认为 ``${插件名}_output_def.json`` <br/>
+默认路径在 src/main/resources/templates 下<br/> 
+比如 ``mydog-plugin-entityui`` 这个插件，输出项定义文件为：<br/>
+<b>``entityui_output_def.json``</b>:
+
+```ftl
+<#assign prj=project["mydogProj"]/>
+{
+  "pluginName":"entityui",
+  "outItemsDef": {
+<#list entity?keys as ent>
+<#assign ev=entity[ent]/>
+        "${ent}":[
+            {
+              "itemName": "${ev.entityName?lower_case}-list.html",
+              "outputPath": "${prj.outputPath}src/main/resources/static/",
+              "genType": "byTemplate",
+              "tmpFilePath": "templates/_entity_list_html.ftl"
+            },
+            {
+              "itemName": "${ev.entityName?lower_case}-list.js",
+              "outputPath": "${prj.outputPath}src/main/resources/static/",
+              "genType": "byTemplate",
+              "tmpFilePath": "templates/_entity_list_js.ftl"
+            }
+        ]
+<#if ent_has_next>      ,</#if>
+</#list>
+        ,
+      //下面的只用生成一次
+        "Common":[
+            {
+                "itemName": "bootstrap.directory", //可以由itemName后缀决定文件类型
+                "outputPath": "${prj.outputPath}src/main/resources/static/",
+                "genType": "byCopy",
+                "cpFilePath": "templates/bootstrap/"
+            }
+            {
+                "itemName":"index.html",
+                "outputPath":"${prj.outputPath}src/main/resources/static/",
+                "genType":"byTemplate",
+                "tmpFilePath":"templates/_index.html.ftl"
+            }
+        ]
+  }
+}
+```
+
+可以看到定义文件本身其实是一个半成品，它也是一个ftl的模板文件。
+原因是，输出项可能和元数据相关，类似的输出项可能不是直接能定义出来的，
+所以需要模板。
+
+我们单独拿一个输出项出来看看：
+
+```json
+{
+    "itemName":"index.html",
+    "outputPath":"${prj.outputPath}src/main/resources/static/",
+    "genType":"byTemplate",
+    "tmpFilePath":"templates/_index.html.ftl"
+}
+```
+ * **itemName**      ---> 是输出文件的名称
+ * **outputPath**    ---> 是输出文件相对于项目的位置
+ * **genType**       ---> 使用哪种方式产生输出
+ * **tmpFilePath**   ---> 如果输出使用了模板，制定摸完的位置和名称
+
+##### 目前生成输出文件的方式有 4种:
+ 
+ 1. **byTemplate**  --->用模板方式生成
+ 2. **byCopy**  --->直接copy文件到输出的目录（还需要指定``cpFilePath``属性）
+ 3. **byCode**  --->通过指定一个类的全限定名，用这个类来产生输出(還要指定 ``generator`` 属性，属性值即自定义生成器）
+ 4. **byGrammar** --->支持用itemName的后缀名得到对应语言的抽象语法树，通过语法树来生成代码（这个模式还没有用好，最灵活，但也最复杂）
+ 
+#### 生成器扩展点
+1. byCode方式可以指定一个实现了Generator接口的自定义代码生成器。
+2. 可以在本插件对应的MydogPlugin实现类中指定一个生成器的装饰器实现类。<br/>装饰器可以对指定的所有生成器进行装饰，这个装饰器一般针对该插件的所有输出项公共的逻辑。
+比如entity插件的装饰器``EntityGeneratorDecorator`` 就在模板渲染前对属性进行了修改。
+
+
+
+
+
