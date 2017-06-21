@@ -148,7 +148,7 @@ public interface MyDogPlugin {
 }
 ```
 
-meta 制定的project 即为依赖的插件，
+meta 的属性是 的project 即为依赖的插件，
 props 是依赖的project 中的属性，当project插件的这些属性未定义时，
 应该提示用户制定这些属性，否则datasource 插件则不能使用。
 
@@ -219,7 +219,7 @@ props 是依赖的project 中的属性，当project插件的这些属性未定�
  * **itemName**      ---> 是输出文件的名称
  * **outputPath**    ---> 是输出文件相对于项目的位置
  * **genType**       ---> 使用哪种方式产生输出
- * **tmpFilePath**   ---> 如果输出使用了模板，制定摸完的位置和名称
+ * **tmpFilePath**   ---> 如果输出使用了模板，制定模板的位置和名称
 
 ##### 目前生成输出文件的方式有 4种:
  
