@@ -37,6 +37,13 @@ MyDog - 开发者最忠实的朋友.
 ```
 编译成功将看到 ``BUILD SUCCESS`` 
 
+
+#### 如果你不希望编译源代码,也可以直接下载已经编译好的文件**
+ 
+  *  [mydog-shell.jar](https://github.com/PowerShenli/MyDog/releases/download/0.01/mydog-shell-1.0-SNAPSHOT.jar)
+  *  [demo.json](https://github.com/PowerShenli/MyDog/releases/download/0.01/demo.json)
+
+
 #### 3. 修改配置
 
 * 配置文件说明
