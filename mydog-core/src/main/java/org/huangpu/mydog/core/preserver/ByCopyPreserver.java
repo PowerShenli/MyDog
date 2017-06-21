@@ -51,12 +51,14 @@ public class ByCopyPreserver implements Preserver<CopyOutputItem> {
                 jarFile.close();
             } else if (urlConnection instanceof FileURLConnection) {
                 LOG.info("is FileURLConnection, cpFilePath={}", cpFilePath);
-                File source = new File(resourceFolder.getPath() + cpFilePath);
+                File source = new File(resourceFolder.getPath() +"!"+ cpFilePath);
                 LOG.info("source = {}" , source);
                 if (source.isDirectory()) {
+                    LOG.info("source.isDirectory");
                     FileUtils.copyDirectory(source, new File(outputPath));
                 }
                 else if (resourceFolder.getPath().endsWith(".jar")) {
+                    LOG.info("source not dir and ends jar");
                     JarFile jarFile = new JarFile(resourceFolder.getPath());
                     Enumeration<JarEntry> entrys = jarFile.entries();
                     while (entrys.hasMoreElements()) {
