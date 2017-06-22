@@ -161,7 +161,7 @@ public interface MyDogPlugin {
 
 meta 的属性是 的project 即为依赖的插件，
 props 是依赖的project 中的属性，当project插件的这些属性未定义时，
-应该提示用户制定这些属性，否则datasource 插件则不能使用。
+应该提示用户必须指定这些属性，否则datasource 插件则不能使用。
 
 #### 插件输出项定义
 
