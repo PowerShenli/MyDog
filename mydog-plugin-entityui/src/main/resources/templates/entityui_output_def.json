@@ -28,7 +28,7 @@
                 "outputPath": "${prj.outputPath}src/main/resources/static/",
                 "genType": "byCopy",
                 "cpFilePath": "templates/bootstrap/"
-            }
+            },
             {
                 "itemName":"index.html",
                 "outputPath":"${prj.outputPath}src/main/resources/static/",

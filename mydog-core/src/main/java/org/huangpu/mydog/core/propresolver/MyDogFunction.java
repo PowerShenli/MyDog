@@ -42,7 +42,7 @@ public class MyDogFunction {
         Objects.requireNonNull(props);
         source = TemplateUtils.render(type + "_output_def", source, props);
         LOG.info("A source==>{}",source);
-        System.out.println("props = " + props);
+        LOG.info("props = {}" , props);
         JSONObject jo = JSON.parseObject(source);
 
         JSONObject outItemsDef = jo.getJSONObject("outItemsDef");

@@ -7,6 +7,8 @@ import org.huangpu.mydog.core.Metadata;
 import org.huangpu.mydog.core.OutputItem;
 import org.huangpu.mydog.core.OutputItemDef;
 import org.huangpu.mydog.core.plugins.GenerateContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
@@ -15,10 +17,11 @@ import java.util.Map;
  */
 public class MyBatisGenerator implements Generator {
 
+    private static final Logger LOG = LoggerFactory.getLogger(MyBatisGenerator.class);
 
     @Override
     public OutputItem generate(Metadata metaInstance, OutputItemDef outputItemDef) {
-        System.out.println("MyBatisGenerator.generate");
+        LOG.info("MyBatisGenerator.generate");
 
         MyBatisOutputItem outputItem = new MyBatisOutputItem();
 
@@ -35,11 +38,6 @@ public class MyBatisGenerator implements Generator {
         JSONObject project = stringMapMap.get("project").get("mydogProj");
         String targetProject = project.getString("outputPath");
         String basePackage = project.getString("basePackage");
-//        String basePath = project.getString("basePath");
-
-//        JSONObject entity = stringMapMap.get("entity").get("User");
-//        String domainObjectName = entity.getString("entityName");
-//        String tableName = MyBatisUtils.getTbName(domainObjectName);
 
         MyBatisGeneratorConfig myBConfig = new MyBatisGeneratorConfig();
         myBConfig.setConnectorJarFilePath(driverJarPath);
@@ -51,11 +49,10 @@ public class MyBatisGenerator implements Generator {
         myBConfig.setTargetProject(targetProject+"src/main/java/");
         myBConfig.setClientGeneratorTargetPackage(basePackage+".mapping");
         myBConfig.setModelGeneratorTargetPackage(basePackage+".domain");
-//        myBConfig.setTableName(tableName);
-//        myBConfig.setDomainObjectName(domainObjectName);
+
         myBConfig.setOffsetLimit(true);
 
-        System.out.println("myBConfig = " + myBConfig);
+        LOG.info("myBConfig = {}" , myBConfig);
 
 
         MyBatisPreserver myBatisPreserver = new MyBatisPreserver();

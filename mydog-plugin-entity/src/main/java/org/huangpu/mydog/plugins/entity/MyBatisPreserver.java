@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Strings;
 import org.huangpu.mydog.core.Preserver;
 import org.huangpu.mydog.core.plugins.GenerateContext;
+import org.huangpu.mydog.core.utils.DDLUtils;
 import org.mybatis.generator.api.ProgressCallback;
 import org.mybatis.generator.api.ShellCallback;
 import org.mybatis.generator.config.*;
@@ -21,7 +22,7 @@ import java.util.*;
  */
 public class MyBatisPreserver implements Preserver<MyBatisOutputItem> {
 
-    private static final Logger logger = LoggerFactory.getLogger(MyBatisPreserver.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MyBatisPreserver.class);
 
     private MyBatisGeneratorConfig generatorConfig;
 
@@ -57,7 +58,7 @@ public class MyBatisPreserver implements Preserver<MyBatisOutputItem> {
         Configuration config = new Configuration();
         String connectorLibPath = generatorConfig.getConnectorJarFilePath();
 
-        logger.info("connectorLibPath: {}", connectorLibPath);
+        LOG.info("connectorLibPath: {}", connectorLibPath);
         config.addClasspathEntry(connectorLibPath);
         Context context = new Context(ModelType.CONDITIONAL);
         config.addContext(context);
@@ -70,7 +71,7 @@ public class MyBatisPreserver implements Preserver<MyBatisOutputItem> {
             String domainName = entProp.getString("entityName");
             // Table config
             TableConfiguration tableConfig = new TableConfiguration(context);
-            tableConfig.setTableName(MyBatisUtils.getTbName(domainName));
+            tableConfig.setTableName(DDLUtils.getTbName(domainName));
             tableConfig.setDomainObjectName(domainName);
 
             // add ignore columns
@@ -152,7 +153,7 @@ public class MyBatisPreserver implements Preserver<MyBatisOutputItem> {
             PluginConfiguration pc = new PluginConfiguration();
             pc.setConfigurationType(plugin);
             context.addPluginConfiguration(pc);
-            System.out.println("add plugin = " + plugin);
+            LOG.info("add plugin = {}" , plugin);
         }
 
         List<String> warnings = new ArrayList<>();
@@ -181,7 +182,7 @@ public class MyBatisPreserver implements Preserver<MyBatisOutputItem> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("Mybatis persist completed.");
+        LOG.info("Mybatis persist completed.");
 
     }
 

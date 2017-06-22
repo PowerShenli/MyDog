@@ -22,24 +22,7 @@ public class ByCopyGenerator implements Generator {
 
         String itemName = outputItemDef.getItemName();
         LOG.debug("\n itemName = {}, \n cpFilePath = {}, \n outputPath = {}", itemName, cpFilePath, outputPath2);
-//        Objects.requireNonNull(outputPath);
         CopyOutputItem outputItem = new CopyOutputItem();
-
-//        OutputDef outputDef = metaInstance.getPlugin().getOutputDef();
-
-//        File srcDir = null;// ,destDir = null;
-
-//        String path = getClass().getClassLoader().getResource(".").getPath().replace("/test-classes", "/classes");
-//            String outPath = "/tmp/myDog/output/";
-
-
-//        Map<String, Map<String,JSONObject>> props = GenerateContext.get("props");
-//        JSONObject project = props.get("project").get("mydogProj");
-//        String outputPath1 = project.getString("outputPath");
-
-
-//        srcDir = new File(path + cpFilePath);
-//        outputItem.setGenType(GenType.byCopy);
         outputItem.setOutputPath(outputPath2);
         outputItem.setPreserver(new ByCopyPreserver());
         outputItem.setCpFilePath(cpFilePath);
@@ -50,17 +33,6 @@ public class ByCopyGenerator implements Generator {
 
         ClassLoader classLoader = metaInstance.getPlugin().getClass().getClassLoader();
         outputItem.setClassLoader(classLoader);
-
-//        outputItem.setOutputPath(outputPath);
-
-//            destDir = new File(outPath + outputPath);
-//            FileUtils.copyDirectory(srcDir, destDir);
-//            outputItem.setDestDir(destDir.getPath());
-
-//            TODO: 打到jar中后需要 xxx.jar!xxx 这样读取
-//            URL url = getClass().getResource(cpFilePath);
-//            FileUtils.copyURLToFile(url, destDir);
-
 
         return outputItem;
     }

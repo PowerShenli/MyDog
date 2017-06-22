@@ -36,7 +36,7 @@ public class MybatisValidatePlugin extends PluginAdapter {
         Properties colProps = introspectedColumn.getProperties();
 
         String fieldName = field.getName();
-        System.out.println("fieldName = " + fieldName+","+colProps);
+        LOG.info("fieldName = {},{}" , fieldName,colProps);
 
         String validates = colProps.getProperty("validates","[]");
         JSONArray array = JSONArray.parseArray(validates);
