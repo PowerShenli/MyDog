@@ -5,6 +5,11 @@ package org.huangpu.mydog.web.config;
  */
 public class Constant {
 	
-	public static final String USER_PREFIX = "";
+	/**
+	 * mydog admin's application.propertes prefix
+	 * mydog.admin.user
+	 * mydog.admin.password
+	 */
+	public static final String USER_PREFIX = "mydog.admin";
 	
 }
