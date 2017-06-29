@@ -13,4 +13,7 @@ public class QuickStartController {
     public String index(){
         return "quick_start";
     }
+    
+    
+    
 }
