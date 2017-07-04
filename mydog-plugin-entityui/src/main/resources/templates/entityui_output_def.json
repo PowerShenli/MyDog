@@ -37,14 +37,14 @@
     "Common":[
       // STYLES
       {
-      "itemName": "bootstrap.file", //可以由itemName后缀决定文件类型
-      "outputPath": "${prj.outputPath}src/main/resources/static/assets/css/",
+      "itemName": "bootstrap.css", //可以由itemName后缀决定文件类型
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/css/bootstrap.min.css",
       "genType": "byCopy",
       "cpFilePath": "templates/assets/css/bootstrap.min.css"
       },
       {
-      "itemName": "style.file",
-      "outputPath": "${prj.outputPath}src/main/resources/static/assets/css/",
+      "itemName": "style.css",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/css/style.css",
       "genType": "byCopy",
       "cpFilePath": "templates/assets/css/style.css"
       },
@@ -55,22 +55,22 @@
       "cpFilePath": "templates/assets/font-awesome/"
       },
       {
-      "itemName": "animate.file",
-      "outputPath": "${prj.outputPath}src/main/resources/static/assets/css/",
+      "itemName": "animate.css",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/css/animate.css",
       "genType": "byCopy",
       "cpFilePath": "templates/assets/css/animate.css"
       },
 
       // VENDOR
       {
-      "itemName": "jquery.file",
-      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/lib/",
+      "itemName": "jquery.js",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/lib/jquery.min.js",
       "genType": "byCopy",
       "cpFilePath": "templates/assets/js/lib/jquery-3.1.1.min.js"
       },
       {
-        "itemName": "bootstrap.file",
-        "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/lib/",
+        "itemName": "bootstrap.js",
+        "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/lib/bootstrap.min.js",
         "genType": "byCopy",
         "cpFilePath": "templates/assets/js/lib/bootstrap.min.js"
       },
@@ -78,37 +78,37 @@
       // PLUGINS
       {
       "itemName": "footable.directory",
-      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/footable/",
       "genType": "byCopy",
       "cpFilePath": "templates/assets/js/plugins/footable/"
       },
       {
       "itemName": "footable.directory",
-      "outputPath": "${prj.outputPath}src/main/resources/static/assets/css/plugins/",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/css/plugins/footable/",
       "genType": "byCopy",
       "cpFilePath": "templates/assets/css/plugins/footable/"
       },
       {
       "itemName": "metisMenu.directory",
-      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/metisMenu/",
       "genType": "byCopy",
       "cpFilePath": "templates/assets/js/plugins/metisMenu/"
       },
       {
       "itemName": "slimscroll.directory",
-      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/slimscroll/",
       "genType": "byCopy",
       "cpFilePath": "templates/assets/js/plugins/slimscroll/"
       },
       {
       "itemName": "peity.directory",
-      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/peity/",
       "genType": "byCopy",
       "cpFilePath": "templates/assets/js/plugins/peity/"
       },
       {
       "itemName": "sparkline.directory",
-      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/sparkline/",
       "genType": "byCopy",
       "cpFilePath": "templates/assets/js/plugins/sparkline/"
       },
@@ -122,13 +122,13 @@
       },
       {
         "itemName":"login.js",
-        "outputPath":"${prj.outputPath}src/main/resources/static/js/",
+        "outputPath":"${prj.outputPath}src/main/resources/static/assets/js/",
         "genType":"byTemplate",
         "tmpFilePath":"templates/_login.js.ftl"
       },
       {
       "itemName":"main.js",
-      "outputPath":"${prj.outputPath}src/main/resources/static/js/",
+      "outputPath":"${prj.outputPath}src/main/resources/static/assets/js/",
       "genType":"byTemplate",
       "tmpFilePath":"templates/_main.js.ftl"
       },
