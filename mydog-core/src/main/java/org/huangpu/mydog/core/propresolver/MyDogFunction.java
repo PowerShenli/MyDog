@@ -29,9 +29,9 @@ public class MyDogFunction {
 
     private static final Logger LOG = LoggerFactory.getLogger(MyDogFunction.class);
 
-    public static final BiFunction<String,ClassLoader,JSONObject> getDepFunc = (type,loader)->{
-        return readConfigFileContent(type, "dependency", loader);
-    };
+    public static final BiFunction<String,ClassLoader,JSONObject> getDepFunc = (type,loader)->
+         readConfigFileContent(type, "dependency", loader);
+
 
     public static OutputDef renderOutputDef(String type,ClassLoader classLoader){
 
@@ -145,7 +145,7 @@ public class MyDogFunction {
 
     private static JSONObject readConfigFileContent(String type,String key,ClassLoader classLoader){
         String content = readConfigFile(type, key, classLoader);
-        if (Strings.isNullOrEmpty(content)) {
+        if (!Strings.isNullOrEmpty(content)) {
             return JSON.parseObject(content);
         }
         else {
