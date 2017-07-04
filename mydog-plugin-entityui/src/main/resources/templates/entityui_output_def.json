@@ -2,39 +2,143 @@
 {
   "pluginName":"entityui",
   "outItemsDef": {
-<#list entity?keys as ent>
-<#assign ev=entity[ent]/>
-        "${ent}":[
-            {
-              "itemName": "${ev.entityName?lower_case}-list.html",
-              "outputPath": "${prj.outputPath}src/main/resources/static/",
-              "genType": "byTemplate",
-              "tmpFilePath": "templates/_entity_list_html.ftl"
-            },
-            {
-              "itemName": "${ev.entityName?lower_case}-list.js",
-              "outputPath": "${prj.outputPath}src/main/resources/static/",
-              "genType": "byTemplate",
-              "tmpFilePath": "templates/_entity_list_js.ftl"
-            }
-        ]
-<#if ent_has_next>      ,</#if>
-</#list>
-        ,
-      //下面的只用生成一次
-        "Common":[
-            {
-                "itemName": "bootstrap.directory", //可以由itemName后缀决定文件类型
-                "outputPath": "${prj.outputPath}src/main/resources/static/",
-                "genType": "byCopy",
-                "cpFilePath": "templates/bootstrap/"
-            },
-            {
-                "itemName":"index.html",
-                "outputPath":"${prj.outputPath}src/main/resources/static/",
-                "genType":"byTemplate",
-                "tmpFilePath":"templates/_index.html.ftl"
-            }
-        ]
+    <#list entity?keys as ent>
+    <#assign ev=entity[ent]/>
+      "${ent}":[
+        {
+          "itemName": "${ev.entityName?lower_case}_list.html",
+          "outputPath": "${prj.outputPath}src/main/resources/static/",
+          "genType": "byTemplate",
+          "tmpFilePath": "templates/_entity_list.html.ftl"
+        },
+        {
+          "itemName": "${ev.entityName?lower_case}_list.js",
+          "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/",
+          "genType": "byTemplate",
+          "tmpFilePath": "templates/_entity_list.js.ftl"
+        },
+        {
+        "itemName": "${ev.entityName?lower_case}_detail.html",
+        "outputPath": "${prj.outputPath}src/main/resources/static/",
+        "genType": "byTemplate",
+        "tmpFilePath": "templates/_entity_detail.html.ftl"
+        },
+        {
+        "itemName": "${ev.entityName?lower_case}_detail.js",
+        "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/",
+        "genType": "byTemplate",
+        "tmpFilePath": "templates/_entity_detail.js.ftl"
+        }
+      ]
+    <#if ent_has_next>      ,</#if>
+    </#list>
+    ,
+    //下面的只用生成一次
+    "Common":[
+      // STYLES
+      {
+      "itemName": "bootstrap.file", //可以由itemName后缀决定文件类型
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/css/",
+      "genType": "byCopy",
+      "cpFilePath": "templates/assets/css/bootstrap.min.css"
+      },
+      {
+      "itemName": "style.file",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/css/",
+      "genType": "byCopy",
+      "cpFilePath": "templates/assets/css/style.css"
+      },
+      {
+      "itemName": "font-awesome.directory",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/font-awesome/",
+      "genType": "byCopy",
+      "cpFilePath": "templates/assets/font-awesome/"
+      },
+      {
+      "itemName": "animate.file",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/css/",
+      "genType": "byCopy",
+      "cpFilePath": "templates/assets/css/animate.css"
+      },
+
+      // VENDOR
+      {
+      "itemName": "jquery.file",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/lib/",
+      "genType": "byCopy",
+      "cpFilePath": "templates/assets/js/lib/jquery-3.1.1.min.js"
+      },
+      {
+        "itemName": "bootstrap.file",
+        "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/lib/",
+        "genType": "byCopy",
+        "cpFilePath": "templates/assets/js/lib/bootstrap.min.js"
+      },
+
+      // PLUGINS
+      {
+      "itemName": "footable.directory",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/",
+      "genType": "byCopy",
+      "cpFilePath": "templates/assets/js/plugins/footable/"
+      },
+      {
+      "itemName": "footable.directory",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/css/plugins/",
+      "genType": "byCopy",
+      "cpFilePath": "templates/assets/css/plugins/footable/"
+      },
+      {
+      "itemName": "metisMenu.directory",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/",
+      "genType": "byCopy",
+      "cpFilePath": "templates/assets/js/plugins/metisMenu/"
+      },
+      {
+      "itemName": "slimscroll.directory",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/",
+      "genType": "byCopy",
+      "cpFilePath": "templates/assets/js/plugins/slimscroll/"
+      },
+      {
+      "itemName": "peity.directory",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/",
+      "genType": "byCopy",
+      "cpFilePath": "templates/assets/js/plugins/peity/"
+      },
+      {
+      "itemName": "sparkline.directory",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/",
+      "genType": "byCopy",
+      "cpFilePath": "templates/assets/js/plugins/sparkline/"
+      },
+
+      // PAGE
+      {
+        "itemName":"login.html",
+        "outputPath":"${prj.outputPath}src/main/resources/static/",
+        "genType":"byTemplate",
+        "tmpFilePath":"templates/_login.html.ftl"
+      },
+      {
+        "itemName":"login.js",
+        "outputPath":"${prj.outputPath}src/main/resources/static/js/",
+        "genType":"byTemplate",
+        "tmpFilePath":"templates/_login.js.ftl"
+      },
+      {
+      "itemName":"main.js",
+      "outputPath":"${prj.outputPath}src/main/resources/static/js/",
+      "genType":"byTemplate",
+      "tmpFilePath":"templates/_main.js.ftl"
+      },
+      {
+        "itemName":"index.html",
+        "outputPath":"${prj.outputPath}src/main/resources/static/",
+        "genType":"byTemplate",
+        "tmpFilePath":"templates/_index.html.ftl"
+      }
+
+    ]
   }
 }

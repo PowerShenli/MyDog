@@ -14,7 +14,8 @@ public class EntityUIPlugin implements MyDogPlugin {
     private static final ClassLoader classLoader = EntityUIPlugin.class.getClassLoader();
 
     @Override
-    public void init() {
+    public void init()
+    {
         dependencyProps = MyDogFunction.getDepFunc.apply(getMetadataType(),classLoader);
     }
 

@@ -11,17 +11,13 @@
     <title>${project["mydogProj"]["name"]}</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="assets/css/animate.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/bootstrap-table.min.css" rel="stylesheet">
-    <link href="css/bootstrap-dialog.min.css" rel="stylesheet">
-    <style>
-        body {
-            padding-top: 70px;
-            /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-        }
-    </style>
+    <link href="assets/css/style.css" rel="stylesheet">
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,390 +25,511 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <!-- jQuery Version 1.11.1 -->
-    <script src="js/jquery.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.js"></script>
-
-    <!--  bootstrap-table -->
-    <script src="js/bootstrap-table.min.js"></script>
-    <script src="js/bootstrap-table-locale-all.min.js"></script>
-    <script src="js/handlebars-v4.0.5.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/index.js"></script>
-    <script src="js/bootstrapValidator.js"></script>
-    <script src="js/bootstrap-dialog.js"></script>
 </head>
 
 <body>
 
-<!-- Navigation -->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">${project["mydogProj"]["name"]}后台</a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <#list entity?keys as ent>
-                    <#assign ev=entity[ent]/>
-                    <li data-page="${ent?lower_case}-list.html">
-                        <a href="#">${ev.label}管理</a>
-                    </li>
-                </#list>
-                <#--<li data-page="login.html" id="logoutBtn">-->
-                    <#--<a href="#">退出登录</a>-->
-                <#--</li>-->
+<div id="wrapper">
+    <!-- Navigation -->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse" id="menu-box">
+            <ul class="nav metismenu" id="side-menu">
             </ul>
         </div>
-        <!-- /.navbar-collapse -->
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <!-- Top Bar -->
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2" href="#"><i class="fa fa-bars"></i> </a>
+                    <form role="search" class="navbar-form-custom" action="search_results.html">
+                        <div class="form-group">
+                            <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                        </div>
+                    </form>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <span class="m-r-sm text-muted welcome-message">Welcome to MyDog.</span>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-messages">
+                            <li>
+                                <div class="dropdown-messages-box">
+                                    <a href="profile.html" class="pull-left">
+                                        <img alt="image" class="img-circle" src="assets/img/a7.jpg">
+                                    </a>
+                                    <div class="media-body">
+                                        <small class="pull-right">46h ago</small>
+                                        <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                                        <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="dropdown-messages-box">
+                                    <a href="profile.html" class="pull-left">
+                                        <img alt="image" class="img-circle" src="assets/img/a4.jpg">
+                                    </a>
+                                    <div class="media-body ">
+                                        <small class="pull-right text-navy">5h ago</small>
+                                        <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
+                                        <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="dropdown-messages-box">
+                                    <a href="profile.html" class="pull-left">
+                                        <img alt="image" class="img-circle" src="assets/img/profile.jpg">
+                                    </a>
+                                    <div class="media-body ">
+                                        <small class="pull-right">23h ago</small>
+                                        <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
+                                        <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="text-center link-block">
+                                    <a href="mailbox.html">
+                                        <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="mailbox.html">
+                                    <div>
+                                        <i class="fa fa-envelope fa-fw"></i> You have 16 messages
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="profile.html">
+                                    <div>
+                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                        <span class="pull-right text-muted small">12 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="grid_options.html">
+                                    <div>
+                                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="text-center link-block">
+                                    <a href="notifications.html">
+                                        <strong>See All Alerts</strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="login.html">
+                            <i class="fa fa-sign-out"></i> Log out
+                        </a>
+                    </li>
+                    <li>
+                        <a class="right-sidebar-toggle">
+                            <i class="fa fa-tasks"></i>
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+        </div>
+
+        <!-- Page Head -->
+        <div class="row  border-bottom white-bg dashboard-header">
+
+            <div class="col-md-3">
+                <h2>Welcome to MyDog</h2>
+
+                <p><img src="https://raw.githubusercontent.com/PowerShenli/MyDog/master/mydog-doc/src/main/resources/mydog.ico" alt="MyDog logo"></p>
+
+                <p>MyDog - 开发者最忠实的朋友.</p>
+
+                <p>主人，有什么吩咐？生成代码？好的。让我帮你做更多的事, 汪汪！</p>
+
+                <small>
+                    了解我更多? 请访问:&nbsp; <a href="https://github.com/PowerShenli/MyDog/wiki">MyDog WIKI</a>
+                </small>
+            </div>
+
+        </div>
+
+        <!-- Content start from here -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="wrapper wrapper-content">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5>New data for the report</h5> <span class="label label-primary">IN+</span>
+                                    <div class="ibox-tools">
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                            <i class="fa fa-wrench"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-user">
+                                            <li><a href="#">Config option 1</a>
+                                            </li>
+                                            <li><a href="#">Config option 2</a>
+                                            </li>
+                                        </ul>
+                                        <a class="close-link">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="ibox-content">
+                                    <div>
+
+                                        <div class="pull-right text-right">
+
+                                            <span class="bar_dashboard">5,3,9,6,5,9,7,3,5,2,4,7,3,2,7,9,6,4,5,7,3,2,1,0,9,5,6,8,3,2,1</span>
+                                            <br/>
+                                            <small class="font-bold">$ 20 054.43</small>
+                                        </div>
+                                        <h4>NYS report new data!
+                                            <br/>
+                                            <small class="m-r"><a href="graph_flot.html"> Check the stock price! </a> </small>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5>Read below comments</h5>
+                                    <div class="ibox-tools">
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                            <i class="fa fa-wrench"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-user">
+                                            <li><a href="#">Config option 1</a>
+                                            </li>
+                                            <li><a href="#">Config option 2</a>
+                                            </li>
+                                        </ul>
+                                        <a class="close-link">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="ibox-content no-padding">
+                                    <ul class="list-group">
+                                        <#list entity?keys as ent>
+                                            <#assign ev=entity[ent]/>
+                                            <li class="list-group-item" data-page="${ent?lower_case}-list.html">
+                                                <p><a class="text-info" href="#">${ev.label}管理</a> </p>
+                                                <small class="block text-muted"><i class="fa fa-clock-o"></i> 1 minuts ago</small>
+                                            </li>
+                                        </#list>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5>Your daily feed</h5>
+                                    <div class="ibox-tools">
+                                        <span class="label label-warning-light pull-right">10 Messages</span>
+                                    </div>
+                                </div>
+                                <div class="ibox-content">
+
+                                    <div>
+                                        <div class="feed-activity-list">
+
+                                            <div class="feed-element">
+                                                <a href="profile.html" class="pull-left">
+                                                    <img alt="image" class="img-circle" src="assets/img/profile.jpg">
+                                                </a>
+                                                <div class="media-body ">
+                                                    <small class="pull-right">5m ago</small>
+                                                    <strong>Monica Smith</strong> posted a new blog. <br>
+                                                    <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="feed-element">
+                                                <a href="profile.html" class="pull-left">
+                                                    <img alt="image" class="img-circle" src="assets/img/a2.jpg">
+                                                </a>
+                                                <div class="media-body ">
+                                                    <small class="pull-right">2h ago</small>
+                                                    <strong>Mark Johnson</strong> posted message on <strong>Monica Smith</strong> site. <br>
+                                                    <small class="text-muted">Today 2:10 pm - 12.06.2014</small>
+                                                </div>
+                                            </div>
+                                            <div class="feed-element">
+                                                <a href="profile.html" class="pull-left">
+                                                    <img alt="image" class="img-circle" src="assets/img/a3.jpg">
+                                                </a>
+                                                <div class="media-body ">
+                                                    <small class="pull-right">2h ago</small>
+                                                    <strong>Janet Rosowski</strong> add 1 photo on <strong>Monica Smith</strong>. <br>
+                                                    <small class="text-muted">2 days ago at 8:30am</small>
+                                                </div>
+                                            </div>
+                                            <div class="feed-element">
+                                                <a href="profile.html" class="pull-left">
+                                                    <img alt="image" class="img-circle" src="assets/img/a4.jpg">
+                                                </a>
+                                                <div class="media-body ">
+                                                    <small class="pull-right text-navy">5h ago</small>
+                                                    <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
+                                                    <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
+                                                    <div class="actions">
+                                                        <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
+                                                        <a class="btn btn-xs btn-white"><i class="fa fa-heart"></i> Love</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="feed-element">
+                                                <a href="profile.html" class="pull-left">
+                                                    <img alt="image" class="img-circle" src="assets/img/a5.jpg">
+                                                </a>
+                                                <div class="media-body ">
+                                                    <small class="pull-right">2h ago</small>
+                                                    <strong>Kim Smith</strong> posted message on <strong>Monica Smith</strong> site. <br>
+                                                    <small class="text-muted">Yesterday 5:20 pm - 12.06.2014</small>
+                                                    <div class="well">
+                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                                                        Over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                                                    </div>
+                                                    <div class="pull-right">
+                                                        <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="feed-element">
+                                                <a href="profile.html" class="pull-left">
+                                                    <img alt="image" class="img-circle" src="assets/img/profile.jpg">
+                                                </a>
+                                                <div class="media-body ">
+                                                    <small class="pull-right">23h ago</small>
+                                                    <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
+                                                    <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
+                                                </div>
+                                            </div>
+                                            <div class="feed-element">
+                                                <a href="profile.html" class="pull-left">
+                                                    <img alt="image" class="img-circle" src="assets/img/a7.jpg">
+                                                </a>
+                                                <div class="media-body ">
+                                                    <small class="pull-right">46h ago</small>
+                                                    <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                                                    <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-down"></i> Show More</button>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5>Alpha project</h5>
+                                    <div class="ibox-tools">
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                            <i class="fa fa-wrench"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-user">
+                                            <li><a href="#">Config option 1</a>
+                                            </li>
+                                            <li><a href="#">Config option 2</a>
+                                            </li>
+                                        </ul>
+                                        <a class="close-link">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="ibox-content ibox-heading">
+                                    <h3>You have meeting today!</h3>
+                                    <small><i class="fa fa-map-marker"></i> Meeting is on 6:00am. Check your schedule to see detail.</small>
+                                </div>
+                                <div class="ibox-content inspinia-timeline">
+
+                                    <div class="timeline-item">
+                                        <div class="row">
+                                            <div class="col-xs-3 date">
+                                                <i class="fa fa-briefcase"></i>
+                                                6:00 am
+                                                <br/>
+                                                <small class="text-navy">2 hour ago</small>
+                                            </div>
+                                            <div class="col-xs-7 content no-top-border">
+                                                <p class="m-b-xs"><strong>Meeting</strong></p>
+
+                                                <p>Conference on the sales results for the previous year. Monica please examine sales trends in marketing and products. Below please find the current status of the
+                                                    sale.</p>
+
+                                                <p><span data-diameter="40" class="updating-chart">5,3,9,6,5,9,7,3,5,2,5,3,9,6,5,9,4,7,3,2,9,8,7,4,5,1,2,9,5,4,7,2,7,7,3,5,2</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="row">
+                                            <div class="col-xs-3 date">
+                                                <i class="fa fa-file-text"></i>
+                                                7:00 am
+                                                <br/>
+                                                <small class="text-navy">3 hour ago</small>
+                                            </div>
+                                            <div class="col-xs-7 content">
+                                                <p class="m-b-xs"><strong>Send documents to Mike</strong></p>
+                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="row">
+                                            <div class="col-xs-3 date">
+                                                <i class="fa fa-coffee"></i>
+                                                8:00 am
+                                                <br/>
+                                            </div>
+                                            <div class="col-xs-7 content">
+                                                <p class="m-b-xs"><strong>Coffee Break</strong></p>
+                                                <p>
+                                                    Go to shop and find some products.
+                                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="row">
+                                            <div class="col-xs-3 date">
+                                                <i class="fa fa-phone"></i>
+                                                11:00 am
+                                                <br/>
+                                                <small class="text-navy">21 hour ago</small>
+                                            </div>
+                                            <div class="col-xs-7 content">
+                                                <p class="m-b-xs"><strong>Phone with Jeronimo</strong></p>
+                                                <p>
+                                                    Lorem Ipsum has been the industry's standard dummy text ever since.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="row">
+                                            <div class="col-xs-3 date">
+                                                <i class="fa fa-user-md"></i>
+                                                09:00 pm
+                                                <br/>
+                                                <small>21 hour ago</small>
+                                            </div>
+                                            <div class="col-xs-7 content">
+                                                <p class="m-b-xs"><strong>Go to the doctor dr Smith</strong></p>
+                                                <p>
+                                                    Find some issue and go to doctor.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="row">
+                                            <div class="col-xs-3 date">
+                                                <i class="fa fa-comments"></i>
+                                                12:50 pm
+                                                <br/>
+                                                <small class="text-navy">48 hour ago</small>
+                                            </div>
+                                            <div class="col-xs-7 content">
+                                                <p class="m-b-xs"><strong>Chat with Monica and Sandra</strong></p>
+                                                <p>
+                                                    Web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Page Foot -->
+                <div class="footer">
+                    <div class="pull-right">
+                        10GB of <strong>250GB</strong> Free.
+                    </div>
+                    <div>
+                        <strong>Copyright</strong> Example Company &copy; 2014-2017
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
     </div>
-    <!-- /.container -->
-</nav>
-
-<!-- Page Content -->
-<div class="container" id="bodymain">
-
-    <style type="text/css">
-        body {
-            font-family: Helvetica, arial, sans-serif;
-            font-size: 14px;
-            line-height: 1.6;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            background-color: white;
-            padding: 30px; }
-
-        body > *:first-child {
-            margin-top: 0 !important; }
-        body > *:last-child {
-            margin-bottom: 0 !important; }
-
-        a {
-            color: #4183C4; }
-        a.absent {
-            color: #cc0000; }
-        a.anchor {
-            display: block;
-            padding-left: 30px;
-            margin-left: -30px;
-            cursor: pointer;
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0; }
-
-        h1, h2, h3, h4, h5, h6 {
-            margin: 20px 0 10px;
-            padding: 0;
-            font-weight: bold;
-            -webkit-font-smoothing: antialiased;
-            cursor: text;
-            position: relative; }
-
-        h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
-            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
-            text-decoration: none; }
-
-        h1 tt, h1 code {
-            font-size: inherit; }
-
-        h2 tt, h2 code {
-            font-size: inherit; }
-
-        h3 tt, h3 code {
-            font-size: inherit; }
-
-        h4 tt, h4 code {
-            font-size: inherit; }
-
-        h5 tt, h5 code {
-            font-size: inherit; }
-
-        h6 tt, h6 code {
-            font-size: inherit; }
-
-        h1 {
-            font-size: 28px;
-            color: black; }
-
-        h2 {
-            font-size: 24px;
-            border-bottom: 1px solid #cccccc;
-            color: black; }
-
-        h3 {
-            font-size: 18px; }
-
-        h4 {
-            font-size: 16px; }
-
-        h5 {
-            font-size: 14px; }
-
-        h6 {
-            color: #777777;
-            font-size: 14px; }
-
-        p, blockquote, ul, ol, dl, li, table, pre {
-            margin: 15px 0; }
-
-        hr {
-            background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
-            border: 0 none;
-            color: #cccccc;
-            height: 4px;
-            padding: 0;
-        }
-
-        body > h2:first-child {
-            margin-top: 0;
-            padding-top: 0; }
-        body > h1:first-child {
-            margin-top: 0;
-            padding-top: 0; }
-        body > h1:first-child + h2 {
-            margin-top: 0;
-            padding-top: 0; }
-        body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
-            margin-top: 0;
-            padding-top: 0; }
-
-        a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
-            margin-top: 0;
-            padding-top: 0; }
-
-        h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
-            margin-top: 0; }
-
-        li p.first {
-            display: inline-block; }
-        li {
-            margin: 0; }
-        ul, ol {
-            padding-left: 30px; }
-
-        ul :first-child, ol :first-child {
-            margin-top: 0; }
-
-        dl {
-            padding: 0; }
-        dl dt {
-            font-size: 14px;
-            font-weight: bold;
-            font-style: italic;
-            padding: 0;
-            margin: 15px 0 5px; }
-        dl dt:first-child {
-            padding: 0; }
-        dl dt > :first-child {
-            margin-top: 0; }
-        dl dt > :last-child {
-            margin-bottom: 0; }
-        dl dd {
-            margin: 0 0 15px;
-            padding: 0 15px; }
-        dl dd > :first-child {
-            margin-top: 0; }
-        dl dd > :last-child {
-            margin-bottom: 0; }
-
-        blockquote {
-            border-left: 4px solid #dddddd;
-            padding: 0 15px;
-            color: #777777; }
-        blockquote > :first-child {
-            margin-top: 0; }
-        blockquote > :last-child {
-            margin-bottom: 0; }
-
-        table {
-            padding: 0;border-collapse: collapse; }
-        table tr {
-            border-top: 1px solid #cccccc;
-            background-color: white;
-            margin: 0;
-            padding: 0; }
-        table tr:nth-child(2n) {
-            background-color: #f8f8f8; }
-        table tr th {
-            font-weight: bold;
-            border: 1px solid #cccccc;
-            margin: 0;
-            padding: 6px 13px; }
-        table tr td {
-            border: 1px solid #cccccc;
-            margin: 0;
-            padding: 6px 13px; }
-        table tr th :first-child, table tr td :first-child {
-            margin-top: 0; }
-        table tr th :last-child, table tr td :last-child {
-            margin-bottom: 0; }
-
-        img {
-            max-width: 100%; }
-
-        span.frame {
-            display: block;
-            overflow: hidden; }
-        span.frame > span {
-            border: 1px solid #dddddd;
-            display: block;
-            float: left;
-            overflow: hidden;
-            margin: 13px 0 0;
-            padding: 7px;
-            width: auto; }
-        span.frame span img {
-            display: block;
-            float: left; }
-        span.frame span span {
-            clear: both;
-            color: #333333;
-            display: block;
-            padding: 5px 0 0; }
-        span.align-center {
-            display: block;
-            overflow: hidden;
-            clear: both; }
-        span.align-center > span {
-            display: block;
-            overflow: hidden;
-            margin: 13px auto 0;
-            text-align: center; }
-        span.align-center span img {
-            margin: 0 auto;
-            text-align: center; }
-        span.align-right {
-            display: block;
-            overflow: hidden;
-            clear: both; }
-        span.align-right > span {
-            display: block;
-            overflow: hidden;
-            margin: 13px 0 0;
-            text-align: right; }
-        span.align-right span img {
-            margin: 0;
-            text-align: right; }
-        span.float-left {
-            display: block;
-            margin-right: 13px;
-            overflow: hidden;
-            float: left; }
-        span.float-left span {
-            margin: 13px 0 0; }
-        span.float-right {
-            display: block;
-            margin-left: 13px;
-            overflow: hidden;
-            float: right; }
-        span.float-right > span {
-            display: block;
-            overflow: hidden;
-            margin: 13px auto 0;
-            text-align: right; }
-
-        code, tt {
-            margin: 0 2px;
-            padding: 0 5px;
-            white-space: nowrap;
-            border: 1px solid #eaeaea;
-            background-color: #f8f8f8;
-            border-radius: 3px; }
-
-        pre code {
-            margin: 0;
-            padding: 0;
-            white-space: pre;
-            border: none;
-            background: transparent; }
-
-        .highlight pre {
-            background-color: #f8f8f8;
-            border: 1px solid #cccccc;
-            font-size: 13px;
-            line-height: 19px;
-            overflow: auto;
-            padding: 6px 10px;
-            border-radius: 3px; }
-
-        pre {
-            background-color: #f8f8f8;
-            border: 1px solid #cccccc;
-            font-size: 13px;
-            line-height: 19px;
-            overflow: auto;
-            padding: 6px 10px;
-            border-radius: 3px; }
-        pre code, pre tt {
-            background-color: transparent;
-            border: none; }
-
-        sup {
-            font-size: 0.83em;
-            vertical-align: super;
-            line-height: 0;
-        }
-
-        kbd {
-            display: inline-block;
-            padding: 3px 5px;
-            font-size: 11px;
-            line-height: 10px;
-            color: #555;
-            vertical-align: middle;
-            background-color: #fcfcfc;
-            border: solid 1px #ccc;
-            border-bottom-color: #bbb;
-            border-radius: 3px;
-            box-shadow: inset 0 -1px 0 #bbb
-        }
-
-        * {
-            -webkit-print-color-adjust: exact;
-        }
-        @media screen and (min-width: 914px) {
-            body {
-                width: 854px;
-                margin:0 auto;
-            }
-        }
-        @media print {
-            table, pre {
-                page-break-inside: avoid;
-            }
-            pre {
-                word-wrap: break-word;
-            }
-        }
-    </style>
-
-<br><br><br>
-
-    <h1 id="toc_0">MyDog</h1>
-
-    <p><img src="https://raw.githubusercontent.com/PowerShenli/MyDog/master/mydog-doc/src/main/resources/mydog.ico" alt="MyDog logo"></p>
-
-    <p>MyDog - 开发者最忠实的朋友.</p>
-
-    <p>主人，有什么吩咐？生成代码？好的。让我帮你做更多的事, 汪汪！</p>
-
-    <p>
-        了解我更多? 请访问:&nbsp; <a href="https://github.com/PowerShenli/MyDog/wiki">MyDog WIKI</a>
-    </p>
+</div>
 
 
-    <!-- /.container -->
+
+    <!-- vendor lib -->
+    <script src="assets/js/lib/jquery-3.1.1.min.js"></script>
+    <script src="assets/js/lib/bootstrap.min.js"></script>
+
+    <!-- common plugins -->
+    <script src="assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!--  customer javascript -->
+    <script src="assets/js/main.js"></script>
 
 </body>
 
