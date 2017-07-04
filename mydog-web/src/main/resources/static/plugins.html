@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>MyDog</title>
+
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="assets/css/animate.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <!-- menu start... -->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse" id="menu-box">
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element"> <span>
+                            <img alt="image" class="img-circle" src="assets/img/profile_small.jpg" />
+                             </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">许思涵</strong>
+                             </span> <span class="text-muted text-xs block">Full-Stack <b class="caret"></b></span> </span> </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="profile.html">Profile</a></li>
+                                <li><a href="contacts.html">Contacts</a></li>
+                                <li class="divider"></li>
+                                <li><a href="login.html">Logout</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">
+                            MYDOG
+                        </div>
+                    </li>
+                    <li>
+                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span></a>
+                    </li>
+                    <li>
+                        <a href="document.html"><i class="fa fa-diamond"></i> <span class="nav-label">Document</span></a>
+                    </li>
+                    <li class="active">
+                        <a href="plugins.html"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Plugins</span><span class="label label-primary pull-right">new</span></a>
+                    </li>
+                    <li>
+                        <a href="generate.html"><i class="fa fa-envelope"></i> <span class="nav-label">Generate </span><span class="label label-info pull-right">new</span></a>
+                    </li>
+                    <li>
+                        <a href="applications.html"><i class="fa fa-cubes"></i> <span class="nav-label">Applications</span>  </a>
+                    </li>
+                    <li>
+                        <a href="contacts.html"><i class="fa fa-flask"></i> <span class="nav-label">JoinUs</span></a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </nav>
+        <!-- menu end... -->
+
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2" href="#"><i class="fa fa-bars"></i> </a>
+                        <form role="search" class="navbar-form-custom" action="search_results.html">
+                            <div class="form-group">
+                                <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                            </div>
+                        </form>
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li>
+                            <span class="m-r-sm text-muted welcome-message">Welcome to MyDog.</span>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                                <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-messages">
+                                <li>
+                                    <div class="dropdown-messages-box">
+                                        <a href="profile.html" class="pull-left">
+                                            <img alt="image" class="img-circle" src="assets/img/a7.jpg">
+                                        </a>
+                                        <div class="media-body">
+                                            <small class="pull-right">46h ago</small>
+                                            <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                                            <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <div class="dropdown-messages-box">
+                                        <a href="profile.html" class="pull-left">
+                                            <img alt="image" class="img-circle" src="assets/img/a4.jpg">
+                                        </a>
+                                        <div class="media-body ">
+                                            <small class="pull-right text-navy">5h ago</small>
+                                            <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
+                                            <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <div class="dropdown-messages-box">
+                                        <a href="profile.html" class="pull-left">
+                                            <img alt="image" class="img-circle" src="assets/img/profile.jpg">
+                                        </a>
+                                        <div class="media-body ">
+                                            <small class="pull-right">23h ago</small>
+                                            <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
+                                            <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <div class="text-center link-block">
+                                        <a href="mailbox.html">
+                                            <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                                <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-alerts">
+                                <li>
+                                    <a href="mailbox.html">
+                                        <div>
+                                            <i class="fa fa-envelope fa-fw"></i> You have 16 messages
+                                            <span class="pull-right text-muted small">4 minutes ago</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="profile.html">
+                                        <div>
+                                            <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                            <span class="pull-right text-muted small">12 minutes ago</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="grid_options.html">
+                                        <div>
+                                            <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                            <span class="pull-right text-muted small">4 minutes ago</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <div class="text-center link-block">
+                                        <a href="notifications.html">
+                                            <strong>See All Alerts</strong>
+                                            <i class="fa fa-angle-right"></i>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                        <li>
+                            <a href="login.html">
+                                <i class="fa fa-sign-out"></i> Log out
+                            </a>
+                        </li>
+                    </ul>
+
+                </nav>
+            </div>
+            <!-- bread crumbs start... -->
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-9">
+                    <h2>Plugins</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="active">
+                            <strong>Plugins</strong>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <!-- bread crumbs end... -->
+            <div class="row dashboard-header">
+                <div class="col-md-12">
+                    <h2>Intraduce</h2>
+                    <p>MyDog plugin is the most inportance in MyDog. There are some plugins....</p>
+                </div>
+            </div>
+
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="widget white-bg p-lg text-center">
+                            <div class="m-b-md">
+                                <i class="fa fa-2x fa-database"></i>
+                                <h1 class="m-xs">database</h1>
+                                <h3 class="font-bold no-margins">
+                                    <!-- database -->
+                                </h3>
+                                <small>We detect the error.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="widget white-bg p-lg text-center">
+                            <div class="m-b-md">
+                                <i class="fa fa-2x fa-plug"></i>
+                                <h1 class="m-xs">jdbc</h1>
+                                <h3 class="font-bold no-margins">
+                                </h3>
+                                <small>We detect the error.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="widget white-bg p-lg text-center">
+                            <div class="m-b-md">
+                                <i class="fa fa-2x fa-cubes"></i>
+                                <h1 class="m-xs">entity</h1>
+                                <h3 class="font-bold no-margins">
+                                </h3>
+                                <small>We detect the error.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="widget white-bg p-lg text-center">
+                            <div class="m-b-md">
+                                <i class="fa fa-2x fa-file-image-o"></i>
+                                <h1 class="m-xs">project</h1>
+                                <h3 class="font-bold no-margins">
+                                </h3>
+                                <small>We detect the error.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="widget white-bg p-lg text-center">
+                            <div class="m-b-md">
+                                <i class="fa fa-2x fa-coffee"></i>
+                                <h1 class="m-xs">html</h1>
+                                <h3 class="font-bold no-margins">
+                                </h3>
+                                <small>We detect the error.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="widget white-bg p-lg text-center">
+                            <div class="m-b-md">
+                                <i class="fa fa-2x fa-bicycle"></i>
+                                <h1 class="m-xs">xxx</h1>
+                                <h3 class="font-bold no-margins">
+                                </h3>
+                                <small>We detect the error.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- footer start... -->
+            <div class="footer">
+                <div>
+                    <strong>Copyright</strong> Example Company &copy; 2014-2017
+                </div>
+            </div>
+            <!-- footer end... -->
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="assets/js/lib/jquery-3.1.1.min.js"></script>
+    <script src="assets/js/lib/bootstrap.min.js"></script>
+    <script src="assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
