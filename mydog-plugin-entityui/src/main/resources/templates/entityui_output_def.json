@@ -64,7 +64,7 @@
       // VENDOR
       {
       "itemName": "jquery.js",
-      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/lib/jquery.min.js",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/lib/jquery-3.1.1.min.js",
       "genType": "byCopy",
       "cpFilePath": "templates/assets/js/lib/jquery-3.1.1.min.js"
       },
@@ -112,6 +112,14 @@
       "genType": "byCopy",
       "cpFilePath": "templates/assets/js/plugins/sparkline/"
       },
+
+      // IMG
+      {
+        "itemName": "images.directory",
+        "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/sparkline/",
+        "genType": "byCopy",
+        "cpFilePath": "templates/assets/js/plugins/sparkline/"
+      }
 
       // PAGE
       {
