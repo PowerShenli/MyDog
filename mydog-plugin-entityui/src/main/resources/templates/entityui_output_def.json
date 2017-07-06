@@ -49,12 +49,6 @@
       "cpFilePath": "templates/assets/css/style.css"
       },
       {
-      "itemName": "font-awesome.directory",
-      "outputPath": "${prj.outputPath}src/main/resources/static/assets/font-awesome/",
-      "genType": "byCopy",
-      "cpFilePath": "templates/assets/font-awesome/"
-      },
-      {
       "itemName": "animate.css",
       "outputPath": "${prj.outputPath}src/main/resources/static/assets/css/animate.css",
       "genType": "byCopy",
@@ -74,13 +68,31 @@
         "genType": "byCopy",
         "cpFilePath": "templates/assets/js/lib/bootstrap.min.js"
       },
+      {
+      "itemName": "font-awesome.directory",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/font-awesome/",
+      "genType": "byCopy",
+      "cpFilePath": "templates/assets/font-awesome/"
+      },
+      {
+      "itemName": "fonts.directory",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/fonts/",
+      "genType": "byCopy",
+      "cpFilePath": "templates/assets/fonts/"
+      },
 
       // PLUGINS
       {
-      "itemName": "footable.directory",
-      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/footable/",
+      "itemName": "bootstrap.directory",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/lib/bootstrap/",
       "genType": "byCopy",
-      "cpFilePath": "templates/assets/js/plugins/footable/"
+      "cpFilePath": "templates/assets/js/lib/bootstrap/"
+      },
+      {
+      "itemName": "FooTable.directory",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/FooTable/",
+      "genType": "byCopy",
+      "cpFilePath": "templates/assets/js/plugins/FooTable/"
       },
       {
       "itemName": "footable.directory",
@@ -100,6 +112,7 @@
       "genType": "byCopy",
       "cpFilePath": "templates/assets/js/plugins/slimscroll/"
       },
+
       {
       "itemName": "peity.directory",
       "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/peity/",
@@ -116,10 +129,10 @@
       // IMG
       {
         "itemName": "images.directory",
-        "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/sparkline/",
+        "outputPath": "${prj.outputPath}src/main/resources/static/assets/img/",
         "genType": "byCopy",
-        "cpFilePath": "templates/assets/js/plugins/sparkline/"
-      }
+        "cpFilePath": "templates/assets/img/"
+      },
 
       // PAGE
       {

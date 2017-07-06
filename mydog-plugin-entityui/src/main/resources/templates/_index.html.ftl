@@ -35,6 +35,51 @@
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse" id="menu-box">
             <ul class="nav metismenu" id="side-menu">
+                <!-- 顶图 -->
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <span>
+                            <img class="img-circle" src="assets/img/mydog-s.png" alt="MyDog logo">
+                        </span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear">
+                                <span class="block m-t-xs">
+                                    <strong class="font-bold">许思涵</strong>
+                                </span>
+                                <span class="text-muted text-xs block">Full-Stack Engineer <b class="caret"></b></span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a href="contacts.html">Contacts</a></li>
+                            <li class="divider"></li>
+                            <li><a href="login.html">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        MyDog
+                    </div>
+                </li>
+
+                <!-- Side menu start -->
+                <li class="active">
+                    <a href="index.html">
+                        <i class="fa fa-th-large"></i>
+                        <span class="nav-label">Dashboards</span>
+                        <!--<span class="fa arrow"></span>-->
+                    </a>
+                </li>
+
+                <!-- Entity menu start -->
+                <#list entity?keys as ent>
+                    <#assign ev=entity[ent]/>
+                <li>
+                    <a href="${ent?lower_case}_list.html">
+                        <i class="fa fa-table"></i>
+                        <span class="nav-label">${ev.label}管理</span>
+                    </a>
+                </li>
+                </#list>
+
             </ul>
         </div>
     </nav>
@@ -78,7 +123,7 @@
                 <h2>Welcome to MyDog</h2>
                 <div class="media">
                     <div class="media-left">
-                        <img src="https://raw.githubusercontent.com/PowerShenli/MyDog/master/mydog-doc/src/main/resources/mydog.ico" alt="MyDog logo">
+                        <img src="assets/img/mydog-m.png" alt="MyDog logo">
                     </div>
                     <div class="media-body">
                         <h5>MyDog - 开发者最忠实的朋友.</h5>
@@ -110,15 +155,15 @@
                                 <tbody>
                                 <#list entity?keys as ent>
                                     <#assign ev=entity[ent]/>
-                                <tr data-page="${ent?lower_case}-list.html">
+                                <tr data-page="${ent?lower_case}_list.html">
                                     <td>
                                         <i class="fa fa-circle text-danger"></i>
                                     </td>
                                     <td>
-                                        <a href="${ent?lower_case}-list.html">${ev.label}管理</a>
+                                        <a href="${ent?lower_case}_list.html">${ev.label}管理</a>
                                     </td>
                                     <td>
-                                        <a href="${ent?lower_case}-list.html" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>
+                                        <a href="${ent?lower_case}_list.html" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>
                                     </td>
                                 </tr>
                                 </#list>

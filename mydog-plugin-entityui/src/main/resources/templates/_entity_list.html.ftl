@@ -16,7 +16,7 @@
     <link href="assets/css/animate.css" rel="stylesheet">
 
     <!-- Plugin CSS -->
-    <link href="css/plugins/footable/footable.core.css" rel="stylesheet">
+    <link href="assets/js/plugins/FooTable/footable.bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="assets/css/style.css" rel="stylesheet">
@@ -27,7 +27,7 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]--><meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
+    <![endif]-->
 
 </head>
 <body>
@@ -37,6 +37,51 @@
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse" id="menu-box">
             <ul class="nav metismenu" id="side-menu">
+                <!-- 顶图 -->
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <span>
+                            <img class="img-circle" src="assets/img/mydog-s.png" alt="MyDog logo">
+                        </span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear">
+                                <span class="block m-t-xs">
+                                    <strong class="font-bold">许思涵</strong>
+                                </span>
+                                <span class="text-muted text-xs block">Full-Stack Engineer <b class="caret"></b></span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a href="contacts.html">Contacts</a></li>
+                            <li class="divider"></li>
+                            <li><a href="login.html">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        MyDog
+                    </div>
+                </li>
+
+                <!-- Side menu start -->
+                <li>
+                    <a href="index.html">
+                        <i class="fa fa-th-large"></i>
+                        <span class="nav-label">Dashboards</span>
+                        <!--<span class="fa arrow"></span>-->
+                    </a>
+                </li>
+
+                <!-- Entity menu start -->
+            <#--<#list entity?keys as ent>-->
+                <#--<#assign ev=entity[ent]/>-->
+                <#--<li>-->
+                    <#--<a href="${ent?lower_case}_list.html">-->
+                        <#--<i class="fa fa-table"></i>-->
+                        <#--<span class="nav-label">${ev.label}管理</span>-->
+                    <#--</a>-->
+                <#--</li>-->
+            <#--</#list>-->
+
             </ul>
         </div>
     </nav>
@@ -95,68 +140,26 @@
         <!-- bread crumbs end... -->
 
         <!-- main content start... -->
-        <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="wrapper wrapper-content" id="${l_ent_name}List">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>FooTable with row toggler, sorting and pagination</h5>
+                            <h5>${entity.label}列表</h5>
 
                             <div class="ibox-tools">
-                                <a class="collapse-link">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-wrench"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-user">
-                                    <li><a href="#">Config option 1</a>
-                                    </li>
-                                    <li><a href="#">Config option 2</a>
-                                    </li>
-                                </ul>
-                                <a class="close-link">
-                                    <i class="fa fa-times"></i>
-                                </a>
+                                <button class="btn btn-info btn-${l_ent_name}-add" id="btn-${l_ent_name}-add" data-toggle="modal" data-target="#${l_ent_name}Modal">
+                                    <span class="fa fa-plug"/>&nbsp;新建${entity.label}
+                                </button>
+                                <button class="btn btn-info btn-${l_ent_name}-query" id="btn-${l_ent_name}-query">
+                                    <span class="fa fa-search"/>&nbsp;查询
+                                </button>
                             </div>
                         </div>
                         <div class="ibox-content">
 
-                            <table class="footable table table-stripped toggle-arrow-tiny tablet breakpoint footable-loaded">
-                                <thead>
-                                <tr>
+                            <table id="${l_ent_name}Tb" class="table" data-paging="true">
 
-                                    <th data-toggle="true" class="footable-visible footable-first-column footable-sortable">Project<span class="footable-sort-indicator"></span></th>
-                                    <th class="footable-visible footable-sortable">Name<span class="footable-sort-indicator"></span></th>
-                                    <th class="footable-visible footable-sortable">Phone<span class="footable-sort-indicator"></span></th>
-                                    <th data-hide="all" class="footable-sortable" style="display: none;">Company<span class="footable-sort-indicator"></span></th>
-                                    <th data-hide="all" class="footable-sortable" style="display: none;">Completed<span class="footable-sort-indicator"></span></th>
-                                    <th data-hide="all" class="footable-sortable" style="display: none;">Task<span class="footable-sort-indicator"></span></th>
-                                    <th data-hide="all" class="footable-sortable" style="display: none;">Date<span class="footable-sort-indicator"></span></th>
-                                    <th class="footable-visible footable-last-column footable-sortable">Action<span class="footable-sort-indicator"></span></th>
-                                </tr>
-                                </thead>
-
-                                <tbody>
-                                <tr class="footable-even" style="">
-                                    <td class="footable-visible footable-first-column"><span class="footable-toggle"></span>Project - This is example of project</td>
-                                    <td class="footable-visible">Patrick Smith</td>
-                                    <td class="footable-visible">0800 051213</td>
-                                    <td style="display: none;">Inceptos Hymenaeos Ltd</td>
-                                    <td style="display: none;"><span class="pie">0.52/1.561</span></td>
-                                    <td style="display: none;">20%</td>
-                                    <td style="display: none;">Jul 14, 2013</td>
-                                    <td class="footable-visible footable-last-column"><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                </tr>
-
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <td colspan="5" class="footable-visible">
-                                        <ul class="pagination pull-right"><li class="footable-page-arrow disabled"><a data-page="first" href="#first">«</a></li><li class="footable-page-arrow disabled"><a data-page="prev" href="#prev">‹</a></li><li class="footable-page active"><a data-page="0" href="#">1</a></li><li class="footable-page"><a data-page="1" href="#">2</a></li><li class="footable-page-arrow"><a data-page="next" href="#next">›</a></li><li class="footable-page-arrow"><a data-page="last" href="#last">»</a></li></ul>
-                                    </td>
-                                </tr>
-                                </tfoot>
                             </table>
 
                         </div>
@@ -167,31 +170,17 @@
         <!-- main content end... -->
 
         <!-- old... -->
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>FooTable with row toggler, sorting and pagination</h5>
+        <#--<table data-toggle="table" id="${l_ent_name}Tb" data-paging="true">-->
+            <#--<thead>-->
+            <#--<tr>-->
+            <#--<#list entity.fields as field>-->
+                <#--<th data-field="${field.fieldName}">${field.label}</th>-->
+            <#--</#list>-->
+                <#--<th data-formatter="${l_ent_name}Ctl.opFormatter">操作</th>-->
+            <#--</tr>-->
+            <#--</thead>-->
+        <#--</table>-->
 
-                        <div class="ibox-tools">
-                            <button class="btn btn-info" id="create_${l_ent_name}_btn"><span class="glyphicon glyphicon-plus"/>&nbsp;新建${entity.label}</button>
-                            <button class="btn btn-info" id="search_${l_ent_name}_btn"><span class="glyphicon glyphicon-plus"/>&nbsp;查询</button>
-                        </div>
-                    </div>
-
-                    <table data-toggle="table" id="${l_ent_name}Tb">
-                        <thead>
-                        <tr>
-                        <#list entity.fields as field>
-                            <th data-field="${field.fieldName}">${field.label}</th>
-                        </#list>
-                            <th data-formatter="${l_ent_name}Ctl.opFormatter">操作</th>
-                        </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
-        </div>
 
         <!-- footer start... -->
         <div class="footer">
@@ -205,7 +194,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="add${l_ent_name}Div" role="dialog">
+<div class="modal fade" id="${l_ent_name}Modal" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -283,7 +272,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" id="${l_ent_name}SubmitBtn">提交</button>
+                <button type="button" class="btn btn-success btn-${l_ent_name}-save">提交</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
         </div>
@@ -302,6 +291,9 @@
 <script src="assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- plugins -->
+<script src="assets/js/plugins/FooTable/footable.min.js"></script>
 
 <!--  customer javascript -->
 <script src="assets/js/main.js"></script>

@@ -1,4 +1,72 @@
 <#assign l_ent_name=entity.entityName?lower_case/>
+;(function (global) {
+    'use strict';
+
+    var roleTable = $('#${l_ent_name}Tb');
+
+    function init() {
+        if(roleTable.length > 0){
+        // fetch data and init table
+        var ft = FooTable.init('#${l_ent_name}Tb',{
+            "columns":[
+                <#list entity.fields as field>
+                {
+                    name: '${field.fieldName}',
+                    title: '${field.fieldName}'
+                },
+                </#list>
+                {
+                    title: '操作',
+                    name: '#'
+                }
+            ]
+        });
+        setTimeout(function () {
+            $_ajax.get('/${l_ent_name}').then(function (res) {
+                if(res.success && res.data){
+                    console.log(res.data);
+                    console.log(ft);
+                    ft.rows.load(res.data);
+                }
+            });
+        },500);
+
+    }
+
+    $("#${l_ent_name}List").on('click','.btn-${l_ent_name}-del',function(e){
+        // delete
+        del();
+    });
+
+    $("#${l_ent_name}List").on('click','.btn-${l_ent_name}-save',function(e){
+        // save data
+    });
+
+
+    }
+
+    function getAll() {
+
+    }
+    function getDataOfPage() {
+
+    }
+    function add() {
+
+    }
+    function edit() {
+
+    }
+    function del() {
+
+    }
+
+    $(document).ready(function() {
+        init();
+    });
+
+}(window,undefined))
+
 ${l_ent_name}Ctl = {
 
     initTable : function(){
@@ -59,9 +127,9 @@ ${l_ent_name}Ctl = {
         $("#${l_ent_name}Form").bootstrapValidator({
             message: 'This value is not valid',
             feedbackIcons: {        //提示图标
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
+                valid: 'fa fa-check-square-o',
+                invalid: 'fa fa-times',
+                validating: 'fa fa-exclamation'
             },
             fields:{
                 <#list entity.fields as f>
@@ -317,8 +385,8 @@ ${l_ent_name}Ctl = {
 };
 
 $(document).ready(function(){
-    console.log("${l_ent_name}-list.js on ready.");
-    ${l_ent_name}Ctl.initTable();
-    ${l_ent_name}Ctl.initEventHandler();
-    ${l_ent_name}Ctl.loadTableData();
+    //console.log("${l_ent_name}-list.js on ready.");
+    //${l_ent_name}Ctl.initTable();
+    //${l_ent_name}Ctl.initEventHandler();
+    //${l_ent_name}Ctl.loadTableData();
 });
