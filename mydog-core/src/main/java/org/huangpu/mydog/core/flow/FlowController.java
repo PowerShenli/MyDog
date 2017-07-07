@@ -27,7 +27,8 @@ public class FlowController {
         return "false|null";
     }
 
-    public String startGenerate(String inputJson){
+    @SuppressWarnings("unchecked")
+	public String startGenerate(String inputJson){
         JSONObject json = JSON.parseObject(inputJson);
 
         //从输入解析元数据

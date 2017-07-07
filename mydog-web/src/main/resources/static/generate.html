@@ -10,8 +10,9 @@
 
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet">
-
     <link href="assets/css/animate.css" rel="stylesheet">
+    <link href="assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
 
 </head>
@@ -58,9 +59,7 @@
                     <li>
                         <a href="contacts.html"><i class="fa fa-flask"></i> <span class="nav-label">JoinUs</span></a>
                     </li>
-
                 </ul>
-
             </div>
         </nav>
         <!-- menu end... -->
@@ -202,9 +201,265 @@
             </div>
             <!-- bread crumbs end... -->
 
-            <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="wrapper wrapper-content animated fadeInRight navbar-top-links">
                 <div class="row">
-
+                    <div class="mydog-plugins-add dropdown text-center">
+                        <span class="label label-inverse">add feature</span>
+                        <a class="dropdown-toggle count-info " data-toggle="dropdown" href="#">
+                            <img src="assets/img/add.png" alt="add plugins" class="img-responsive">
+                        </a>
+                        <ul class="dropdown-menu dropdown-messages">
+                            <li>
+                                <div class="dropdown-messages-box clearfix">
+                                    <a href="profile.html" class="pull-left">
+                                        <img alt="image" class=" img-circle " src="assets/img/project.jpg">
+                                    </a>
+                                    <div class="media-body">
+                                        <strong>mydog project</strong>. <br><span class="label label-warning label-min">唯一</span><br>
+                                        <small class="text-muted">用于生成 基础项目</small>
+                                    </div>
+                                    <a href="profile.html" class="plugin-add">
+                                        <img alt="image" class=" img-circle " src="assets/img/add.png">
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="dropdown-messages-box clearfix">
+                                    <a href="profile.html" class="pull-left">
+                                        <img alt="image" class=" img-circle " src="assets/img/database.png">
+                                    </a>
+                                    <div class="media-body">
+                                        <strong>mydog datasource</strong>. <br><span class="label label-warning label-min">唯一</span><br>
+                                        <small class="text-muted">用于生成 datasource</small>
+                                    </div>
+                                    <a href="profile.html" class="plugin-add">
+                                        <img alt="image" class=" img-circle " src="assets/img/add.png">
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="dropdown-messages-box clearfix">
+                                    <a href="profile.html" class="pull-left">
+                                        <img alt="image" class=" img-circle " src="assets/img/entity.jpg">
+                                    </a>
+                                    <div class="media-body">
+                                        <strong>mydog entity</strong> <br><span class="label label-warning label-min">唯一</span><br>
+                                        <small class="text-muted">用于生成 entity</small>
+                                    </div>
+                                    <a href="profile.html" class="plugin-add">
+                                        <img alt="image" class=" img-circle " src="assets/img/add.png">
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="dropdown-messages-box clearfix">
+                                    <a href="profile.html" class="pull-left">
+                                        <img alt="image" class=" img-circle " src="assets/img/web.jpg">
+                                    </a>
+                                    <div class="media-body">
+                                        <strong>mydog web</strong> <br><span class="label label-warning label-min">唯一</span><br>
+                                        <small class="text-muted">用于生成 基础的网页</small>
+                                    </div>
+                                    <a href="profile.html" class="plugin-add">
+                                        <img alt="image" class=" img-circle " src="assets/img/add.png">
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="widget white-bg p-lg mydog-plugins-properties">
+                            <div class="media">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Mydog project</h4>
+                                    <div class="media-left  media-mini col-md-2 text-center">
+                                        <a href="#">
+                                            <img class="media-object" src="assets/img/project.jpg" alt="mydog-project">
+                                        </a>
+                                    </div>
+                                    <form>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="inputGoupId">groupId</label>
+                                                <input type="text" class="form-control" id="inputGoupId" placeholder="groupId">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputArtifactId">artifactId</label>
+                                                <input type="text" class="form-control" id="inputArtifactId" placeholder="artifactId">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputVersion">version</label>
+                                                <input type="text" class="form-control" id="inputVersion" placeholder="version">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="inputOutputPath">outputPath</label>
+                                                <input type="text" class="form-control" id="inputOutputPath" placeholder="D:/mydog/ouput/">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputAppPort">port</label>
+                                                <input type="text" class="form-control" id="inputAppPort" placeholder="8082">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputSpringbootVersion">springbootVersion</label>
+                                                <input type="text" class="form-control" id="inputSpringbootVersion" placeholder="1.4.2.RELEASE">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group ">
+                                                <label for="inputSpringbootVersion">ProjectName</label>
+                                                <input type="text" class="form-control" id="ProjectName" placeholder="mydog测试项目">
+                                            </div>
+                                            <div class="form-group center-block">
+                                                <input type="submit" value="配  置" class="form-control-submit-min btn btn-success"/>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="widget white-bg p-lg mydog-plugins-properties">
+                            <div class="media">
+                                <h4 class="media-heading">Mydog datasource</h4>
+                                <div class="media-left  media-mini col-md-2 text-center">
+                                    <a href="#">
+                                        <img class="media-object" src="assets/img/database.png" alt="mydog-database">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <form>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="inputDatabase">Database</label>
+                                                <input type="text" class="form-control" id="inputDatabase" placeholder="数据库">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="dbuser">DBUser</label>
+                                                <input type="text" class="form-control" id="dbuser" placeholder="数据库连接名">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="dbpwd">DBPwd</label>
+                                                <input type="password" class="form-control" id="dbpwd" placeholder="数据库密码">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>数据源</label>
+                                                <div class="i-checks">
+                                                    <label class="">
+                                                        <div class="iradio_square-green" style="position: relative;">
+                                                            <input type="radio" value="" checked="checked" name="datasource" style="position: absolute; opacity: 0;">
+                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                                                        </div>
+                                                        <i></i>
+                                                        MySQL
+                                                    </label>
+                                                    <label class="">
+                                                        <div class="iradio_square-green" style="position: relative;">
+                                                            <input type="radio" value="" name="datasource" style="position: absolute; opacity: 0;">
+                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                                                        </div>
+                                                        <i></i>
+                                                        Oracle
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="form-group">
+                                                <label for="inputJarPath">Jar路径</label>
+                                                <input type="text" class="form-control" id="inputJarPath" placeholder="/tmp/.m2/repository/mysql/mysql-connector-java/5.1.40/mysql-connector-java-5.1.40.jar">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="form-group ">
+                                                <input type="submit" value="配  置" class=" form-control-submit-min btn btn-success "/>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="widget white-bg p-lg mydog-plugins-properties">
+                            <div class="media">
+                                <h4 class="media-heading">Mydog entity</h4>
+                                <div class="media-left  media-mini col-md-2 text-center">
+                                    <a href="#">
+                                        <img class="media-object" src="assets/img/entity.jpg" alt="mydog-entity">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <form>
+                                        <div class="col-md-9">
+                                            <div class="form-group">
+                                                <label>选择功能</label>
+                                                <div class="i-checks">
+                                                    <label class="">
+                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                            <input type="checkbox" value="" name="datasource" style="position: absolute; opacity: 0;">
+                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                                                        </div>
+                                                        <i></i>
+                                                        Security
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="form-group ">
+                                                <input type="submit" value="配  置" class=" form-control-submit-min btn btn-success "/>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="widget white-bg p-lg mydog-plugins-properties">
+                            <div class="media">
+                                <h4 class="media-heading">Mydog web</h4>
+                                <div class="media-left  media-mini col-md-2 text-center">
+                                    <a href="#">
+                                        <img class="media-object" src="assets/img/web.jpg" alt="mydog-web">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <form>
+                                        <div class="col-md-9">
+                                            <div class="form-group">
+                                                <label>选择功能</label>
+                                                <div class="i-checks">
+                                                    <label class="">
+                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                            <input type="checkbox" value="" name="datasource" style="position: absolute; opacity: 0;">
+                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                                                        </div>
+                                                        <i></i>
+                                                        Security
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="form-group ">
+                                                <input type="submit" value="配  置" class=" form-control-submit-min btn btn-success "/>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -226,5 +481,16 @@
 
     <!-- Custom and plugin javascript -->
     <script src="assets/js/main.js"></script>
+
+    <!-- iCheck -->
+    <script src="assets/js/plugins/iCheck/icheck.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
 </body>
 </html>
