@@ -154,7 +154,7 @@
             "length":1,
             "null":false,
             "viewProp":{
-              "type":"redio",
+              "type":"radio",
               "enum":"{\"true\":\"是\",\"false\":\"否\"}"
             }
           },
