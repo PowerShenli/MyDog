@@ -15,9 +15,6 @@
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="assets/css/animate.css" rel="stylesheet">
 
-    <!-- Plugin CSS -->
-    <link href="assets/js/plugins/FooTable/footable.bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="assets/css/style.css" rel="stylesheet">
 
@@ -30,7 +27,7 @@
     <![endif]-->
 
 </head>
-<body>
+<body class="${l_ent_name}Box">
 
 <div id="wrapper">
     <!-- Navigation -->
@@ -149,7 +146,7 @@
 
                             <div class="ibox-tools">
                                 <button class="btn btn-info btn-${l_ent_name}-add" id="btn-${l_ent_name}-add" data-toggle="modal" data-target="#${l_ent_name}Modal">
-                                    <span class="fa fa-plug"/>&nbsp;新建${entity.label}
+                                    <span class="fa fa-plus"/>&nbsp;新建${entity.label}
                                 </button>
                                 <button class="btn btn-info btn-${l_ent_name}-query" id="btn-${l_ent_name}-query">
                                     <span class="fa fa-search"/>&nbsp;查询
@@ -159,7 +156,17 @@
                         <div class="ibox-content">
 
                             <table id="${l_ent_name}Tb" class="table" data-paging="true">
+                                <thead>
+                                    <tr>
+                                    <#list entity.fields as field>
+                                        <th data-field="${field.fieldName}">${field.label}</th>
+                                    </#list>
+                                        <th data-formatter="${l_ent_name}Ctl.opFormatter">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
+                                </tbody>
                             </table>
 
                         </div>
@@ -201,15 +208,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">新建${entity.label}</h4>
+                <h4 class="modal-title"><em></em>${entity.label}</h4>
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <div class="row-fluid">
-                        <div class="span12">
-                            <fieldset>
+                    <fieldset>
                                 <form method="POST" id="${l_ent_name}Form" role="form" class="form-horizontal" data-toggle="validator">
-                                    <#list entity.fields as field>
+                                    <input type="hidden" name="id" id="id" />
+                                <#list entity.fields as field>
                                     <#assign field_name=field.fieldName/>
                                     <#assign vprop=field.viewProp/>
                                         <#if vprop.type=="select">
@@ -225,7 +231,7 @@
                                                 </#if>
                                             </select>
                                         </div>
-                                        <#elseif vprop.type=="redio">
+                                        <#elseif vprop.type=="radio">
                                         <div class="form-group">
                                             <label class="control-label" for="${field_name}">${field.label}:</label>
                                             <div class="controls" >
@@ -266,9 +272,7 @@
                                     </#list>
 
                                 </form>
-                            </fieldset>
-                        </div>
-                    </div>
+                    </fieldset>
                 </div>
             </div>
             <div class="modal-footer">
@@ -279,21 +283,41 @@
 
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="${l_ent_name}DelModal" role="dialog">
+    <div class="modal-dialog">
 
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">提示消息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <input type="hidden" name="id" />
+                    确定要删除${entity.label}？
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success btn-${l_ent_name}-del">删除</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 
 
 <!-- vendor lib -->
-<script src="assets/js/lib/jquery-3.1.1.min.js"></script>
-<script src="assets/js/lib/bootstrap.min.js"></script>
+<script src="assets/vendor/jquery/jquery-3.1.1.min.js"></script>
+<script src="assets/vendor/bootstrap/bootstrap.min.js"></script>
 
 <!-- common plugins -->
-<script src="assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="assets/vendor/metisMenu/jquery.metisMenu.js"></script>
+<script src="assets/vendor/slimscroll/jquery.slimscroll.min.js"></script>
 
-<!-- plugins -->
-<script src="assets/js/plugins/FooTable/footable.min.js"></script>
 
 <!--  customer javascript -->
 <script src="assets/js/main.js"></script>

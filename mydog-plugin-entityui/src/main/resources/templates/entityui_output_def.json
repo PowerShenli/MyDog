@@ -57,16 +57,16 @@
 
       // VENDOR
       {
-      "itemName": "jquery.js",
-      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/lib/jquery-3.1.1.min.js",
+      "itemName": "jquery.directory",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/vendor/jquery/",
       "genType": "byCopy",
-      "cpFilePath": "templates/assets/js/lib/jquery-3.1.1.min.js"
+      "cpFilePath": "templates/assets/vendor/jquery/"
       },
       {
-        "itemName": "bootstrap.js",
-        "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/lib/bootstrap.min.js",
+        "itemName": "bootstrap.directory",
+        "outputPath": "${prj.outputPath}src/main/resources/static/assets/vendor/bootstrap/",
         "genType": "byCopy",
-        "cpFilePath": "templates/assets/js/lib/bootstrap.min.js"
+        "cpFilePath": "templates/assets/vendor/bootstrap/"
       },
       {
       "itemName": "font-awesome.directory",
@@ -81,49 +81,36 @@
       "cpFilePath": "templates/assets/fonts/"
       },
 
-      // PLUGINS
       {
-      "itemName": "bootstrap.directory",
-      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/lib/bootstrap/",
-      "genType": "byCopy",
-      "cpFilePath": "templates/assets/js/lib/bootstrap/"
-      },
-      {
-      "itemName": "FooTable.directory",
-      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/FooTable/",
-      "genType": "byCopy",
-      "cpFilePath": "templates/assets/js/plugins/FooTable/"
-      },
-      {
-      "itemName": "footable.directory",
-      "outputPath": "${prj.outputPath}src/main/resources/static/assets/css/plugins/footable/",
-      "genType": "byCopy",
-      "cpFilePath": "templates/assets/css/plugins/footable/"
+        "itemName": "jqBootstrapValidation.directory",
+        "outputPath": "${prj.outputPath}src/main/resources/static/assets/vendor/jqBootstrapValidation/",
+        "genType": "byCopy",
+        "cpFilePath": "templates/assets/vendor/jqBootstrapValidation/"
       },
       {
       "itemName": "metisMenu.directory",
-      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/metisMenu/",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/vendor/metisMenu/",
       "genType": "byCopy",
-      "cpFilePath": "templates/assets/js/plugins/metisMenu/"
+      "cpFilePath": "templates/assets/vendor/metisMenu/"
       },
       {
       "itemName": "slimscroll.directory",
-      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/slimscroll/",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/vendor/slimscroll/",
       "genType": "byCopy",
-      "cpFilePath": "templates/assets/js/plugins/slimscroll/"
+      "cpFilePath": "templates/assets/vendor/slimscroll/"
       },
 
       {
       "itemName": "peity.directory",
-      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/peity/",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/vendor/peity/",
       "genType": "byCopy",
-      "cpFilePath": "templates/assets/js/plugins/peity/"
+      "cpFilePath": "templates/assets/vendor/peity/"
       },
       {
       "itemName": "sparkline.directory",
-      "outputPath": "${prj.outputPath}src/main/resources/static/assets/js/plugins/sparkline/",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/vendor/sparkline/",
       "genType": "byCopy",
-      "cpFilePath": "templates/assets/js/plugins/sparkline/"
+      "cpFilePath": "templates/assets/vendor/sparkline/"
       },
 
       // IMG
@@ -146,6 +133,12 @@
         "outputPath":"${prj.outputPath}src/main/resources/static/assets/js/",
         "genType":"byTemplate",
         "tmpFilePath":"templates/_login.js.ftl"
+      },
+      {
+      "itemName":"menu.html",
+      "outputPath":"${prj.outputPath}src/main/resources/static/",
+      "genType":"byTemplate",
+      "tmpFilePath":"templates/_menu.html.ftl"
       },
       {
       "itemName":"main.js",

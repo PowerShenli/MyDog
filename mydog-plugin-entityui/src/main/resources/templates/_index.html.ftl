@@ -194,12 +194,12 @@
 
 
     <!-- vendor lib -->
-    <script src="assets/js/lib/jquery-3.1.1.min.js"></script>
-    <script src="assets/js/lib/bootstrap.min.js"></script>
+    <script src="assets/vendor/jquery/jquery-3.1.1.min.js"></script>
+    <script src="assets/vendor/bootstrap/bootstrap.min.js"></script>
 
     <!-- common plugins -->
-    <script src="assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="assets/vendor/metisMenu/jquery.metisMenu.js"></script>
+    <script src="assets/vendor/slimscroll/jquery.slimscroll.min.js"></script>
 
     <!--  customer javascript -->
     <script src="assets/js/main.js"></script>

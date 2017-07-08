@@ -2,63 +2,135 @@
 ;(function (global) {
     'use strict';
 
-    var roleTable = $('#${l_ent_name}Tb');
+    var ${l_ent_name}Table = $('#${l_ent_name}Tb');
+    var tpl = '<tr><#list entity.fields as field><td>{{ ${field.fieldName} }}</td></#list><td><button class="btn btn-sm btn-${l_ent_name}-edit" data-toggle="modal" data-target="#${l_ent_name}Modal" data-whatever="{{ id }}"><i class="fa fa-edit"></i></button><button class="btn btn-sm btn-${l_ent_name}-del" data-toggle="modal" data-target="#${l_ent_name}DelModal" data-whatever="{{ id }}"><i class="fa fa-trash"</button></td></tr>';
+    var lists = [];
+    var editModal = $('#${l_ent_name}Modal');
+    var delModal = $('#${l_ent_name}DelModal');
 
     function init() {
-        if(roleTable.length > 0){
-        // fetch data and init table
-        var ft = FooTable.init('#${l_ent_name}Tb',{
-            "columns":[
-                <#list entity.fields as field>
-                {
-                    name: '${field.fieldName}',
-                    title: '${field.fieldName}'
-                },
-                </#list>
-                {
-                    title: '操作',
-                    name: '#'
-                }
-            ]
+
+        getAll();
+
+        editModal.on('show.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var id = button.data('whatever');
+            var modal = $(this);
+
+            if(id && id!=''){
+                modal.find('input[name=id]').val(id);
+                modal.find('.modal-title em').html('新建');
+                $_ajax.get('/${l_ent_name}/'+id).then(function (res) {
+                    if(res && res.success){
+                        var d = res.data || {};
+                        modal.find('#${l_ent_name}').val(d.name || '');
+                        modal.find('#${l_ent_name}_'+d.available).prop('checked',true);
+                    }
+                });
+            } else {
+                modal.find('.modal-title em').html('编辑');
+            }
         });
-        setTimeout(function () {
-            $_ajax.get('/${l_ent_name}').then(function (res) {
-                if(res.success && res.data){
-                    console.log(res.data);
-                    console.log(ft);
-                    ft.rows.load(res.data);
-                }
-            });
-        },500);
+        $(".${l_ent_name}Box").on('click','.btn-${l_ent_name}-save',function(e){
+            // save data
+            var id = editModal.find('input[name=id]').val();
+            var param = {
+            <#list entity.fields as f>
+                <#assign t=f["viewProp"].type/><#assign fn=f.fieldName/>
+                <#if t=="radio">
+                '${fn}':$("input[name='${fn}']").prop("checked")
+                <#else>
+                '${fn}':$("#${fn}").val()
+                </#if>
+                <#if f_has_next>,</#if>
+            </#list>
+            };
+            if(id && id!=''){
+                edit(param);
+            } else {
+                add(param);
+            }
+        });
+
+        delModal.on('show.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var id = button.data('whatever');
+            var modal = $(this);
+
+            if(id && id!=''){
+                modal.find('input[name=id]').val(id);
+            }
+        });
+        $(".${l_ent_name}Box").on('click','.btn-${l_ent_name}-del',function(e){
+            // delete
+            var id = delModal.find('input[name=id]').val();
+            if(id && id!=''){
+                del(id);
+            }else{
+                //delModal.modal('hide');
+            }
+        });
 
     }
 
-    $("#${l_ent_name}List").on('click','.btn-${l_ent_name}-del',function(e){
-        // delete
-        del();
-    });
-
-    $("#${l_ent_name}List").on('click','.btn-${l_ent_name}-save',function(e){
-        // save data
-    });
-
-
-    }
 
     function getAll() {
+        $_ajax.get('/${l_ent_name}').then(function (res) {
+            if(res.success && res.data){
+                var d = res.data;
+                var lists = [];
+                if(Utils.isArray(d) && d.length>0){
+                    for(var i=0,l=d.length;i<l;i++){
+                        lists.push(Utils.parseTemplate(tpl,d[i]));
+                    }
 
+                    ${l_ent_name}Table.find('tbody').html(lists.join(''));
+                }
+            }
+        });
     }
-    function getDataOfPage() {
-
+    function getDataOfPage(limit) {
+        $_ajax.get('/${l_ent_name}/limit-'+limit).then(function (res) {
+            if(res && res.success){
+                // 刷新数据
+                getAll();
+            }
+        });
     }
-    function add() {
-
+    function add(obj) {
+        if(!Utils.isObject(obj)){
+            return;
+        }
+        $_ajax.post('/${l_ent_name}',obj).then(function (res) {
+            if(res && res.success){
+                // 刷新数据
+                getAll();
+                editModal.find('input').val('');
+                editModal.modal('hide');
+            }
+        });
     }
-    function edit() {
-
+    function edit(obj) {
+        if(!Utils.isObject(obj)){
+            return;
+        }
+        $_ajax.put('/${l_ent_name}/'+obj.id,obj).then(function (res) {
+            if(res && res.success){
+                // 刷新数据
+                getAll();
+                editModal.find('input').val('');
+                editModal.modal('hide');
+            }
+        });
     }
-    function del() {
-
+    function del(id) {
+        $_ajax.del('/${l_ent_name}/'+id).then(function (res) {
+            if(res && res.success){
+                // 刷新数据
+                getAll();
+                delModal.modal('hide');
+            }
+        });
     }
 
     $(document).ready(function() {
@@ -67,326 +139,3 @@
 
 }(window,undefined))
 
-${l_ent_name}Ctl = {
-
-    initTable : function(){
-        $("#${l_ent_name}Tb").bootstrapTable({
-            columns:[
-                <#list entity.fields as field>
-                {
-                    field: '${field.fieldName}',
-                    checkbox: true,
-                    rowspan: 2,
-                    align: 'center',
-                    valign: 'middle'
-                },
-                </#list>
-                {
-                    title: '操作',
-                    field: '#',
-                    align: 'center',
-                    valign: 'middle',
-                    checkbox: true,
-                    rowspan: 2,
-                    formatter:${l_ent_name}Ctl.opFormatter
-                }
-            ]
-        });
-    },
-
-    initEventHandler : function(){
-        //show add dialog
-        $("#create_${l_ent_name}_btn").click(function(){
-            ${l_ent_name}Ctl.resetForm();
-            $('#add${l_ent_name}Div').modal();
-        });
-
-        //save entity
-        $("#${l_ent_name}SubmitBtn").click(function(){
-            var form = $("#${l_ent_name}Form");
-            form.bootstrapValidator('validate');
-            var flag = form.data("bootstrapValidator").isValid();
-            console.log("validate form :"+flag);
-            if(flag){
-                var id = $("#${l_ent_name}Form")[0]["${entity.id.fieldName}"].value;
-                var formData = {
-                <#list entity.fields as f>
-                    "${f.fieldName}":$("#${l_ent_name}Form")[0]["${f.fieldName}"].value <#if f_has_next>,</#if>
-                </#list>
-                };
-
-                if(id == ""){
-                    ${l_ent_name}Ctl.add(formData);
-                }
-                else{
-                    ${l_ent_name}Ctl.update(formData);
-                }
-            }
-        });
-
-        $("#${l_ent_name}Form").bootstrapValidator({
-            message: 'This value is not valid',
-            feedbackIcons: {        //提示图标
-                valid: 'fa fa-check-square-o',
-                invalid: 'fa fa-times',
-                validating: 'fa fa-exclamation'
-            },
-            fields:{
-                <#list entity.fields as f>
-                <#if f["null"]==false>
-                ${f.fieldName}:{
-                    validators:{
-                        notEmpty: {
-                            message: "${f.label}是必填的,不能为空"
-                        }
-                    }
-                }<#if f_has_next>,</#if>
-                </#if>
-                </#list>
-            }
-        });
-    },
-
-    loadTableData : function(){
-        ${l_ent_name}Ctl.sync2Server("${l_ent_name}","GET",{},
-            function(data) {
-                if(data["success"] == true) {
-                    if(data["data"] != null) {
-                        $("#${l_ent_name}Tb").bootstrapTable('load', data["data"]);
-                    }
-                    else{
-                        console.log("data['data'] is null.");
-                    }
-                }
-                else{
-                    if(data["handler"] != null) {
-                        ${l_ent_name}Ctl.callHandle(data["handler"]);
-                    }
-                }
-            },
-            function(er_ary){
-
-                console.log("loadTableData ${l_ent_name}: msg.success = false, reason=" + msg["responseText"]);
-            }
-        )
-    },
-
-    callHandle:function(handlerStr){
-        console.log("call handler");
-        var handler = eval(handlerStr);
-        if(typeof handler == "function") {
-            handler.call();
-        }
-    },
-
-    sync2Server:function(url, method, jsonData, s_call, e_call){
-        //alert("type="+typeof(jsonData)+",d="+JSON.stringify(jsonData));
-        $.ajax(url,{
-            type: method,
-            contentType:"application/json",
-            dataType: "json",
-            data: JSON.stringify(jsonData),
-            success: function(data){
-                console.log("success.data=" + JSON.stringify(data)+",typeof(data)="+typeof(data));
-                if(typeof(data) == "string"){
-                    data = eval("(" + data + ")");
-                }
-                s_call(data);
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown){
-                //alert('error.XMLHttpRequest='+JSON.stringify(XMLHttpRequest)+",textStatus="+textStatus+",errorThrown="+errorThrown);
-                try{
-                    if(XMLHttpRequest.responseText){
-                        var response = $.parseJSON(XMLHttpRequest.responseText);
-                        var er_array = response.errors;
-                        //alert("error array length="+er_array.length);
-                        e_call(er_array);
-                    }
-                }catch(e){
-                    console.log("parse errorinfo failed, e="+e);
-                }
-
-            }
-        });
-    },
-
-    add:function(formData){
-        //${l_ent_name}Ctl.resetForm();
-        ${l_ent_name}Ctl.sync2Server("${l_ent_name}","POST", formData,
-            function(data){
-                console.log("success.data=" + JSON.stringify(data)+",typeof(data)="+typeof(data));
-                if(data["success"] == true) {
-                    BootstrapDialog.show({
-                        type: BootstrapDialog.TYPE_SUCCESS,
-                        title: '创建${entity.label}成功',
-                        message: '创建${entity.label}成功',
-                        buttons: [{
-                            label: '关闭',
-                            action: function(dialogItself){
-                                dialogItself.close();
-                            }
-                        }]
-                    });
-                    $("#add${l_ent_name}Div").modal('toggle');
-                    ${l_ent_name}Ctl.loadTableData();
-                }
-            },
-            function(er_ary){
-                for(e in er_ary){
-                    var e_info = er_ary[e];
-                    var objectName = e_info.objectName;
-                    var fieldName = e_info.field;
-                    var e_msg = e_info.defaultMessage;
-                    $("#er_"+fieldName).remove();
-                    $('<small/>')
-                    .css('display', 'block')
-                    .attr('data-bv-validator', 'remote')
-                    .attr('data-bv-validator-for', fieldName)
-                    .attr('id','er_'+fieldName)
-                    .html(e_msg)
-                    .addClass('help-block')
-                    .appendTo($("#${l_ent_name}Form")[0][fieldName].parentNode);
-                    //alert('append error elm for '+fieldName);
-                    $("#${l_ent_name}Form").data('bootstrapValidator').updateStatus(fieldName,'INVALID','remote');
-
-                    <#--$('#er_'+field).css('display','block');-->
-                }
-            }
-        );
-    },
-
-    update:function(formData){
-        console.log("== update,formDate="+JSON.stringify(formData)+" ==");
-        //${l_ent_name}Ctl.resetForm();
-        ${l_ent_name}Ctl.sync2Server("${l_ent_name}","PUT", formData,
-            function(data){
-                console.log("success.data=" + JSON.stringify(data)+",typeof(data)="+typeof(data));
-                if(data["success"] == true) {
-                    BootstrapDialog.show({
-                        type: BootstrapDialog.TYPE_SUCCESS,
-                        title: '更新${entity.label}成功',
-                        message: '更新${entity.label}成功',
-                        buttons: [{
-                            label: '关闭',
-                            action: function(dialogItself){
-                                dialogItself.close();
-                            }
-                        }]
-                    });
-                    $("#add${l_ent_name}Div").modal('toggle');
-                    ${l_ent_name}Ctl.loadTableData();
-                }
-            },
-            function(er_ary){
-                for(e in er_ary){
-                    var e_info = er_ary[e];
-                    var objectName = e_info.objectName;
-                    var fieldName = e_info.field;
-                    var e_msg = e_info.defaultMessage;
-                    $("#er_"+fieldName).remove();
-                    $('<small/>')
-                        .css('display', 'block')
-                        .attr('data-bv-validator', 'remote')
-                        .attr('data-bv-validator-for', fieldName)
-                        .attr('id','er_'+fieldName)
-                        .html(e_msg)
-                        .addClass('help-block')
-                        .appendTo($("#${l_ent_name}Form")[0][fieldName].parentNode);
-                    //alert('append error elm for '+fieldName);
-                    $("#${l_ent_name}Form").data('bootstrapValidator').updateStatus(fieldName,'INVALID','remote');
-
-                <#--$('#er_'+field).css('display','block');-->
-                }
-            }
-        );
-    },
-
-    opFormatter: function(value, row) {
-        console.log("fbFormatter.row="+JSON.stringify(row));
-        var detail = "<a href='#' onclick='${l_ent_name}Ctl.detail("+JSON.stringify(row)+")'>详情</a>";
-        var edit = "<a href='#' onclick='${l_ent_name}Ctl.edit("+JSON.stringify(row)+")'>编辑</a>";
-        var del = "<a href='#' onclick='${l_ent_name}Ctl.del("+JSON.stringify(row)+")'>删除</a>";
-        return detail +"&nbsp;"+ edit + "&nbsp;" + del;
-    },
-
-    resetForm: function(){
-        console.log("==resetForm()==");
-        var form = $("#${l_ent_name}Form");
-        form.data('bootstrapValidator').resetForm();
-        form[0].reset();
-    },
-
-    detail: function(row){
-        console.log("${l_ent_name}Ctr.detail("+JSON.stringify(row)+")");
-    },
-
-    edit: function(row){
-        console.log("${l_ent_name}Ctr.edit("+JSON.stringify(row)+")");
-        ${l_ent_name}Ctl.resetForm();
-        <#list entity.fields as f>
-            <#assign t=f["viewProp"].type/><#assign fn=f.fieldName/>
-            <#if t=="redio">
-        $("input[name='${fn}']").removeAttr("checked");
-            //踩坑了,Jquery设置checkbox的checked属性attr改为了prop否则第二次失效
-        $("input[name='${fn}'][value='"+row["${fn}"]+"']").prop("checked","true");
-            <#else>
-        $("#${fn}").val(row["${fn}"]);
-            </#if>
-        </#list>
-        $('#add${l_ent_name}Div').modal();
-    },
-
-    del : function(row){
-        console.log("${l_ent_name}Ctr.del("+JSON.stringify(row)+")");
-        ${l_ent_name}Ctl.sync2Server(
-            "${l_ent_name}/"+row["${entity.id.fieldName}"],//url
-            "DELETE",  //method
-            {},//formData
-            function(data){
-                console.log("success.data=" + JSON.stringify(data)+",typeof(data)="+typeof(data));
-                if(data["success"] == true) {
-                    BootstrapDialog.show({
-                        type: BootstrapDialog.TYPE_SUCCESS,
-                        title: '删除${entity.label}成功',
-                        message: '删除${entity.label}成功',
-                        buttons: [{
-                            label: '关闭',
-                            action: function(dialogItself){
-                                dialogItself.close();
-                            }
-                        }]
-                    });
-                    ${l_ent_name}Ctl.loadTableData();
-                }
-            },
-            function(er_ary){
-                for(e in er_ary){
-                    var e_info = er_ary[e];
-                    var objectName = e_info.objectName;
-                    var fieldName = e_info.field;
-                    var e_msg = e_info.defaultMessage;
-                    $("#er_"+fieldName).remove();
-                    $('<small/>')
-                        .css('display', 'block')
-                        .attr('data-bv-validator', 'remote')
-                        .attr('data-bv-validator-for', fieldName)
-                        .attr('id','er_'+fieldName)
-                        .html(e_msg)
-                        .addClass('help-block')
-                        .appendTo($("#${l_ent_name}Form")[0][fieldName].parentNode);
-                    //alert('append error elm for '+fieldName);
-                    $("#${l_ent_name}Form").data('bootstrapValidator').updateStatus(fieldName,'INVALID','remote');
-
-                <#--$('#er_'+field).css('display','block');-->
-                }
-            }
-        );
-    }
-};
-
-$(document).ready(function(){
-    //console.log("${l_ent_name}-list.js on ready.");
-    //${l_ent_name}Ctl.initTable();
-    //${l_ent_name}Ctl.initEventHandler();
-    //${l_ent_name}Ctl.loadTableData();
-});

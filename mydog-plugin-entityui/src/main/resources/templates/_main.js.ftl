@@ -3,6 +3,35 @@
  *
  */
 
+(function (global) {
+    var Utils = {
+        isArray: function (obj) {
+            return Array.isArray(obj) || Object.prototype.toString.call(obj) == '[Object Array]';
+        },
+        isObject: function(obj){
+            var type = typeof obj;
+            return type === 'function' || type === 'object' && !!obj;
+        },
+        has: function(obj, key){
+            return obj != null && Object.prototype.hasOwnProperty.call(obj, key);
+        },
+        parseTemplate: function(tpl,obj) {
+            if (obj == null) {
+                return;
+            }
+            return tpl.replace(/({{([\s\S]+?)}})/g, function (_, key, value) {
+                var v = value.trim();
+                if (Object.prototype.hasOwnProperty.call(obj, v)) {
+                    return obj[v];
+                } else {
+                    return '';
+                }
+            });
+        }
+    };
+    global.Utils = Utils;
+})(window,undefined);
+
 // universal http request
 (function(global,$,undefined){
     'use strict';
@@ -26,14 +55,15 @@
         }
     };
     var request = function(options){
-        return $.ajax({
+        var params = {
             url: options.url,
             headers:{
                 Authorization: 'HPE ' + sessionStorage.getItem('um') || ''
             },
             type: options.type || 'get',
+            dataType: options.dataType || 'json',
             // 文件上传请去掉contentType
-            contentType: options.contentType || 'application/json; charset=UTF-8',
+            contentType: options.contentType || 'application/json',
             statusCode: statusCode,
             beforeSend: function() {
                 // 显示加载的loading...
@@ -47,31 +77,39 @@
             error: function(xhr,statusText,err){
                 // 4xx~5xx
             }
-        });
+        };
+        if(options.data){
+            params.data = JSON.stringify(options.data);
+        }
+        return $.ajax(params);
     };
     var $_ajax = {
         get: function(url,data,extra){
             var opt = {url:url,data:data,type:'get'};
-            if(extra && extra.headers) opt.headers = extra.headers;
-            if(extra && extra.dataType) opt.dataType = extra.dataType;
+            if(extra){
+                opt = $.extend({},opt,extra);
+            }
             return request(opt);
         },
         post: function(url,data,extra){
             var opt = {url:url,data:data,type:'post'};
-            if(extra && extra.headers) opt.headers = extra.headers;
-            if(extra && extra.dataType) opt.dataType = extra.dataType;
+            if(extra){
+                opt = $.extend({},opt,extra);
+            }
             return request(opt);
         },
         put: function(url,data,extra){
             var opt = {url:url,data:data,type:'put'};
-            if(extra && extra.headers) opt.headers = extra.headers;
-            if(extra && extra.dataType) opt.dataType = extra.dataType;
+            if(extra){
+                opt = $.extend({},opt,extra);
+            }
             return request(opt);
         },
-        delete: function(url,data,extra){
+        del: function(url,data,extra){
             var opt = {url:url,data:data,type:'delete'};
-            if(extra && extra.headers) opt.headers = extra.headers;
-            if(extra && extra.dataType) opt.dataType = extra.dataType;
+            if(extra){
+                opt = $.extend({},opt,extra);
+            }
             return request(opt);
         }
     };
@@ -81,11 +119,11 @@
 
 // load menu
 function loadMenu(){
-    // debugger;
-    // $_ajax.get('menu.html',{},{dataType:'jsonp',success: function(res){
-    //     console.log(res);
-    //     $("#menu-box").html(res);
-    // }})
+
+    $_ajax.get('/menu.html',{},{dataType:'text'}).then(function(res){
+
+        $("#side-menu").html(res);
+    });
 }
 
 
