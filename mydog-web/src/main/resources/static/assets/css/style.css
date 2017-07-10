@@ -7735,6 +7735,10 @@ body.md-skin {
   font-size: 8px;
   padding: 1px 2px;
 }
-.mydog-plugins-add .form-group label {
-  font-size: 18px;
+.mydog-plugins-wrapper .form-group label {
+  font-size: 15px;
+  font-weight: 200;
+}
+.mydog-introduce{
+  padding: 10px 0;
 }
