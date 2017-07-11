@@ -1,4 +1,4 @@
-package org.huangpu.mydog.plugins.entity;
+package org.huangpu.mydog.plugins.ormapping;
 
 import com.alibaba.fastjson.JSONArray;
 import org.mybatis.generator.api.IntrospectedColumn;

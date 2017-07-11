@@ -1,0 +1,17 @@
+{
+  "pluginName":"ormapping",
+  "dependency":[
+    {
+      "meta"  : "project",
+      "props" : ["basePath","outputPath","basePackage"]
+    },
+    {
+      "meta"  :  "entity",
+      "props" : []
+    },
+    {
+      "meta" : "datasource",
+      "props": ["driverClassName","url","username","password"]
+    }
+  ]
+}

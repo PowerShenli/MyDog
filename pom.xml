@@ -18,6 +18,7 @@
         <module>mydog-plugin-entity</module>
         <module>mydog-plugin-entityui</module>
         <module>mydog-doc</module>
+        <module>mydog-plugin-ormapping</module>
     </modules>
 
     <properties>

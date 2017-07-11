@@ -1,4 +1,4 @@
-package org.huangpu.mydog.plugins.entity;
+package org.huangpu.mydog.plugins.ormapping;
 
 /**
  * Created by zzs
@@ -38,6 +38,7 @@ public class MyBatisGeneratorConfig {
     private String clientGeneratorTargetPackage;
     /**
      * 生成方式 默认代码方式
+     * TODO: 要支持XML方式
      */
     private String clientGeneratorType = "ANNOTATEDMAPPER";
     /**
@@ -47,11 +48,11 @@ public class MyBatisGeneratorConfig {
     /**
      * control 生成的包
      */
-    private String controlGeneratorTargetPackage;
-    /**
-     * service 生成的包
-     */
-    private String serviceGeneratorTargetPackage;
+//    private String controlGeneratorTargetPackage;
+//    /**
+//     * service 生成的包
+//     */
+//    private String serviceGeneratorTargetPackage;
     /**
      * domainName
      */
@@ -193,21 +194,7 @@ public class MyBatisGeneratorConfig {
         this.passWord = passWord;
     }
 
-    public String getControlGeneratorTargetPackage() {
-        return controlGeneratorTargetPackage;
-    }
 
-    public void setControlGeneratorTargetPackage(String controlGeneratorTargetPackage) {
-        this.controlGeneratorTargetPackage = controlGeneratorTargetPackage;
-    }
-
-    public String getServiceGeneratorTargetPackage() {
-        return serviceGeneratorTargetPackage;
-    }
-
-    public void setServiceGeneratorTargetPackage(String serviceGeneratorTargetPackage) {
-        this.serviceGeneratorTargetPackage = serviceGeneratorTargetPackage;
-    }
 
 
     public String getCharset() {
@@ -247,8 +234,8 @@ public class MyBatisGeneratorConfig {
                 ", clientGeneratorTargetPackage='" + clientGeneratorTargetPackage + '\'' +
                 ", clientGeneratorType='" + clientGeneratorType + '\'' +
                 ", modelGeneratorTargetPackage='" + modelGeneratorTargetPackage + '\'' +
-                ", controlGeneratorTargetPackage='" + controlGeneratorTargetPackage + '\'' +
-                ", serviceGeneratorTargetPackage='" + serviceGeneratorTargetPackage + '\'' +
+//                ", controlGeneratorTargetPackage='" + controlGeneratorTargetPackage + '\'' +
+//                ", serviceGeneratorTargetPackage='" + serviceGeneratorTargetPackage + '\'' +
 //                ", domainObjectName='" + domainObjectName + '\'' +
 //                ", tableName='" + tableName + '\'' +
                 ", offsetLimit=" + offsetLimit +

@@ -45,6 +45,11 @@
             <artifactId>mydog-plugin-entityui</artifactId>
             <version>${mydog.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.huangpu</groupId>
+            <artifactId>mydog-plugin-ormapping</artifactId>
+            <version>${mydog.version}</version>
+        </dependency>
 
 
         <dependency>

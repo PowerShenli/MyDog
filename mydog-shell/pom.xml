@@ -43,6 +43,11 @@
             <artifactId>mydog-plugin-entityui</artifactId>
             <version>${mydog.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.huangpu</groupId>
+            <artifactId>mydog-plugin-ormapping</artifactId>
+            <version>${mydog.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>mysql</groupId>
@@ -68,6 +73,8 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
+
+
     </dependencies>
 
     <build>

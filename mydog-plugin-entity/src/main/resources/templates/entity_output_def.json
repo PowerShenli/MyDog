@@ -16,19 +16,6 @@
               "outputPath": "${prj.outputPath}src/main/java/${prj.basePath}/service/",
               "genType": "byTemplate",
               "tmpFilePath": "templates/_Service.ftl"
-            },
-            {
-              "itemName": "${ev.entityName}DomainAndMapping.mybatis",
-              "outputPath": "${prj.outputPath}src/main/java/${prj.basePath}/",
-              "generator": "org.huangpu.mydog.plugins.entity.MyBatisGenerator",
-              "genType": "byCode",
-              "overwrite": false
-            },
-            {
-              "itemName": "${ev.entityName}_DDL.sql",
-              "outputPath": "${prj.outputPath}sql/",
-              "genType": "byGrammar",
-              "overwrite": false
             }
         ]
 <#if ent_has_next>      ,</#if>

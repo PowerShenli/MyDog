@@ -34,7 +34,7 @@ public class FlowController {
         parseMetadata(json.getJSONArray("metadatas"));
 
         Map<String,List<Metadata>> metadataMapList = GenerateContext.get("metadataMapList");
-//        metadataList.forEach(m -> System.out.println("m.getType() = " + m.getType()));
+
 
         //合并元数据属性,这是为何应对新添加的插件对已有插件进行扩展的情况.
         transProps(metadataMapList);
@@ -63,6 +63,7 @@ public class FlowController {
                 LOG.info("{}.commList={}",common.getName(),commList);
                 commList.forEach(def -> {
                     Generator generatorImpl = TypeGeneratorFactory.makeGenerator(def.getGenDef().getGenType());
+                    LOG.info("Common generatorImpl = " + generatorImpl);
                     //实例装饰器
                     LOG.info("comm.name={},generator={}", common.getName(), generatorImpl);
                     OutputItem outputItem = generatorImpl.generate(common, def);

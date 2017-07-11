@@ -1,4 +1,4 @@
-package org.huangpu.mydog.plugins.entity;
+package org.huangpu.mydog.plugins.ormapping;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -6,13 +6,13 @@ import com.google.common.base.Strings;
 import org.huangpu.mydog.core.Preserver;
 import org.huangpu.mydog.core.plugins.GenerateContext;
 import org.huangpu.mydog.core.utils.DDLUtils;
+import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.api.ProgressCallback;
 import org.mybatis.generator.api.ShellCallback;
 import org.mybatis.generator.config.*;
 import org.mybatis.generator.internal.DefaultShellCallback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.mybatis.generator.api.MyBatisGenerator;
 
 import java.util.*;
 
@@ -74,6 +74,11 @@ public class MyBatisPreserver implements Preserver<MyBatisOutputItem> {
             tableConfig.setTableName(DDLUtils.getTbName(domainName));
             tableConfig.setDomainObjectName(domainName);
 
+//            tableConfig.setSelectByPrimaryKeyStatementEnabled(false);
+//            tableConfig.setSelectByExampleStatementEnabled(false);
+//            tableConfig.setUpdateByExampleStatementEnabled(false);
+//            tableConfig.setUpdateByPrimaryKeyStatementEnabled(false);
+
             // add ignore columns
             if (ignoredColumns != null) {
                 ignoredColumns.stream().forEach(ignoredColumn -> {
@@ -100,7 +105,10 @@ public class MyBatisPreserver implements Preserver<MyBatisOutputItem> {
                 tableConfig.addColumnOverride(col);
             });
             context.addTableConfiguration(tableConfig);
+
         });
+
+
 
         context.setId("myid");
 
@@ -131,6 +139,8 @@ public class MyBatisPreserver implements Preserver<MyBatisOutputItem> {
         daoConfig.setTargetProject(generatorConfig.getTargetProject());
         daoConfig.setImplementationPackage(generatorConfig.getTargetProject());
         context.setJavaClientGeneratorConfiguration(daoConfig);
+
+
 
         // Comment
         CommentGeneratorConfiguration commentConfig = new CommentGeneratorConfiguration();

@@ -43,4 +43,13 @@ public class OutputItemDef {
         this.metaInstanceName = metaInstanceName;
     }
 
+    @Override
+    public String toString() {
+        return "OutputItemDef{" +
+                "itemName='" + itemName + '\'' +
+                ", metaInstanceName='" + metaInstanceName + '\'' +
+                ", genDef=" + genDef +
+                ", preDef=" + preDef +
+                '}';
+    }
 }

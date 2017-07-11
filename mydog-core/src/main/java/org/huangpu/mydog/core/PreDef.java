@@ -33,4 +33,12 @@ public class PreDef {
         this.itemName = itemName;
     }
 
+    @Override
+    public String toString() {
+        return "PreDef{" +
+                "outputPath='" + outputPath + '\'' +
+                ", cpFilePath='" + cpFilePath + '\'' +
+                ", itemName='" + itemName + '\'' +
+                '}';
+    }
 }

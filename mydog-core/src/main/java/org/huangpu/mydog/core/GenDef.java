@@ -82,4 +82,18 @@ public class GenDef {
     public void setTemplateProp(Map<String,Object> templateProp) {
         this.templateProp = templateProp;
     }
+
+    @Override
+    public String toString() {
+        return "GenDef{" +
+                "genType=" + genType +
+                ", outputFormat=" + outputFormat +
+                ", itemName='" + itemName + '\'' +
+                ", grammar=" + grammar +
+                ", templateCtx='" + templateCtx + '\'' +
+                ", generatorName='" + generatorName + '\'' +
+                ", overwrite=" + overwrite +
+                ", templateProp=" + templateProp +
+                '}';
+    }
 }

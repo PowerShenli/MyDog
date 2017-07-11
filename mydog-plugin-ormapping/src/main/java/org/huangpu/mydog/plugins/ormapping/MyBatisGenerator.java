@@ -1,4 +1,4 @@
-package org.huangpu.mydog.plugins.entity;
+package org.huangpu.mydog.plugins.ormapping;
 
 
 import com.alibaba.fastjson.JSONObject;
@@ -39,8 +39,13 @@ public class MyBatisGenerator implements Generator {
         String targetProject = project.getString("outputPath");
         String basePackage = project.getString("basePackage");
 
+        JSONObject mybatis = stringMapMap.get("ormapping").get("mybatis");
+        boolean generateSQL = mybatis.getBoolean("generateSQL");//TODO 实现
+        String mapperType = mybatis.getString("mapperType");
+
         MyBatisGeneratorConfig myBConfig = new MyBatisGeneratorConfig();
         myBConfig.setConnectorJarFilePath(driverJarPath);
+        myBConfig.setClientGeneratorType(mapperType);
 
         myBConfig.setDriverClass(driverClassName);
         myBConfig.setConnectionURL(url);
@@ -60,7 +65,7 @@ public class MyBatisGenerator implements Generator {
 
         //2. 增加对应的插件
         //2.1 自定义的,支持校验的
-        myBatisPreserver.addPlugin("org.huangpu.mydog.plugins.entity.MybatisValidatePlugin");
+        myBatisPreserver.addPlugin("org.huangpu.mydog.plugins.ormapping.MybatisValidatePlugin");
         //2.2 Mybatis自带的
         myBatisPreserver.addPlugin("org.mybatis.generator.plugins.ToStringPlugin");
         myBatisPreserver.addPlugin("org.mybatis.generator.plugins.SerializablePlugin");

@@ -245,6 +245,14 @@
       "instanceName": "bootstrap+jquery"
     },
     {
+      "metadataType" :"ormapping",
+      "instanceName" :"mybatis",
+      "properties":{
+        "generateSQL" : false,
+        "mapperType"  : "XMLMAPPER"//"ANNOTATEDMAPPER"
+      }
+    },
+    {
       "properties": {
         "name":"MyDog测试项目",
         "springBoot-version": "1.4.2.RELEASE",
@@ -254,7 +262,8 @@
           "version": "1.0.0-SNAPSHOT"
         },
         "basePath": "com/power/test/project",
-        "outputPath": "/tmp/myDog_1/output/",
+        "outputPath": "/tmp/myDog_2/output/",
+        "outputType":"file",//download
         "basePackage": "com.power.test.project",
         "appProp":{
           "server.port":"8082",

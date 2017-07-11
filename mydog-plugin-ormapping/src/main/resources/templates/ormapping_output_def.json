@@ -1,0 +1,29 @@
+<#assign prj=project["mydogProj"]/>
+{
+  "pluginName":"ormapping",
+  "outItemsDef": {
+<#list entity?keys as ent>
+<#assign ev=entity[ent]/>
+        "${ent}":[
+            {
+              "itemName": "${ev.entityName}_DDL.sql",
+              "outputPath": "${prj.outputPath}sql/",
+              "genType": "byGrammar",
+              "overwrite": false
+            }
+        ]
+<#if ent_has_next>      ,</#if>
+</#list>
+      ,
+        //下面的只用生成一次
+      "Common":[
+          {
+              "itemName": "${ev.entityName}DomainAndMapping.mybatis",
+              "outputPath": "${prj.outputPath}src/main/java/${prj.basePath}/",
+              "generator": "org.huangpu.mydog.plugins.ormapping.MyBatisGenerator",
+              "genType": "byCode",
+              "overwrite": false
+          }
+      ]
+   }  
+}

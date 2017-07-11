@@ -10,15 +10,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.huangpu</groupId>
-    <artifactId>mydog-plugin-entity</artifactId>
+    <artifactId>mydog-plugin-ormapping</artifactId>
     <version>1.0-SNAPSHOT</version>
-
 
     <dependencies>
         <dependency>
             <groupId>org.huangpu</groupId>
             <artifactId>mydog-core</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
         </dependency>
     </dependencies>
 
