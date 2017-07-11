@@ -36,7 +36,6 @@ public class DatasourcePlugin implements MyDogPlugin {
 
     @Override
     public OutputDef getOutputDef() {
-
         return MyDogFunction.renderOutputDef("datasource",classLoader);
     }
 

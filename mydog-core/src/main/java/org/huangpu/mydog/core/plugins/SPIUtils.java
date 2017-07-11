@@ -33,8 +33,10 @@ public class SPIUtils {
     public static void main(String[] args) {
         List<Object> objects = loadList(MyDogPlugin.class);
         LOG.info("objects = " + objects);
+        System.out.println("objects = " + objects);
         objects = loadList(MyDogPlugin.class);
         LOG.info("objects = " + objects);
+        System.out.println("objects = " + objects);
     }
 
 }

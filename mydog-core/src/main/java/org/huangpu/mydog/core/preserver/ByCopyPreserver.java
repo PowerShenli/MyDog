@@ -68,7 +68,10 @@ public class ByCopyPreserver implements Preserver<CopyOutputItem> {
                     }
                 }
                 else{
-                    LOG.error("Can not parse urlConnection : {}", urlConnection);
+                    File sourceFile = new File(resourceFolder.getPath()+ cpFilePath);
+                    File outputFile = new File(outputPath);
+                    LOG.info("sourceFile = {}, outputFile = {}",sourceFile.getAbsolutePath(), outputFile.getAbsolutePath());
+                    FileUtils.copyFile(sourceFile, outputFile);
                 }
 
             }

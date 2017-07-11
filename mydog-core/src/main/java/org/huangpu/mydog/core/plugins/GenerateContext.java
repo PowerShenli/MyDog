@@ -29,7 +29,9 @@ public class GenerateContext {
         }
     };
 
-
+    public static Map<String, MyDogPlugin> getPluginMap(){
+    	return pluginMap;
+    }
 
     public static <T> T get(String key){
         return (T)genPropMap.get().get(key);

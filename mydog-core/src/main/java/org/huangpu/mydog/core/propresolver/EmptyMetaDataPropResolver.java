@@ -9,6 +9,6 @@ public class EmptyMetaDataPropResolver implements MetaDataPropResolver {
 
     @Override
     public void resolve() {
-
+    	
     }
 }

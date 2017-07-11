@@ -7684,3 +7684,61 @@ body.md-skin {
     margin: 0; } }
 
 /*# sourceMappingURL=style.css.map */
+.media-mini{
+  padding: 20px;
+}
+.media-mini a{
+  padding-bottom: 5px;
+  display: block;
+}
+.media-mini .media-object{
+  width: 100px;
+  margin: 0 auto;
+  margin-top: 20%;
+}
+.media-mini  .btn{
+  margin: 0 auto;
+  width: 50%;
+}
+.mydog-plugins-add{
+  float: right;
+  margin-right: 10px;
+  width: 50px;
+  z-index: 9999;
+}
+.mydog-plugins-add .dropdown-menu{
+  width: 270px;
+  left: -270px;
+}
+.mydog-plugins-add .dropdown-messages-box .plugin-add{
+  padding: 5px 5px;
+}
+/*.mydog-plugins-add .dropdown-menu .media-body{
+  width: 50%;
+}*/
+.mydog-plugins-add .dropdown-messages-box .media-body{
+  width: 120px;
+  float: left;
+}
+.mydog-plugins-properties .media-heading{
+  padding: 5px 0 5px 6px;
+  margin-bottom: 5px;
+  border-left: #218ec3 5px solid ;
+  font-size:15px;
+  font-weight: 200;
+}
+.mydog-plugins-properties .form-control-submit-min{
+  margin: 25px 0;
+  width: 120px;
+}
+.label-min{
+  font-size: 8px;
+  padding: 1px 2px;
+}
+.mydog-plugins-wrapper .form-group label {
+  font-size: 15px;
+  font-weight: 200;
+}
+.mydog-introduce{
+  padding: 10px 0;
+}
