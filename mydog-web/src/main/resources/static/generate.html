@@ -205,7 +205,7 @@
                 <div class="row">
                     <div class="mydog-plugins-add dropdown text-center">
                         <span class="label label-inverse">add feature</span>
-                        <a class="dropdown-toggle count-info " data-toggle="dropdown" href="#">
+                        <a class="dropdown-toggle count-info " aria-expanded="false"  onclick="featurePanelOpen(this)">
                             <img src="assets/img/add.png" alt="add plugins" class="img-responsive">
                         </a>
                         <ul class="dropdown-menu dropdown-messages">
@@ -260,7 +260,7 @@
                                         <img alt="image" class=" img-circle " src="assets/img/web.jpg">
                                     </a>
                                     <div class="media-body">
-                                        <strong>mydog web</strong> <br><span class="label label-warning label-min">唯一</span><br>
+                                        <strong>mydog entityUI</strong> <br><span class="label label-warning label-min">唯一</span><br>
                                         <small class="text-muted">用于生成 基础的网页</small>
                                     </div>
                                     <a href="profile.html" class="plugin-add">
@@ -281,7 +281,7 @@
                                             <img class="media-object" src="assets/img/project.jpg" alt="mydog-project">
                                         </a>
                                     </div>
-                                    <form>
+                                    <form name="myDogProjectParams">
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="inputGoupId">groupid</label>
@@ -334,7 +334,7 @@
                                     </a>
                                 </div>
                                 <div class="media-body">
-                                    <form>
+                                    <form name="myDogDataSourceParams" >
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="inputDatabase">database</label>
@@ -350,7 +350,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="dbpwd">password</label>
-                                                <input type="password" class="form-control" id="dbpwd" placeholder="数据库密码">
+                                                <input type="password" class="form-control"id="dbpwd" placeholder="数据库密码">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -402,7 +402,7 @@
                                     </a>
                                 </div>
                                 <div class="media-body">
-                                    <form>
+                                    <form name="myDogEntityParams">
                                         <div class="col-md-9">
                                             <div class="form-group">
                                                 <label>选择功能</label>
@@ -431,14 +431,14 @@
                     <div class="col-md-12">
                         <div class="widget white-bg p-lg mydog-plugins-properties">
                             <div class="media">
-                                <h4 class="media-heading">Mydog Web</h4>
+                                <h4 class="media-heading">Mydog EntityUI</h4>
                                 <div class="media-left  media-mini col-md-2 text-center">
                                     <a href="#">
                                         <img class="media-object" src="assets/img/web.jpg" alt="mydog-web">
                                     </a>
                                 </div>
                                 <div class="media-body">
-                                    <form>
+                                    <form name="myDogEntityUIParams">
                                         <div class="col-md-9">
                                             <div class="form-group">
                                                 <label>选择功能</label>
