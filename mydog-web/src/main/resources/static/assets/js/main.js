@@ -2,7 +2,9 @@
  * 
  *
  */
-
+console.log("============================================================");
+console.log("==============        欢迎使用MyDog            ==============");
+console.log("============================================================");
 // universal http request 
 (function(global,$,undefined){
     'use strict';
@@ -380,4 +382,33 @@ function WinMove() {
         .disableSelection();
 }
 
+// add feature animal
+function featurePanelOpen(e){
+    var $parent       = getParent($(e))
+    //var relatedTarget = { relatedTarget: this }
 
+    if (!$parent.hasClass('open')) {
+        $(e).attr('aria-expanded', 'true');
+        $parent.addClass('open');
+    }else{
+        $(e).attr('aria-expanded', 'false');
+        $parent.removeClass('open');
+    }
+}
+
+// find parent
+function getParent($this) {
+    var selector = $this.attr('data-target')
+    if (!selector) {
+        selector = $this.attr('href')
+        selector = selector && /#[A-Za-z]/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
+    }
+    var $parent = selector && $(selector)
+    return $parent && $parent.length ? $parent : $this.parent()
+}
+
+// register mydog plugin ajax request
+(function ($,$_ajax) {
+    'use strict';
+    // mydog 
+})(jQuery,$_ajax)

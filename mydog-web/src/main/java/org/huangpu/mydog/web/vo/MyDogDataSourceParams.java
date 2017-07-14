@@ -85,5 +85,11 @@ public class MyDogDataSourceParams {
 	public void setJarPath(String jarPath) {
 		this.jarPath = jarPath;
 	}
+
+	@Override
+	public String toString() {
+		return "MyDogDataSourceParams [database=" + database + ", url=" + url + ", user=" + user + ", password="
+				+ password + ", dataType=" + dataType + ", jarPath=" + jarPath + "]";
+	}
 	
 }

@@ -98,5 +98,12 @@ public class MyDogProjectParams {
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
+
+	@Override
+	public String toString() {
+		return "MyDogProjectParams [groupId=" + groupId + ", artifactId=" + artifactId + ", version=" + version
+				+ ", outputPath=" + outputPath + ", port=" + port + ", springbootVersion=" + springbootVersion
+				+ ", projectName=" + projectName + "]";
+	}
 	
 }
