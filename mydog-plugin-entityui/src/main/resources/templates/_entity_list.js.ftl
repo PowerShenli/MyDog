@@ -12,6 +12,7 @@
 
         getAll();
 
+        // 新增 ｜ 编辑
         editModal.on('show.bs.modal', function (e) {
             var button = $(e.relatedTarget);
             var id = button.data('whatever');
@@ -34,21 +35,95 @@
         $(".${l_ent_name}Box").on('click','.btn-${l_ent_name}-save',function(e){
             // save data
             var id = editModal.find('input[name=id]').val();
-            var param = {
-            <#list entity.fields as f>
-                <#assign t=f["viewProp"].type/><#assign fn=f.fieldName/>
-                <#if t=="radio">
-                '${fn}':$("input[name='${fn}']").prop("checked")
-                <#else>
-                '${fn}':$("#${fn}").val()
-                </#if>
-                <#if f_has_next>,</#if>
-            </#list>
-            };
-            if(id && id!=''){
-                edit(param);
-            } else {
-                add(param);
+            var flag = $("#${l_ent_name}Form").data("bootstrapValidator").isValid();
+            if(flag){
+                var param = {
+                    <#list entity.fields as f>
+                    <#assign t=f["viewProp"].type/><#assign fn=f.fieldName/>
+                    <#if t=="radio">
+                    '${fn}':$("input[name='${fn}']").prop("checked")
+                    <#else>
+                    '${fn}':$("#${fn}").val()
+                    </#if>
+                    <#if f_has_next>,</#if>
+                    </#list>
+                };
+                if(id && id!=''){
+                    edit(param);
+                } else {
+                    add(param);
+                }
+            }
+        });
+        // 初始化校验
+        $("#${l_ent_name}Form").bootstrapValidator({
+            message: '校验不通过',
+            feedbackIcons: {        //提示图标
+                valid: 'fa fa-check-square-o',
+                invalid: 'fa fa-times',
+                validating: 'fa fa-exclamation'
+            },
+            fields:{
+                <#list entity.fields as f>
+                ${f.fieldName}:{
+                <#assign valids = f.validates />
+                    validators:{
+                    <#list valids as v>
+                        <#--"${v}" ---->
+                        <#--<#assign  res = v?matches(r"(NotNull)[\(]")>-->
+                        <#assign  res = v?matches(r"(^@\S+)[(]") />
+                        <#list res as m>
+                        <#if m?groups[1] == "@NotNull">
+                        notEmpty: {
+                            message: "${f.label}是必填的,不能为空"
+                        }
+                        </#if>
+                        <#if m?groups[1] =="@Size">
+                        stringLength: {
+                            min: 6,
+                            max: 18,
+                            message: "${f.label}长度为{6}-{18}个字符"
+                        }
+                        </#if>
+                        <#if m?groups[1] == "@Pattern">
+                        regexp: {
+                            regexp: /^[A-Za-z0-9]+$/,
+                            message: "${f.label}格式不正确"
+                        }
+                        </#if>
+                        <#if m?groups[1] == "@DecimalMax">
+                        <#assign hasAge = true />
+                        ages: {
+                            lessThan: {
+                                value: 99,
+                                inclusive: true,
+                                message: "${f.label}数值不能大于{99}"
+                            }
+                        }
+                        </#if>
+                        <#if m?groups[1] == "@DecimalMin">
+                        ages2: {
+                        greaterThan: {
+                        value: 18,
+                        inclusive: true,
+                        message: "${f.label}数值不能小于{18}"
+                        }
+                        }
+                        </#if><#if v_has_next>,</#if>
+                        </#list>
+
+                        <#--<#if res>-->
+                        <#--<#if res?groups[1] == "@NotNull">-->
+                        <#--notEmpty: {-->
+                            <#--message: "${f.label}是必填的,不能为空"-->
+                        <#--}-->
+                        <#--</#if>-->
+
+                    <#--</#if>-->
+                    </#list>
+                    }
+                }<#if f_has_next>,</#if>
+                </#list>
             }
         });
 

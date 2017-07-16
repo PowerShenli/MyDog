@@ -15,6 +15,8 @@
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="assets/css/animate.css" rel="stylesheet">
 
+    <link href="assets/vendor/bootstrapvalidator/css/bootstrapValidator.min.css" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link href="assets/css/style.css" rel="stylesheet">
 
@@ -176,18 +178,6 @@
         </div>
         <!-- main content end... -->
 
-        <!-- old... -->
-        <#--<table data-toggle="table" id="${l_ent_name}Tb" data-paging="true">-->
-            <#--<thead>-->
-            <#--<tr>-->
-            <#--<#list entity.fields as field>-->
-                <#--<th data-field="${field.fieldName}">${field.label}</th>-->
-            <#--</#list>-->
-                <#--<th data-formatter="${l_ent_name}Ctl.opFormatter">操作</th>-->
-            <#--</tr>-->
-            <#--</thead>-->
-        <#--</table>-->
-
 
         <!-- footer start... -->
         <div class="footer">
@@ -213,65 +203,73 @@
             <div class="modal-body">
                 <div class="container-fluid">
                     <fieldset>
-                                <form method="POST" id="${l_ent_name}Form" role="form" class="form-horizontal" data-toggle="validator">
-                                    <input type="hidden" name="id" id="id" />
-                                <#list entity.fields as field>
-                                    <#assign field_name=field.fieldName/>
-                                    <#assign vprop=field.viewProp/>
-                                        <#if vprop.type=="select">
-                                        <div class="form-group">
-                                            <label for="${field_name}">${field.label}:</label>
+                        <form method="POST" id="${l_ent_name}Form" role="form" class="form-horizontal" data-toggle="validator">
+                            <#--<input type="hidden" name="id" id="id" />-->
+                            <#list entity.fields as field>
+                                <#assign field_name=field.fieldName/>
+                                <#assign vprop=field.viewProp/>
+
+                                <#if vprop.type=="select">
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label" for="${field_name}">${field.label}:</label>
+                                        <div class="col-xs-9 selectContainer">
                                             <select name="${field_name}" class="form-control" id="#{field_name}" <#if field["null"]!=true>required</#if>>
                                                 <#if vprop.enum??>
                                                     <#assign options=vprop.enum?eval/>
                                                     <#list options?keys as v>
                                                         <option value="${v}">${options[v]}</option>
                                                     </#list>
-                                                    <#--<div id="ermsg_${field_name}" class="help-block with-errors"></div>-->
                                                 </#if>
                                             </select>
                                         </div>
-                                        <#elseif vprop.type=="radio">
-                                        <div class="form-group">
-                                            <label class="control-label" for="${field_name}">${field.label}:</label>
-                                            <div class="controls" >
-                                                <#if vprop.enum??><#assign rmap=vprop.enum?eval/>
-                                                    <#list rmap?keys as v>
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="${field_name}" id="${field_name}_${v}" value="${v}" > ${rmap[v]}
-                                                </label>
-                                                    </#list>
-                                                    <#--<div id="ermsg_${field_name}" class="help-block with-errors"></div>-->
-                                                </#if>
-                                            </div>
-                                        </div>
+                                    </div>
 
-                                        <#elseif vprop.type=="text">
-                                        <div class="form-group">
-                                            <label class="control-label" for="${field_name}">${field.label}:</label>
+                                <#elseif vprop.type=="radio">
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label" for="${field_name}">${field.label}:</label>
+                                        <div class="col-xs-9 radioContainer" >
+                                            <#if vprop.enum??>
+                                                <#assign rmap=vprop.enum?eval/>
+                                                <#list rmap?keys as v>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="${field_name}" id="${field_name}_${v}" value="${v}" > ${rmap[v]}
+                                                    </label>
+                                                </#list>
+                                            </#if>
+                                        </div>
+                                    </div>
+
+                                <#elseif vprop.type=="text">
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label" for="${field_name}">${field.label}:</label>
+                                        <div class="col-xs-9 inputContainer">
                                             <input type="text" name="${field_name}" id="${field_name}" class="form-control" value="<#if vprop.dft??>${vprop.dft}</#if>" <#if field["null"]!=true>required</#if>/>
-                                            <#--<div id="ermsg_${field_name}" class="help-block with-errors"></div>-->
                                         </div>
-                                        <#elseif vprop.type=="number">
-                                        <div class="form-group">
-                                            <label class="control-label" for="${field_name}">${field.label}:</label>
-                                            <input type="number" name="${field_name}" id="${field_name}" class="form-control" value="<#if vprop.dft??>${vprop.dft}</#if>" <#if field["null"]!=true>required</#if>/>
-                                            <#--<div id="ermsg_${field_name}" class="help-block with-errors"></div>-->
-                                        </div>
-                                        <#elseif vprop.type=="hidden">
-                                        <div class="form-group">
-                                            <input type="hidden" name="${field_name}" id="${field_name}" class="form-control" value="<#if vprop.dft??>${vprop.dft}</#if>" <#if field["null"]!=true>required</#if>/>
-                                        </div>
-                                        <#elseif vprop.type=="password">
-                                        <div class="form-group">
-                                            <label class="control-label" for="${field_name}">${field.label}:</label>
-                                            <input type="password" name="${field_name}" id="${field_name}" class="form-control">
-                                            <#--<div id="ermsg_${field_name}" class="help-block with-errors"></div>-->
-                                        </div>
-                                    </#if>
-                                    </#list>
+                                    </div>
 
-                                </form>
+                                <#elseif vprop.type=="number">
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label" for="${field_name}">${field.label}:</label>
+                                        <div class="col-xs-9 inputContainer">
+                                            <input type="number" name="${field_name}" id="${field_name}" class="form-control" value="<#if vprop.dft??>${vprop.dft}</#if>" <#if field["null"]!=true>required</#if>/>
+                                        </div>
+                                    </div>
+
+                                <#elseif vprop.type=="hidden">
+                                    <div class="form-group">
+                                        <input type="hidden" name="${field_name}" id="${field_name}" class="form-control" value="<#if vprop.dft??>${vprop.dft}</#if>" <#if field["null"]!=true>required</#if>/>
+                                    </div>
+
+                                <#elseif vprop.type=="password">
+                                    <div class="form-group">
+                                        <label class="col-xs-3 control-label" for="${field_name}">${field.label}:</label>
+                                        <div class="col-xs-9 inputContainer">
+                                            <input type="password" name="${field_name}" id="${field_name}" class="form-control">
+                                        </div>
+                                    </div>
+                                </#if>
+                            </#list>
+                        </form>
                     </fieldset>
                 </div>
             </div>
@@ -318,6 +316,8 @@
 <script src="assets/vendor/metisMenu/jquery.metisMenu.js"></script>
 <script src="assets/vendor/slimscroll/jquery.slimscroll.min.js"></script>
 
+<!-- orther plugins -->
+<script src="assets/vendor/bootstrapvalidator/js/bootstrapValidator.min.js"></script>
 
 <!--  customer javascript -->
 <script src="assets/js/main.js"></script>
