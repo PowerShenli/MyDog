@@ -247,7 +247,7 @@
     {
       "properties": {
         "name":"MyDog测试项目",
-        "springBoot-version": "1.4.2.RELEASE",
+        "springBootVersion": "1.4.2.RELEASE",
         "project": {
           "groupId": "com.power.test",
           "artifactId": "MyDogPrj",

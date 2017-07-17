@@ -11,13 +11,13 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.boot.version>${prj["springBoot-version"]}</spring.boot.version>
+        <spring.boot.version>${prj["springBootVersion"]}</spring.boot.version>
     </properties>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>${prj["springBoot-version"]}</version>
+        <version>${prj["springBootVersion"]}</version>
     </parent>
 
     <dependencies>
