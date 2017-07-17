@@ -6,8 +6,7 @@ package org.huangpu.mydog.core.plugins.metadata;
  * @author xusihan on 2017.07.04
  *
  */
-public abstract class MyDogPluginComponent {
-	
-	public abstract void resolvePlugin();
+public abstract class AbstractMyDogPluginMetaData implements MyDogPluginMetaData{
+	//public abstract void resolvePlugin();
 	
 }

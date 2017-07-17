@@ -5,6 +5,11 @@
 console.log("============================================================");
 console.log("==============        欢迎使用MyDog            ==============");
 console.log("============================================================");
+
+if (typeof jQuery === 'undefined') {
+    throw new Error('Bootstrap\'s JavaScript requires jQuery')
+}
+
 // universal http request 
 (function(global,$,undefined){
     'use strict';
@@ -410,5 +415,15 @@ function getParent($this) {
 // register mydog plugin ajax request
 (function ($,$_ajax) {
     'use strict';
-    // mydog 
+    // mydog
+
 })(jQuery,$_ajax)
+
+function mydogSubmit(){
+    console.log(document.forms['myDogProjectParams'].username);
+    console.log($("form[name='myDogProjectParams']").serializeArray());
+    var myDogProjectParams = {
+        myDogProjectParams: $("form[name='myDogProjectParams']").serializeArray()
+    }
+    console.log(JSON.stringify(myDogProjectParams));
+}
