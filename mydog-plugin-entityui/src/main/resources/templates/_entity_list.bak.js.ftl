@@ -64,7 +64,7 @@ ${l_ent_name}Ctl = {
             },
             fields:{
             <#list entity.fields as f>
-                <#if f["null"]==false>
+                <#if f["isNull"]==false>
                 ${f.fieldName}:{
                     validators:{
                         notEmpty: {

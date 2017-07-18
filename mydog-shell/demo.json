@@ -23,7 +23,7 @@
             ],
             "fieldType": "String",
             "length":"10",
-            "null":false,
+            "isNull":false,
             "viewProp":{
               "type":"text"
             }
@@ -34,7 +34,7 @@
             "isId": false,
             "fieldType": "String",
             "length":50,
-            "null":false,
+            "isNull":false,
             "validates":[
               "@NotNull",
               "@Size(min =6, max=18)",
@@ -50,7 +50,7 @@
             "fieldType": "Integer",
             "isId": true,
             "length":11,
-            "null": true,
+            "isNull": true,
             "validates":[
 
             ],
@@ -64,7 +64,7 @@
             "fieldType": "Integer",
             "isId": false,
             "length": 3,
-            "null": false,
+            "isNull": false,
             "validates":[
               "@NotNull",
               "@DecimalMax(value = \"99\")",
@@ -80,7 +80,7 @@
             "fieldType": "String",
             "isId": false,
             "length": 50,
-            "null": false,
+            "isNull": false,
             "validates":[
               "@NotNull",
               "@Pattern(regexp=\"^\\\\s*\\\\w+(?:\\\\.{0,1}[\\\\w-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\\\\.[a-zA-Z]+\\\\s*$\")"
@@ -141,7 +141,7 @@
             ],
             "fieldType": "String",
             "length":"18",
-            "null":false,
+            "isNull":false,
             "viewProp":{
               "type":"text"
             }
@@ -152,7 +152,7 @@
             "isId": false,
             "fieldType": "Boolean",
             "length":1,
-            "null":false,
+            "isNull":false,
             "viewProp":{
               "type":"radio",
               "enum":"{\"true\":\"是\",\"false\":\"否\"}"
@@ -164,7 +164,7 @@
             "fieldType": "Integer",
             "isId": true,
             "length":11,
-            "null": true,
+            "isNull": true,
             "validates":[
 
             ],
@@ -201,7 +201,7 @@
             ],
             "fieldType": "Integer",
             "length":"11",
-            "null":false,
+            "isNull":false,
             "viewProp":{
               "type":"text"
             }
@@ -215,7 +215,7 @@
             ],
             "fieldType": "Integer",
             "length":"11",
-            "null":false,
+            "isNull":false,
             "viewProp":{
               "type":"text"
             }
@@ -226,7 +226,7 @@
             "fieldType": "Integer",
             "isId": true,
             "length":11,
-            "null": true,
+            "isNull": true,
             "validates":[
 
             ],

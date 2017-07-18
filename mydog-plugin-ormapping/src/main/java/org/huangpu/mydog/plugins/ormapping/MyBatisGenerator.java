@@ -10,6 +10,7 @@ import org.huangpu.mydog.core.plugins.GenerateContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.util.Map;
 
 /**
@@ -54,6 +55,14 @@ public class MyBatisGenerator implements Generator {
         myBConfig.setTargetProject(targetProject+"src/main/java/");
         myBConfig.setClientGeneratorTargetPackage(basePackage+".mapping");
         myBConfig.setModelGeneratorTargetPackage(basePackage+".domain");
+
+        String existFilePath = targetProject +"src/main/java/"+basePackage;
+        LOG.info("existFilePath="+existFilePath);
+        File file = new File(existFilePath);
+        if (file.isDirectory()) {
+            file.deleteOnExit();
+            LOG.info("delete files: {}",existFilePath);
+        }
 
         myBConfig.setOffsetLimit(true);
 

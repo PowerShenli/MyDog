@@ -94,7 +94,7 @@ public class MyBatisPreserver implements Preserver<MyBatisOutputItem> {
             fields.stream().forEach(obj ->{
                 JSONObject field = (JSONObject)obj;
                 ColumnOverride col = new ColumnOverride(field.getString("fieldName"));
-                col.addProperty("null",field.getString("null"));
+                col.addProperty("null",field.getString("isNull"));
                 col.addProperty("length",field.getString("length"));
                 col.addProperty("type", field.getString("fieldType"));
                 JSONArray validates = field.getJSONArray("validates");

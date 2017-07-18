@@ -35,7 +35,7 @@ public class DDLGrammar implements Grammar {
                 StringBuilder ss = new StringBuilder();
                 ss.append("`").append(DDLUtils.getColumnName(field.getString("fieldName"))).append("`");
                 ss.append(" ").append(DDLUtils.getColumnType(field.getString("fieldType"), field.getInteger("length")));
-                if(!field.getBoolean("null")){
+                if(!field.getBoolean("isNull")){
                     ss.append(" NOT NULL ");
                 }
                 if (field.getBoolean("isId")) {

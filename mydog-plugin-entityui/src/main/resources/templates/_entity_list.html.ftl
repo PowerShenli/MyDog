@@ -221,7 +221,7 @@
                                         <#if vprop.type=="select">
                                         <div class="form-group">
                                             <label for="${field_name}">${field.label}:</label>
-                                            <select name="${field_name}" class="form-control" id="#{field_name}" <#if field["null"]!=true>required</#if>>
+                                            <select name="${field_name}" class="form-control" id="#{field_name}" <#if field["isNull"]!=true>required</#if>>
                                                 <#if vprop.enum??>
                                                     <#assign options=vprop.enum?eval/>
                                                     <#list options?keys as v>
@@ -249,18 +249,18 @@
                                         <#elseif vprop.type=="text">
                                         <div class="form-group">
                                             <label class="control-label" for="${field_name}">${field.label}:</label>
-                                            <input type="text" name="${field_name}" id="${field_name}" class="form-control" value="<#if vprop.dft??>${vprop.dft}</#if>" <#if field["null"]!=true>required</#if>/>
+                                            <input type="text" name="${field_name}" id="${field_name}" class="form-control" value="<#if vprop.dft??>${vprop.dft}</#if>" <#if field["isNull"]!=true>required</#if>/>
                                             <#--<div id="ermsg_${field_name}" class="help-block with-errors"></div>-->
                                         </div>
                                         <#elseif vprop.type=="number">
                                         <div class="form-group">
                                             <label class="control-label" for="${field_name}">${field.label}:</label>
-                                            <input type="number" name="${field_name}" id="${field_name}" class="form-control" value="<#if vprop.dft??>${vprop.dft}</#if>" <#if field["null"]!=true>required</#if>/>
+                                            <input type="number" name="${field_name}" id="${field_name}" class="form-control" value="<#if vprop.dft??>${vprop.dft}</#if>" <#if field["isNull"]!=true>required</#if>/>
                                             <#--<div id="ermsg_${field_name}" class="help-block with-errors"></div>-->
                                         </div>
                                         <#elseif vprop.type=="hidden">
                                         <div class="form-group">
-                                            <input type="hidden" name="${field_name}" id="${field_name}" class="form-control" value="<#if vprop.dft??>${vprop.dft}</#if>" <#if field["null"]!=true>required</#if>/>
+                                            <input type="hidden" name="${field_name}" id="${field_name}" class="form-control" value="<#if vprop.dft??>${vprop.dft}</#if>" <#if field["isNull"]!=true>required</#if>/>
                                         </div>
                                         <#elseif vprop.type=="password">
                                         <div class="form-group">
