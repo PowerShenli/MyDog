@@ -29,6 +29,13 @@
                 "genType":"byTemplate",
                 "tmpFilePath": "templates/_boot_config.java.ftl",
                 "overwrite": false
+            },
+             {
+                "itemName": "PageDataInfo.java",
+                "outputPath": "${prj.outputPath}src/main/java/${prj.basePath}/bean/",
+                "genType":"byTemplate",
+                "tmpFilePath": "templates/_page_data_info.java.ftl",
+                "overwrite": false
             }
         ]
   }

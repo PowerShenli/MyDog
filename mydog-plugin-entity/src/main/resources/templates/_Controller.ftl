@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.*;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import ${prj["basePackage"]}.domain.${entityName};
 import ${prj["basePackage"]}.domain.${entityName}Example;
 import ${prj["basePackage"]}.mapping.${entityName}Mapper;
-
+import ${prj["basePackage"]}.bean.PageDataInfo;
 @Controller
 @RequestMapping(value = "/${entityName?lower_case}")
 public class ${entityName}Controller {
@@ -28,6 +30,28 @@ public class ${entityName}Controller {
     @Autowired
     private ${entityName}Mapper ${entityName?lower_case}Dao;
 
+    @RequestMapping(value="/page",method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String,Object> page(@RequestParam Integer pageNum, @RequestParam Integer pageSize){
+        Log.info("${entityName}Controller.page");
+        ${entityName}Example example = new ${entityName}Example();
+        PageHelper.startPage(pageNum, pageSize);
+        List<${entityName}> entityList = ${entityName?lower_case}Dao.selectByExample(example);
+        PageInfo<${entityName}> pagehelpInfo=new PageInfo<>(entityList);
+        PageDataInfo<${entityName}> pageData=new PageDataInfo<${entityName}>(pagehelpInfo.getList());
+        
+        pageData.setPageNum(pageNum);
+        pageData.setPageSize(pageSize);
+        pageData.setPages(pagehelpInfo.getPages());
+        pageData.setSize(pagehelpInfo.getSize());
+        pageData.setTotal(pagehelpInfo.getTotal());
+        
+        Map<String,Object> result = new HashMap<String,Object>();
+        result.put("success",true);
+        result.put("data",pageData);
+        return result;
+    }
+    
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public Map<String,Object> list(){
