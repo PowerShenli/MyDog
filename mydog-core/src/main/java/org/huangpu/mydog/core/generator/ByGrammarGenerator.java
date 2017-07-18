@@ -33,6 +33,8 @@ public class ByGrammarGenerator implements Generator {
         codedOutputItem.setGrammar(grammar);
         codedOutputItem.setOutputFormat(outputFormat);
         codedOutputItem.setOutputName(outputItemDef.getGenDef().getItemName());
+        codedOutputItem.setOutputPath(outputItemDef.getPreDef().getOutputPath());
+
 
         String code = grammar.getCode();
         LOG.debug("code = {}", code);

@@ -1,7 +1,11 @@
 package org.huangpu.mydog.core.generator;
 
-import org.huangpu.mydog.core.*;
+import org.huangpu.mydog.core.Generator;
+import org.huangpu.mydog.core.Metadata;
+import org.huangpu.mydog.core.OutputItem;
+import org.huangpu.mydog.core.OutputItemDef;
 import org.huangpu.mydog.core.outputitem.CopyOutputItem;
+import org.huangpu.mydog.core.plugins.GenerateContext;
 import org.huangpu.mydog.core.preserver.ByCopyPreserver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,10 +32,10 @@ public class ByCopyGenerator implements Generator {
         outputItem.setCpFilePath(cpFilePath);
         outputItem.setOutputName(itemName);
 
-        URL resourceFolder = metaInstance.getPlugin().getClass().getProtectionDomain().getCodeSource().getLocation();
+        URL resourceFolder = GenerateContext.getPluginByMetadataType(metaInstance.getType()).getClass().getProtectionDomain().getCodeSource().getLocation();
         outputItem.setResourceFolder(resourceFolder);
 
-        ClassLoader classLoader = metaInstance.getPlugin().getClass().getClassLoader();
+        ClassLoader classLoader = GenerateContext.getPluginByMetadataType(metaInstance.getType()).getClass().getClassLoader();
         outputItem.setClassLoader(classLoader);
 
         return outputItem;

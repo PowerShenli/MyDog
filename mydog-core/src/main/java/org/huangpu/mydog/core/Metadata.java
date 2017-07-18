@@ -1,7 +1,6 @@
 package org.huangpu.mydog.core;
 
 import com.alibaba.fastjson.JSONObject;
-import org.huangpu.mydog.core.plugins.GenerateContext;
 
 /**
  * Created by shenli on 2017/6/1.
@@ -34,10 +33,6 @@ public class Metadata {
      */
     public String getName(){
         return name;
-    }
-
-    public MyDogPlugin getPlugin(){
-        return GenerateContext.getPluginByMetadataType(type);
     }
 
     public JSONObject getProp() {
