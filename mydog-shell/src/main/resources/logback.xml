@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
+<configuration debug="false">
 
     <!-- 文件输出格式 -->
     <property name="PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n" />
@@ -11,10 +11,10 @@
         </encoder>
     </appender>
 
-    <logger name="com.power.test.project.mapping" level="debug"/>
+    <logger name="org.huangpu.mydog" level="info"/>
     <logger name="log4j.logger.com.ibatis" level="debug"/>
 
-    <root level="info">
+    <root level="INFO">
         <appender-ref ref="CONSOLE" />
     </root>
 

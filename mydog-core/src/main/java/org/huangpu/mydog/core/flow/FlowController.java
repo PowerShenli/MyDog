@@ -61,14 +61,14 @@ public class FlowController {
                 Metadata common = new Metadata();
                 common.setType(type);
                 common.setName(type+"Common");
-                LOG.info("{}.commList={}",common.getName(),commList);
+                LOG.debug("{}.commList={}",common.getName(),commList);
                 commList.forEach(def -> {
                     Generator generatorImpl = TypeGeneratorFactory.makeGenerator(def.getGenDef().getGenType());
-                    LOG.info("Common generatorImpl = " + generatorImpl);
+                    LOG.debug("Common generatorImpl = " + generatorImpl);
                     //实例装饰器
-                    LOG.info("comm.name={},generator={}", common.getName(), generatorImpl);
+                    LOG.debug("comm.name={},generator={}", common.getName(), generatorImpl);
                     OutputItem outputItem = generatorImpl.generate(common, def);
-                    LOG.info("outputItem={}", outputItem);
+                    LOG.debug("outputItem={}", outputItem);
                     outputItemList.add(outputItem);
                 });
             }
@@ -80,7 +80,7 @@ public class FlowController {
                 String instanceName = meta.getName();
 
                 //TODO: instance的方式对于非Entity元数据是否合理?
-                LOG.info("{}.instanceDefMap={}",meta.getName(),instanceDefMap);
+                LOG.debug("{}.instanceDefMap={}",meta.getName(),instanceDefMap);
                 if(instanceDefMap != null) {
                     //通过instanceName取出对应的output定义
                     //TODO:EntityUI get(jquery+bootstrap)拿不到Entity的属性(除非get(User) get(Role))
@@ -94,7 +94,7 @@ public class FlowController {
                 }
             });
 
-            LOG.info("outputItemList={}",outputItemList);
+            LOG.debug("outputItemList={}",outputItemList);
 
             //持久化
             for (OutputItem out : outputItemList) {
@@ -113,7 +113,7 @@ public class FlowController {
             List<Metadata> metadataList = e.getValue();
             metadataList.stream().forEach(meta -> {
                 String metaName = meta.getName();
-                LOG.info("metaName = {}" , metaName);
+                LOG.debug("metaName = {}" , metaName);
                 meta.getPlugin().getPropResolver().resolve();
             });
         });

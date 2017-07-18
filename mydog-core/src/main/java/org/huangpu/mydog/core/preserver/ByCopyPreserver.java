@@ -27,8 +27,8 @@ public class ByCopyPreserver implements Preserver<CopyOutputItem> {
     public void persistent(CopyOutputItem outputItem) {
         String cpFilePath = outputItem.getCpFilePath();
         String outputPath = outputItem.getOutputPath();
-        LOG.info("cpFilePath = {}" , cpFilePath);
-        LOG.info("outputPath = {}" , outputPath);
+        LOG.debug("cpFilePath = {}" , cpFilePath);
+        LOG.debug("outputPath = {}" , outputPath);
         URL resourceFolder = outputItem.getResourceFolder();
         ClassLoader classLoader = outputItem.getClassLoader();
 
@@ -37,12 +37,12 @@ public class ByCopyPreserver implements Preserver<CopyOutputItem> {
 
         try {
             URLConnection urlConnection = resourceFolder.openConnection();
-            LOG.info("urlConnection={}", urlConnection);
+            LOG.debug("urlConnection={}", urlConnection);
             if (urlConnection instanceof JarURLConnection) {
-                LOG.info("is JarURLConnection");
+                LOG.debug("is JarURLConnection");
                 JarURLConnection jarURLConnection = (JarURLConnection) urlConnection;
                 JarFile jarFile = jarURLConnection.getJarFile();
-                LOG.info("jarFile = " + jarFile);
+                LOG.debug("jarFile = " + jarFile);
                 Enumeration<JarEntry> entrys = jarFile.entries();
                 while(entrys.hasMoreElements()){
                     JarEntry entry = entrys.nextElement();
@@ -50,12 +50,11 @@ public class ByCopyPreserver implements Preserver<CopyOutputItem> {
                 }
                 jarFile.close();
             } else if (urlConnection instanceof FileURLConnection) {
-                LOG.info("is FileURLConnection, cpFilePath={}", cpFilePath);
+                LOG.debug("is FileURLConnection, cpFilePath={}", cpFilePath);
 //                File source = new File(resourceFolder.getPath() +"!"+ cpFilePath);
                 File source = new File(resourceFolder.getPath()+ cpFilePath);
-                LOG.info("source = {}" , source);
+                LOG.debug("source = {}" , source);
                 if (source.isDirectory()) {
-                    LOG.info("source.isDirectory");
                     FileUtils.copyDirectory(source, new File(outputPath));
                 }
                 else if (resourceFolder.getPath().endsWith(".jar")) {
@@ -70,7 +69,7 @@ public class ByCopyPreserver implements Preserver<CopyOutputItem> {
                 else{
                     File sourceFile = new File(resourceFolder.getPath()+ cpFilePath);
                     File outputFile = new File(outputPath);
-                    LOG.info("sourceFile = {}, outputFile = {}",sourceFile.getAbsolutePath(), outputFile.getAbsolutePath());
+                    LOG.debug("sourceFile = {}, outputFile = {}",sourceFile.getAbsolutePath(), outputFile.getAbsolutePath());
                     FileUtils.copyFile(sourceFile, outputFile);
                 }
 
@@ -89,9 +88,9 @@ public class ByCopyPreserver implements Preserver<CopyOutputItem> {
             File outFile = new File(outputPath + entryName.substring(cpFilePath.length()));
             if(!outFile.exists()){
                 if(!outFile.getParentFile().exists()){
-                    LOG.info("parent {} not exists.",outFile.getParentFile());
+                    LOG.debug("parent {} not exists.",outFile.getParentFile());
                     outFile.getParentFile().mkdirs();
-                    LOG.info("completed create dir {}", outFile.getParentFile());
+                    LOG.debug("completed create dir {}", outFile.getParentFile());
                 }
                 try {
                     outFile.createNewFile();
@@ -116,11 +115,5 @@ public class ByCopyPreserver implements Preserver<CopyOutputItem> {
         }
     }
 
-    public static void main(String[] args) {
-        File f = new File("/tmp/myDog_192/output/src/main/resources/static/css/bootstrap-table.css");
-        System.out.println("f.exists() = " + f.exists());
-        System.out.println("f.getParentFile() = " + f.getParentFile().getName());
-        System.out.println("f.getParent() = " + f.getParent());
-    }
 
 }

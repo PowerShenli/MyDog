@@ -66,7 +66,8 @@
             fields:{
                 <#list entity.fields as f>
                 ${f.fieldName}:{
-                <#assign valids = f.validates />
+                <#if f.validates??>
+                    <#assign valids = f.validates />
                     validators:{
                     <#list valids as v>
                         <#--"${v}" ---->
@@ -103,11 +104,11 @@
                         </#if>
                         <#if m?groups[1] == "@DecimalMin">
                         ages2: {
-                        greaterThan: {
-                        value: 18,
-                        inclusive: true,
-                        message: "${f.label}数值不能小于{18}"
-                        }
+                            greaterThan: {
+                                value: 18,
+                                inclusive: true,
+                                message: "${f.label}数值不能小于{18}"
+                            }
                         }
                         </#if><#if v_has_next>,</#if>
                         </#list>
@@ -119,10 +120,12 @@
                         <#--}-->
                         <#--</#if>-->
 
-                    <#--</#if>-->
+                        <#--</#if>-->
                     </#list>
                     }
-                }<#if f_has_next>,</#if>
+                </#if>
+                }
+                <#if f_has_next>,</#if>
                 </#list>
             }
         });

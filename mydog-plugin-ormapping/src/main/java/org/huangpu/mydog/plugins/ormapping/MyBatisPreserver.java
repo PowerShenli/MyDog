@@ -58,7 +58,7 @@ public class MyBatisPreserver implements Preserver<MyBatisOutputItem> {
         Configuration config = new Configuration();
         String connectorLibPath = generatorConfig.getConnectorJarFilePath();
 
-        LOG.info("connectorLibPath: {}", connectorLibPath);
+        LOG.debug("connectorLibPath: {}", connectorLibPath);
         config.addClasspathEntry(connectorLibPath);
         Context context = new Context(ModelType.CONDITIONAL);
         config.addContext(context);
@@ -163,7 +163,7 @@ public class MyBatisPreserver implements Preserver<MyBatisOutputItem> {
             PluginConfiguration pc = new PluginConfiguration();
             pc.setConfigurationType(plugin);
             context.addPluginConfiguration(pc);
-            LOG.info("add plugin = {}" , plugin);
+            LOG.debug("add plugin = {}" , plugin);
         }
 
         List<String> warnings = new ArrayList<>();

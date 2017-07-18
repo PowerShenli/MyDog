@@ -22,7 +22,7 @@ public class ByTemplatedPreserver implements Preserver<TemplateOutputItem> {
         File dest = new File(outputItem.getOutputPath() + outputItem.getOutputName());
         try {
             FileUtils.writeStringToFile(dest, outputItem.getOutputContent(), "UTF-8");
-            LOG.debug("dest = " + dest.getAbsolutePath());
+            LOG.info("file = " + dest.getAbsolutePath());
         } catch (IOException e) {
             LOG.error("writeStringToFile failed.", e);
         }

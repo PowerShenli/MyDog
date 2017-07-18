@@ -37,13 +37,13 @@ public class ByGrammarPreserver implements Preserver<GrammarOutputItem> {
                     connectionProps.getString("spring.datasource.password"),
                     code);
 
-            System.out.println("execute rows = " + execute);
+            LOG.debug("execute rows = " + execute);
         }
         else {
             File dest = new File(outputItem.getOutputPath() + outputItem.getOutputName());
             try {
                 FileUtils.writeStringToFile(dest, outputItem.getOutputContent(), "UTF-8");
-                LOG.info("dest = " + dest.getAbsolutePath());
+                LOG.debug("dest = " + dest.getAbsolutePath());
             } catch (IOException e) {
                 LOG.error("writeStringToFile failed.", e);
             }

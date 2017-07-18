@@ -57,16 +57,16 @@ public class MyBatisGenerator implements Generator {
         myBConfig.setModelGeneratorTargetPackage(basePackage+".domain");
 
         String existFilePath = targetProject +"src/main/java/"+basePackage;
-        LOG.info("existFilePath="+existFilePath);
+        LOG.debug("existFilePath="+existFilePath);
         File file = new File(existFilePath);
         if (file.isDirectory()) {
             file.deleteOnExit();
-            LOG.info("delete files: {}",existFilePath);
+            LOG.debug("delete files: {}",existFilePath);
         }
 
         myBConfig.setOffsetLimit(true);
 
-        LOG.info("myBConfig = {}" , myBConfig);
+//        LOG.info("myBConfig = {}" , myBConfig);
 
 
         MyBatisPreserver myBatisPreserver = new MyBatisPreserver();

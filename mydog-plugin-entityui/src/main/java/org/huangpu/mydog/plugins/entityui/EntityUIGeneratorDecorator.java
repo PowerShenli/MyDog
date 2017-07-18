@@ -22,7 +22,7 @@ public class EntityUIGeneratorDecorator extends GeneratorDecorator {
     @Override
     public OutputItem generate(Metadata metaInstance, OutputItemDef outputItemDef) {
 
-        LOG.info("outputItemDef = {}", outputItemDef.getItemName());
+        LOG.debug("outputItemDef = {}", outputItemDef.getItemName());
         //元数据实例的属性
         JSONObject entityProp = metaInstance.getProp();
         //克隆所有的属性到新集合,保证不改变公共属性集

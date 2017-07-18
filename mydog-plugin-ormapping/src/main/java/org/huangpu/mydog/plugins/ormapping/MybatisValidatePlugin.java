@@ -36,13 +36,13 @@ public class MybatisValidatePlugin extends PluginAdapter {
         Properties colProps = introspectedColumn.getProperties();
 
         String fieldName = field.getName();
-        LOG.info("fieldName = {},{}" , fieldName,colProps);
+        LOG.debug("fieldName = {},{}" , fieldName,colProps);
 
         String validates = colProps.getProperty("validates","[]");
         JSONArray array = JSONArray.parseArray(validates);
         array.stream().forEach(o -> {
             String v = String.valueOf(o);
-            LOG.info("validate=>{}", v);
+            LOG.debug("validate=>{}", v);
             field.addAnnotation(v);
             FullyQualifiedJavaType imptStr = new FullyQualifiedJavaType(getImport(v));
             topLevelClass.addImportedType(imptStr);

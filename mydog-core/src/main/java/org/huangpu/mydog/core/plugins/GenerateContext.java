@@ -112,7 +112,7 @@ public class GenerateContext {
             if(plugin!= null && plugin.getMetadataType() != null) {
                 plugin.init();
                 pluginMap.put(plugin.getMetadataType(), plugin);
-                LOG.info("put {} => {}",plugin.getMetadataType(), plugin);
+                LOG.debug("put {} => {}",plugin.getMetadataType(), plugin);
             }
         }
     }

@@ -26,9 +26,9 @@ public class ByTemplateGenerator implements Generator {
         String itemName = outputItemDef.getGenDef().getItemName();
         //生成目标代码
         Map<String,Object> templateProp = outputItemDef.getGenDef().getTemplateProp();
-        if (itemName.equals("index.html")) {
-            LOG.info("meta.instanceName= {} \nindex.html props == \n{}",metaInstance.getName(), templateProp);
-        }
+//        if (itemName.equals("index.html")) {
+//            LOG.info("meta.instanceName= {} \nindex.html props == \n{}",metaInstance.getName(), templateProp);
+//        }
         String code = TemplateUtils.render("itemCtx_" + itemName, templateSource, templateProp);
 
         TemplateOutputItem outputItem = new TemplateOutputItem();
@@ -37,8 +37,8 @@ public class ByTemplateGenerator implements Generator {
         outputItem.setOutputName(itemName);
         outputItem.setPreserver(new ByTemplatedPreserver());
 
-        LOG.info("item.getOutputName = {}", itemName);
-        LOG.info("code = {}", code);
+        LOG.debug("item.getOutputName = {}", itemName);
+        LOG.debug("code = {}", code);
 
         return outputItem;
     }
