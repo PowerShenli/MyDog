@@ -29,7 +29,7 @@ public class MyDogDataSourceParams {
 	private String password;
 	
 	/**
-	 * dateType {@link DataBaseTypeEnum}
+	 * dateType {@link DataBaseTypeEnum} 
 	 */
 	private Byte dataType;
 	

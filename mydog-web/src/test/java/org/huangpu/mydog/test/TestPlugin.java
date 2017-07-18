@@ -23,7 +23,7 @@ public class TestPlugin {
         JSONObject pro = JSON.parseObject(
                 "{\n" +
                 "        \"name\":\"MyDog测试项目\",\n" +
-                "        \"springBoot-version\": \"1.4.2.RELEASE\",\n" +
+                "        \"springBootVersion\": \"1.4.2.RELEASE\",\n" +
                 "        \"project\": {\n" +
                 "          \"groupId\": \"com.power.test\",\n" +
                 "          \"artifactId\": \"MyDogPrj\",\n" +

@@ -20,6 +20,7 @@ public class ShellTools {
 //        args = new String[]{
 //                "/Users/shenli/knowledge/spring/github/MyDog/mydog-shell/demo.json"
 //        };
+
         String metadataJson = args[0];
         File metaDataFile = new File(metadataJson);
         if (!metaDataFile.exists()) {

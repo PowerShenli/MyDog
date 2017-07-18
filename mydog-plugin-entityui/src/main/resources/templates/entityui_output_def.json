@@ -80,7 +80,12 @@
       "genType": "byCopy",
       "cpFilePath": "templates/assets/fonts/"
       },
-
+      {
+      "itemName": "bootstrapvalidator.directory",
+      "outputPath": "${prj.outputPath}src/main/resources/static/assets/vendor/bootstrapvalidator/",
+      "genType": "byCopy",
+      "cpFilePath": "templates/assets/vendor/bootstrapvalidator/"
+      },
       {
         "itemName": "jqBootstrapValidation.directory",
         "outputPath": "${prj.outputPath}src/main/resources/static/assets/vendor/jqBootstrapValidation/",
