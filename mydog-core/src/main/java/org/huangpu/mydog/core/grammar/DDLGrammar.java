@@ -6,6 +6,8 @@ import com.alibaba.fastjson.JSONObject;
 import org.huangpu.mydog.core.Grammar;
 import org.huangpu.mydog.core.plugins.GenerateContext;
 import org.huangpu.mydog.core.utils.DDLUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -14,6 +16,8 @@ import java.util.stream.Collectors;
  * Created by shenli on 2017/5/3.
  */
 public class DDLGrammar implements Grammar {
+
+    private static final Logger LOG = LoggerFactory.getLogger(DDLGrammar.class);
 
     @Override
     public String getCode() {
@@ -35,6 +39,7 @@ public class DDLGrammar implements Grammar {
                 StringBuilder ss = new StringBuilder();
                 ss.append("`").append(DDLUtils.getColumnName(field.getString("fieldName"))).append("`");
                 ss.append(" ").append(DDLUtils.getColumnType(field.getString("fieldType"), field.getInteger("length")));
+//                LOG.info("field={}",field);
                 if(!field.getBoolean("isNull")){
                     ss.append(" NOT NULL ");
                 }
