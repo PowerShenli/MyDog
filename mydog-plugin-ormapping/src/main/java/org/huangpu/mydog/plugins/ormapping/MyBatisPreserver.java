@@ -6,6 +6,7 @@ import com.google.common.base.Strings;
 import org.huangpu.mydog.core.Preserver;
 import org.huangpu.mydog.core.plugins.GenerateContext;
 import org.huangpu.mydog.core.utils.DDLUtils;
+import org.huangpu.mydog.core.utils.FileUtil;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.api.ProgressCallback;
 import org.mybatis.generator.api.ShellCallback;
@@ -14,6 +15,7 @@ import org.mybatis.generator.internal.DefaultShellCallback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.util.*;
 
 
@@ -54,7 +56,25 @@ public class MyBatisPreserver implements Preserver<MyBatisOutputItem> {
         }
     }
 
+    // 使用generator生成文件前先删除旧文件：解决mybatis 生成xml文件内容重复问题，
+    public void clearMybatisGenFiles(){
+
+        String targetProject = generatorConfig.getTargetProject();
+        String clientPackage = generatorConfig.getClientGeneratorTargetPackage();
+        String modelPackage = generatorConfig.getModelGeneratorTargetPackage();
+
+        String clientPath = clientPackage.replace(".", File.separator);
+        String modelPath = modelPackage.replace(".", File.separator);
+
+        FileUtil.delAllFile(targetProject+clientPath,false);
+        FileUtil.delAllFile(targetProject+modelPath,false);
+
+    }
+
     public void generate() throws Exception {
+
+        clearMybatisGenFiles();
+
         Configuration config = new Configuration();
         String connectorLibPath = generatorConfig.getConnectorJarFilePath();
 
