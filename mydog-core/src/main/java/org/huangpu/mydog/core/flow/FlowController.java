@@ -43,7 +43,12 @@ public class FlowController {
         List<OutputItem> outputItemList = new ArrayList<OutputItem>();
 
         metadataMapList.entrySet().stream().forEach(entry -> {
+
             String type = entry.getKey();
+//            if(!type.equals("ormapping")){
+//                return;
+//            }
+
             MyDogPlugin myDogPlugin = GenerateContext.getPluginByMetadataType(type);
 
             //1. 渲染输出定义,并进行分类(common,instance1,instance2 ...)
@@ -88,7 +93,7 @@ public class FlowController {
                     if(itemDefList != null)
                     itemDefList.forEach(def ->{
                         Generator generatorImpl = TypeGeneratorFactory.makeGenerator(def.getGenDef().getGenType());
-                        Generator decGenerator = meta.getPlugin().getGeneratorDecorator(generatorImpl);
+                        Generator decGenerator = GenerateContext.getPluginByMetadataType(meta.getType()).getGeneratorDecorator(generatorImpl);
                         outputItemList.add(decGenerator.generate(meta, def));
                     });
                 }
@@ -114,7 +119,7 @@ public class FlowController {
             metadataList.stream().forEach(meta -> {
                 String metaName = meta.getName();
                 LOG.debug("metaName = {}" , metaName);
-                meta.getPlugin().getPropResolver().resolve();
+                GenerateContext.getPluginByMetadataType(meta.getType()).getPropResolver().resolve();
             });
         });
     }
