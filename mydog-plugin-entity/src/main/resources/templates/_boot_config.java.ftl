@@ -1,4 +1,6 @@
 <#assign prj=project["mydogProj"]/>
+<#assign myb=ormapping["mybatis"]/>
+<#assign tran=myb["transaction"]/>
 
 package ${prj.basePackage}.config;
 
@@ -28,12 +30,15 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 
 @Configuration
+<#if tran["on"]>
 @EnableTransactionManagement
 @EnableAspectJAutoProxy(proxyTargetClass = true,exposeProxy = true)
+</#if>
 public class BootConfig {
 
     protected static Logger log = LoggerFactory.getLogger(BootConfig.class);
-
+    <#if tran["on"]>
+        <#if tran["defaultStrategy"]>
     @Bean
     @Autowired
         public PlatformTransactionManager transactionManager(DataSource dataSource) {
@@ -44,7 +49,7 @@ public class BootConfig {
     @Bean
     public AspectJExpressionPointcutAdvisor aspectJExpressionPointcutAdvisor() {
         AspectJExpressionPointcutAdvisor advisor = new AspectJExpressionPointcutAdvisor();
-        advisor.setExpression("execution(* com.power.test.project.service.*.*(..)) ");
+        advisor.setExpression("execution(* ${prj.basePackage}.service.*.*(..)) ");
         advisor.setAdvice(transactionInterceptor());
         return advisor;
     }
@@ -95,6 +100,8 @@ public class BootConfig {
         }});
         return attributeSource;
     }
+        </#if>
+    </#if>
 
 
 

@@ -249,8 +249,13 @@
       "instanceName" :"mybatis",
       "properties":{
         "generateSQL" : false,
-        "mapperType"  : "XMLMAPPER"//"ANNOTATEDMAPPER"
+        "mapperType"  : "XMLMAPPER",//"ANNOTATEDMAPPER"
+        "transaction":{
+          "on":false,
+          "defaultStrategy":true
+        }
       }
+
     },
     {
       "properties": {

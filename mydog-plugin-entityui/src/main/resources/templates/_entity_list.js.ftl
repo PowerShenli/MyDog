@@ -192,7 +192,7 @@
         if(!Utils.isObject(obj)){
             return;
         }
-        $_ajax.put('/${l_ent_name}/'+obj.id,obj).then(function (res) {
+        $_ajax.put('/${l_ent_name}/',obj).then(function (res) {
             if(res && res.success){
                 // 刷新数据
                 getAll();
