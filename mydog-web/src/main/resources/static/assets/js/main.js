@@ -426,4 +426,11 @@ function mydogSubmit(){
         myDogProjectParams: $("form[name='myDogProjectParams']").serializeArray()
     }
     console.log(JSON.stringify(myDogProjectParams));
+
+
+    var myDogPluginsParams = {
+        myDogProjectParams: $("form[name='myDogProjectParams']").serializeArray()
+    }
+    console.log(JSON.stringify(myDogPluginsParams));
+
 }

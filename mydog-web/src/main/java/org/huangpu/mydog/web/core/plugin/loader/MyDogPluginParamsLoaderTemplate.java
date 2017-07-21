@@ -5,19 +5,23 @@ import java.util.Map;
 
 import org.huangpu.mydog.core.Metadata;
 import org.huangpu.mydog.core.plugins.GenerateContext;
+import org.huangpu.mydog.core.plugins.metadata.MyDogPluginMetaData;
+import org.huangpu.mydog.web.vo.AbstractMyDogParams;
 
 /**
  * 
- * Using Map<String,List<MetaData> to save all plugin properties
  * 
  * @author xusihan on 2017.07.01
  */
-public abstract class MyDogPluginPropertiesLoaderTemplate implements MyDogPluginPropertiesLoader{
+public class MyDogPluginParamsLoaderTemplate implements MyDogPluginParamsLoader{
 	
-	
+	@Override
+	public MyDogPluginMetaData loadMyDogPluginParams(AbstractMyDogParams MyDogParams) {
+		
+		return null;
+	}
 	
 	private static class MetaDataCoordinator{
-		
 		/**
 		 * init all plugin metaData
 		 */
@@ -34,6 +38,5 @@ public abstract class MyDogPluginPropertiesLoaderTemplate implements MyDogPlugin
 		}
 		
 	}
-	
-	
+
 }

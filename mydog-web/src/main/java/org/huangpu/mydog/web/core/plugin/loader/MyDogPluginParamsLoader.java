@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.huangpu.mydog.core.Metadata;
+import org.huangpu.mydog.core.plugins.metadata.MyDogPluginMetaData;
+import org.huangpu.mydog.web.vo.AbstractMyDogParams;
 
 /**
  * 1.when the web application start
@@ -19,7 +21,7 @@ import org.huangpu.mydog.core.Metadata;
  * @author xusihan on 2017.06.30
  *
  */
-public interface MyDogPluginPropertiesLoader {
+public interface MyDogPluginParamsLoader {
 	
 	/**
 	 * 
@@ -27,6 +29,6 @@ public interface MyDogPluginPropertiesLoader {
 	 * 
 	 * @author xusihan on 2017.07.11
 	 */
-	Map<String, List<Metadata>> loadMyDogPluginProperties();
+	MyDogPluginMetaData loadMyDogPluginParams(AbstractMyDogParams abstractMyDogParams);
 	
 }
