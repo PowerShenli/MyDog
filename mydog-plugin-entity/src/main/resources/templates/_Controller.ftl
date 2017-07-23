@@ -32,8 +32,15 @@ public class ${entityName}Controller {
         Log.info("${entityName}Controller.page");
         PageDataInfo<${entityName}> pageData=service.getPage(pageNum, pageSize);
         Map<String,Object> result = new HashMap<String,Object>();
-        result.put("success",true);
-        result.put("data",pageData);
+        result.put("resCode",200);
+        result.put("resMsg","操作成功");
+        <#--result.put("data",pageData);-->
+        result.put("data",pageData.getList());
+        result.put("pageNum",pageData.getPageNum());
+        result.put("pageSize",pageData.getPageSize());
+        result.put("size",pageData.getSize());
+        result.put("total",pageData.getTotal());
+        result.put("pages",pageData.getPages());
         return result;
     }
     
@@ -43,7 +50,8 @@ public class ${entityName}Controller {
         Log.info("${entityName}Controller.list");
         List<${entityName}> entityList = service.getAll${entityName}();
         Map<String,Object> result = new HashMap<String,Object>();
-        result.put("success",true);
+        result.put("resCode",200);
+        result.put("resMsg","操作成功");
         result.put("data",entityList);
         return result;
     }
@@ -55,11 +63,12 @@ public class ${entityName}Controller {
         ${entityName} entity = service.get${entityName}ById(id);
         Map<String,Object> result = new HashMap<String,Object>();
         if(entity != null){
-            result.put("success",true);
+            result.put("resCode",200);
+            result.put("resMsg","操作成功");
             result.put("data",entity);
         }
         else{
-            result.put("success",false);
+            result.put("resCode",500);
             result.put("reason","can not find ${entityName} for id="+id);
         }
         return result;
@@ -72,8 +81,9 @@ public class ${entityName}Controller {
         int cnt = service.update(${entityName?lower_case});
       
         Map<String, Object> response = new HashMap<String,Object>(){{
-            put("success",true);
-            put("update","completed");
+            put("resCode",200);
+            put("resMsg","操作成功");
+            //put("update","completed");
             put("cnt",cnt);
         }};
         return response;
@@ -85,8 +95,9 @@ public class ${entityName}Controller {
         Log.info("${entityName}Controller.delete");
         int cnt = service.delete(id);
         Map<String, Object> response = new HashMap<String,Object>(){{
-            put("success",true);
-            put("delete","completed");
+            put("resCode",200);
+            put("resMsg","操作成功");
+            //put("delete","completed");
             put("cnt",cnt);
         }};
         return response;
@@ -98,7 +109,8 @@ public class ${entityName}Controller {
         Log.info("${entityName}Controller.create");
         int cnt = service.create(${entityName?lower_case});
         Map<String, Object> response = new HashMap<String,Object>(){{
-            put("success",true);
+            put("resCode",200);
+            put("resMsg","操作成功");
             put("id", ${entityName?lower_case}.getId());
             put("cnt", cnt);
         }};

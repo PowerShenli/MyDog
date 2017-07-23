@@ -1,4 +1,5 @@
 <#assign l_ent_name=entity.entityName?lower_case/>
+<#assign pagination=entity.pagination/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -101,11 +102,6 @@
                     <li>
                         <span class="m-r-sm text-muted welcome-message">Welcome to MyDog.</span>
                     </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
-                        </a>
-                    </li>
 
                     <li>
                         <a href="login.html">
@@ -171,6 +167,11 @@
                                 </tbody>
                             </table>
 
+                            <#if pagination.enabled >
+                                <ul class="pagination" id="pagination">
+
+                                </ul>
+                            </#if>
                         </div>
                     </div>
                 </div>
@@ -193,7 +194,6 @@
 <!-- Modal -->
 <div class="modal fade" id="${l_ent_name}Modal" role="dialog">
     <div class="modal-dialog">
-
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
@@ -256,7 +256,7 @@
 
                                 <#elseif vprop.type=="hidden">
                                     <div class="form-group">
-                                        <input type="hidden" name="${field_name}" id="${field_name}" class="form-control" value="<#if vprop.dft??>${vprop.dft}</#if>" <#if field["isNull"]!=true>required</#if>/>
+                                        <input type="hidden" name="${field_name}" id="<#if field.isId>id_${l_ent_name}_edit<#else>${field_name}</#if>" class="form-control" value="<#if vprop.dft??>${vprop.dft}</#if>" <#if field["isNull"]!=true>required</#if>/>
                                     </div>
 
                                 <#elseif vprop.type=="password">
@@ -283,7 +283,6 @@
 <!-- Modal -->
 <div class="modal fade" id="${l_ent_name}DelModal" role="dialog">
     <div class="modal-dialog">
-
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
@@ -292,12 +291,12 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <input type="hidden" name="id" />
+                    <input type="hidden" name="id_${l_ent_name}_del" id="id_${l_ent_name}_del" />
                     确定要删除${entity.label}？
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success btn-${l_ent_name}-del">删除</button>
+                <button type="button" class="btn btn-success btn-${l_ent_name}-delete">删除</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
             </div>
         </div>

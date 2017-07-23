@@ -1,4 +1,5 @@
 <#assign l_ent_name=entity.entityName?lower_case/>
+<#assign pagination=entity.pagination/>
 ;(function (global) {
     'use strict';
 
@@ -7,10 +8,34 @@
     var lists = [];
     var editModal = $('#${l_ent_name}Modal');
     var delModal = $('#${l_ent_name}DelModal');
+    <#if pagination.enabled >
+    var currentPage = 1;
+    var pageSize = ${pagination.pageSize}
+    </#if>
 
     function init() {
 
+        <#if pagination.enabled >
+        getPage(1, pageSize);
+        // 分页事件
+        $(".${l_ent_name}Box").find('.pagination').on('click','.p-item',function(e){
+            e.preventDefault();
+            var _this = $(e.target);
+            getPage(_this.html(),pageSize);
+        });
+        $(".${l_ent_name}Box").find('.pagination').on('click','.p-prev',function(e){
+            e.preventDefault();
+            // 当前页码 － 1
+            getPage(currentPage - 1,pageSize);
+        });
+        $(".${l_ent_name}Box").find('.pagination').on('click','.p-next',function(e){
+            e.preventDefault();
+            // 当前页码 ＋ 1
+            getPage(currentPage + 1,pageSize);
+        });
+        <#else>
         getAll();
+        </#if>
 
         // 新增 ｜ 编辑
         editModal.on('show.bs.modal', function (e) {
@@ -19,22 +44,22 @@
             var modal = $(this);
 
             if(id && id!=''){
-                modal.find('input[name=id]').val(id);
-                modal.find('.modal-title em').html('新建');
+                modal.find('#id_${l_ent_name}_edit').val(id);
+                modal.find('.modal-title em').html('编辑');
                 $_ajax.get('/${l_ent_name}/'+id).then(function (res) {
-                    if(res && res.success){
+                    if(res && res.resCode == 200){
                         var d = res.data || {};
                         modal.find('#${l_ent_name}').val(d.name || '');
                         modal.find('#${l_ent_name}_'+d.available).prop('checked',true);
                     }
                 });
             } else {
-                modal.find('.modal-title em').html('编辑');
+                modal.find('.modal-title em').html('新建');
             }
         });
         $(".${l_ent_name}Box").on('click','.btn-${l_ent_name}-save',function(e){
             // save data
-            var id = editModal.find('input[name=id]').val();
+            var id = editModal.find('#id_${l_ent_name}_edit').val();
             var flag = $("#${l_ent_name}Form").data("bootstrapValidator").isValid();
             if(flag){
                 var param = {
@@ -94,21 +119,15 @@
                         </#if>
                         <#if m?groups[1] == "@DecimalMax">
                         <#assign hasAge = true />
-                        ages: {
-                            lessThan: {
-                                value: 99,
-                                inclusive: true,
-                                message: "${f.label}数值不能大于{99}"
-                            }
+                        regexp: {
+                            regexp:/(9[0-9])|([1-8][0-9])/,
+                            message: "${f.label}数值不能大于{99}"
                         }
                         </#if>
                         <#if m?groups[1] == "@DecimalMin">
-                        ages2: {
-                            greaterThan: {
-                                value: 18,
-                                inclusive: true,
-                                message: "${f.label}数值不能小于{18}"
-                            }
+                        regexp: {
+                            regexp: /(1[1-8])|[2-9][0-9]/,
+                            message: "${f.label}数值不能小于{18}"
                         }
                         </#if><#if v_has_next>,</#if>
                         </#list>
@@ -136,16 +155,16 @@
             var modal = $(this);
 
             if(id && id!=''){
-                modal.find('input[name=id]').val(id);
+                modal.find('#id_${l_ent_name}_del').val(id);
             }
         });
-        $(".${l_ent_name}Box").on('click','.btn-${l_ent_name}-del',function(e){
+        $(".${l_ent_name}Box").on('click','.btn-${l_ent_name}-delete',function(e){
             // delete
-            var id = delModal.find('input[name=id]').val();
+            var id = delModal.find('#id_${l_ent_name}_del').val();
             if(id && id!=''){
                 del(id);
             }else{
-                //delModal.modal('hide');
+                delModal.modal('hide');
             }
         });
 
@@ -154,7 +173,7 @@
 
     function getAll() {
         $_ajax.get('/${l_ent_name}').then(function (res) {
-            if(res.success && res.data){
+            if(res.resCode == 200 && res.data){
                 var d = res.data;
                 var lists = [];
                 if(Utils.isArray(d) && d.length>0){
@@ -167,22 +186,53 @@
             }
         });
     }
-    function getDataOfPage(limit) {
-        $_ajax.get('/${l_ent_name}/limit-'+limit).then(function (res) {
-            if(res && res.success){
-                // 刷新数据
-                getAll();
+    // 分页数据
+    function getPage(pageIndex,pageSize) {
+        $_ajax.get('/${l_ent_name}/page?pageNum='+pageIndex+'&pageSize='+pageSize).then(function (res) {
+            if(res && res.resCode == 200){
+                var d = res.data;
+                var lists = [];
+                if(Utils.isArray(d) && d.length>0){
+                    for(var i=0,l=d.length;i<l;i++){
+                        lists.push(Utils.parseTemplate(tpl,d[i]));
+                    }
+
+                    ${l_ent_name}Table.find('tbody').html(lists.join(''));
+
+                    // 处理分页
+                    refreshPagination(res.pageNum || 1,res.pageSize || 10,res.total || 0,res.pages || 0)
+                }
             }
         });
     }
+    // 刷新分页
+    function refreshPagination(pageIndex,pageS,total,pages){
+        if(total == 0 || pages == 0) return;
+        currentPage = pageIndex;
+        pageSize = pageS;
+        var pagin = $('#pagination');
+        var pas = [];
+        pas.push('<li'+(pageIndex==1?' class="disabled"':'')+'><a href="#" aria-label="Previous" class="p-prev"><span aria-hidden="true">&laquo;</span></a></li>');
+        for(var i=1;i<=pages;i++){
+            pas.push('<li'+(i == pageIndex?' class="active"':'')+'><a href="#" class="p-item">'+i+'</a></li>');
+        }
+        pas.push('<li'+(pageIndex==pages?' class="disabled"':'')+'><a href="#" aria-label="Next" class="p-next"><span aria-hidden="true">&raquo;</span></a></li>');
+        pagin.html(pas.join(''));
+    }
+
+
     function add(obj) {
         if(!Utils.isObject(obj)){
             return;
         }
         $_ajax.post('/${l_ent_name}',obj).then(function (res) {
-            if(res && res.success){
+            if(res && res.resCode == 200){
                 // 刷新数据
+                <#if pagination.enabled >
+                getPage(currentPage,pageSize)
+                <#else>
                 getAll();
+                </#if>
                 editModal.find('input').val('');
                 editModal.modal('hide');
             }
@@ -193,9 +243,13 @@
             return;
         }
         $_ajax.put('/${l_ent_name}/',obj).then(function (res) {
-            if(res && res.success){
+            if(res && res.resCode == 200){
                 // 刷新数据
+                <#if pagination.enabled >
+                getPage(currentPage,pageSize)
+                <#else>
                 getAll();
+                </#if>
                 editModal.find('input').val('');
                 editModal.modal('hide');
             }
@@ -203,9 +257,13 @@
     }
     function del(id) {
         $_ajax.del('/${l_ent_name}/'+id).then(function (res) {
-            if(res && res.success){
+            if(res && res.resCode == 200){
                 // 刷新数据
+                <#if pagination.enabled >
+                getPage(currentPage,pageSize)
+                <#else>
                 getAll();
+                </#if>
                 delModal.modal('hide');
             }
         });
