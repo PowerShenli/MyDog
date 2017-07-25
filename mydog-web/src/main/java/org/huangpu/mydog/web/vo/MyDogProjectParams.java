@@ -1,7 +1,7 @@
 package org.huangpu.mydog.web.vo;
 
 import org.huangpu.mydog.core.plugins.metadata.MyDogPluginMetaData;
-import org.huangpu.mydog.plugins.project.metadata.ProjectPluginMetaData;
+import org.huangpu.mydog.plugins.project.metadata.ProjectPluginProperties;
 import org.huangpu.mydog.web.exception.MyDogParamsParserException;
 import org.huangpu.mydog.web.util.PathUtils;
 
@@ -50,6 +50,11 @@ public class MyDogProjectParams extends AbstractMyDogParams{
 	private String projectName;
 
 	/**
+	 * 项目名称
+	 */
+	private String instanceName;
+	
+	/**
 	 * base package
 	 */
 	private String basePackage;
@@ -59,6 +64,14 @@ public class MyDogProjectParams extends AbstractMyDogParams{
 	 */
 	private Byte loggingType;
 	
+	public String getInstanceName() {
+		return instanceName;
+	}
+
+	public void setInstanceName(String instanceName) {
+		this.instanceName = instanceName;
+	}
+
 	public String getBasePackage() {
 		return basePackage;
 	}
@@ -144,19 +157,26 @@ public class MyDogProjectParams extends AbstractMyDogParams{
 			throw new MyDogParamsParserException(String.format("将 {%s} 强制转换成{%s} 出错", myDogParams.getClass().getName(),this.getClass().getName())) ;
 		}
 		MyDogProjectParams myDogProjectParams = (MyDogProjectParams) myDogParams;
-		ProjectPluginMetaData projectPluginMetaData = new ProjectPluginMetaData();
-		projectPluginMetaData.setArtifactId(myDogProjectParams.getArtifactId());
-		projectPluginMetaData.setBasePackage(myDogProjectParams.getBasePackage());
-		projectPluginMetaData.setBasePath(PathUtils.formatBasePath(myDogProjectParams.getBasePackage()));
-		projectPluginMetaData.setGroupId(myDogProjectParams.getGroupId());
-		projectPluginMetaData.setLoggingConfig("");
-		projectPluginMetaData.setOutputPath(myDogProjectParams.getOutputPath());
-		projectPluginMetaData.setProjectName(myDogProjectParams.getProjectName());
-		projectPluginMetaData.setServerPort(myDogProjectParams.getProjectName());
-		projectPluginMetaData.setSpringBootVersion(myDogProjectParams.getSpringbootVersion());
-		projectPluginMetaData.setVersion(myDogProjectParams.getVersion());
-		return projectPluginMetaData;
+		MyDogPluginMetaData medadata = new MyDogPluginMetaData();
+		ProjectPluginProperties properties = new ProjectPluginProperties();
+		setProperties(properties,myDogProjectParams);
+		medadata.setProperties(properties);
+		return medadata;
 	}
+	
+	private ProjectPluginProperties setProperties(ProjectPluginProperties properties,MyDogProjectParams params) {
+		properties.setArtifactId(params.getArtifactId());
+		properties.setBasePackage(params.getBasePackage());
+		properties.setBasePath(PathUtils.formatBasePath(params.getBasePackage()));
+		properties.setGroupId(params.getGroupId());
+		properties.setOutputPath(params.getOutputPath());
+		properties.setProjectName(params.getProjectName());
+		properties.setServerPort(params.getProjectName());
+		properties.setSpringBootVersion(params.getSpringbootVersion());
+		properties.setVersion(params.getVersion());
+		return properties;
+	}
+	
 	
 	public static void main(String[] args) {
 		MyDogProjectParams myDogProjectParams = new MyDogProjectParams();

@@ -1,10 +1,6 @@
 package org.huangpu.mydog.web.core.plugin.loader;
 
-import java.util.List;
-import java.util.Map;
-
-import org.huangpu.mydog.core.Metadata;
-import org.huangpu.mydog.core.plugins.metadata.MyDogPluginMetaData;
+import org.huangpu.mydog.core.plugins.metadata.MyDogPluginProperties;
 import org.huangpu.mydog.web.vo.AbstractMyDogParams;
 
 /**
@@ -29,6 +25,6 @@ public interface MyDogPluginParamsLoader {
 	 * 
 	 * @author xusihan on 2017.07.11
 	 */
-	MyDogPluginMetaData loadMyDogPluginParams(AbstractMyDogParams abstractMyDogParams);
+	MyDogPluginProperties loadMyDogPluginParams(AbstractMyDogParams abstractMyDogParams);
 	
 }

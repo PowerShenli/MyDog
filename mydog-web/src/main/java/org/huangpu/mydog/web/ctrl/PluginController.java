@@ -53,8 +53,8 @@ public class PluginController {
 	@ResponseBody
 	public AjaxResult buildJsonDemo(@RequestBody() MyDogPluginsParams myDogPluginsParams) {
 		AjaxResult result = AjaxResult.prepare();
-		
-		return null;
+		System.out.println(myDogPluginsParams);
+		return result;
 	}
 	
 }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.huangpu.mydog.plugins.datasource.metadata.DatasourcePluginMetaData;
+import org.huangpu.mydog.plugins.datasource.metadata.DatasourcePluginProperties;
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSON;
@@ -38,7 +38,7 @@ public class TestJson {
 	
 	@Test
 	public void testPlugin() {
-		DatasourcePluginMetaData data = new DatasourcePluginMetaData();
+		DatasourcePluginProperties data = new DatasourcePluginProperties();
 		data.setDatasourceDriverClassName("driverclassname");
 		data.setDatasourceInitialSize("1111");
 		data.setDatasourceMaxIdle("11111");

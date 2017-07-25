@@ -2,7 +2,6 @@ package org.huangpu.mydog.web.vo;
 
 import org.huangpu.mydog.core.plugins.metadata.MyDogPluginMetaData;
 import org.huangpu.mydog.web.exception.MyDogOperationNotSupportedException;
-import org.huangpu.mydog.web.exception.MyDogParamsParserException;
 
 /**
  * 
@@ -16,7 +15,7 @@ public class MyDogPluginsParams extends AbstractMyDogParams{
 	 * mydog project params
 	 */
 	private MyDogProjectParams myDogProjectParams;
-
+	
 	public MyDogProjectParams getMyDogProjectParams() {
 		return myDogProjectParams;
 	}

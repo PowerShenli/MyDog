@@ -6,6 +6,12 @@ console.log("============================================================");
 console.log("==============        欢迎使用MyDog            ==============");
 console.log("============================================================");
 
+/*
+require(['http'],function(http){
+    alert(http.add(1,1));
+})
+*/
+
 if (typeof jQuery === 'undefined') {
     throw new Error('Bootstrap\'s JavaScript requires jQuery')
 }
@@ -36,11 +42,12 @@ if (typeof jQuery === 'undefined') {
         return $.ajax({
             url: options.url,
             headers:{
-                Authorization: 'HPE ' + sessionStorage.getItem('um') || ''
+                Authorization:sessionStorage.getItem('um') || ''
             },
+            data:options.data,
             type: options.type || 'get',
             // 文件上传请去掉contentType
-            contentType: options.contentType || 'application/json; charset=UTF-8',
+            contentType: (options.extra && options.extra.contentType) || 'application/json; charset=UTF-8',
             statusCode: statusCode,
             beforeSend: function() {
                 // 显示加载的loading...
@@ -50,6 +57,7 @@ if (typeof jQuery === 'undefined') {
             },
             success:function(data, textStatus, jqXHR){
                 // 2xx~3xx
+
             },
             error: function(xhr,statusText,err){
                 // 4xx~5xx
@@ -59,30 +67,37 @@ if (typeof jQuery === 'undefined') {
     var $_ajax = {
         get: function(url,data,extra){
             var opt = {url:url,data:data,type:'get'};
-            if(extra && extra.headers) opt.headers = extra.headers;
-            if(extra && extra.dataType) opt.dataType = extra.dataType;
+            if (extra) {opt.extra=extra;}
+            //if(extra && extra.headers) opt.headers = extra.headers;
+            //if(extra && extra.dataType) opt.dataType = extra.dataType;
             return request(opt);
         },
         post: function(url,data,extra){
             var opt = {url:url,data:data,type:'post'};
-            if(extra && extra.headers) opt.headers = extra.headers;
-            if(extra && extra.dataType) opt.dataType = extra.dataType;
+            if (extra) {opt.extra=extra;}
+            //if(extra && extra.headers) opt.headers = extra.headers;
+            //if(extra && extra.dataType) opt.dataType = extra.dataType;
             return request(opt);
         },
         put: function(url,data,extra){
             var opt = {url:url,data:data,type:'put'};
-            if(extra && extra.headers) opt.headers = extra.headers;
-            if(extra && extra.dataType) opt.dataType = extra.dataType;
+            if (extra) {opt.extra=extra;}
+            //if(extra && extra.headers) opt.headers = extra.headers;
+            //if(extra && extra.dataType) opt.dataType = extra.dataType;
             return request(opt);
         },
         delete: function(url,data,extra){
             var opt = {url:url,data:data,type:'delete'};
-            if(extra && extra.headers) opt.headers = extra.headers;
-            if(extra && extra.dataType) opt.dataType = extra.dataType;
+            if (extra) {opt.extra=extra;}
+            //if(extra && extra.headers) opt.headers = extra.headers;
+            //if(extra && extra.dataType) opt.dataType = extra.dataType;
             return request(opt);
         }
     };
     global.$_ajax = $_ajax;
+
+
+
 })(window, jQuery);
 
 
@@ -94,8 +109,6 @@ function loadMenu(){
     //     $("#menu-box").html(res);
     // }})
 }
-
-
 $(document).ready(function () {
 
     loadMenu();
@@ -419,18 +432,42 @@ function getParent($this) {
 
 })(jQuery,$_ajax)
 
+/*
+    序列化form表单的数据
+ */
+$.fn.serializeObject = function()
+{
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name]) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
+
 function mydogSubmit(){
-    console.log(document.forms['myDogProjectParams'].username);
-    console.log($("form[name='myDogProjectParams']").serializeArray());
-    var myDogProjectParams = {
-        myDogProjectParams: $("form[name='myDogProjectParams']").serializeArray()
-    }
-    console.log(JSON.stringify(myDogProjectParams));
-
-
+    var myDogProjectParams = $("form[name='myDogProjectParams']").serializeObject();
+    var myDogDataSourceParams = $("form[name='myDogDataSourceParams']").serializeObject();
+    var myDogEntityParams = $("form[name='myDogEntityParams']").serializeObject();
+    var myDogEntityUIParams = $("form[name='myDogEntityUIParams']").serializeObject();
     var myDogPluginsParams = {
-        myDogProjectParams: $("form[name='myDogProjectParams']").serializeArray()
+            myDogProjectParams: myDogProjectParams,
+            myDogDataSourceParams:myDogDataSourceParams,
+            myDogEntityParams:myDogEntityParams,
+            myDogEntityUIParams:myDogEntityUIParams
     }
     console.log(JSON.stringify(myDogPluginsParams));
+    var data = JSON.stringify(myDogPluginsParams);
+    /*var extra={
+        contentType:"application/x-www-form-urlencoded"
+    }*/
+    $_ajax.post('http://localhost:8985/v1/mydog/plugin/mydogPlugins',data)
 
 }

@@ -3,18 +3,18 @@ package org.huangpu.mydog.plugins.datasource.metadata;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.huangpu.mydog.core.plugins.metadata.AbstractMyDogPluginMetaData;
+import org.huangpu.mydog.core.plugins.metadata.AbstractMyDogPluginProperties;
 
 /**
  * 
  * @author xusihan on 2017.07.17
  *
  */
-public class DatasourcePluginMetaData extends AbstractMyDogPluginMetaData {
+public class DatasourcePluginProperties extends AbstractMyDogPluginProperties {
 
 	private static final long serialVersionUID = -5746982299287869446L;
 	
-	public DatasourcePluginMetaData() {
+	public DatasourcePluginProperties() {
 		super();
 		connectionProps = new HashMap<>();
 		connectionProps.put("datasourceName", "default");

@@ -1,11 +1,11 @@
 package org.huangpu.mydog.web.vo;
 
 import org.huangpu.mydog.core.plugins.metadata.MyDogPluginMetaData;
-import org.huangpu.mydog.plugins.datasource.metadata.DatasourcePluginMetaData;
+import org.huangpu.mydog.core.plugins.metadata.MyDogPluginProperties;
+import org.huangpu.mydog.plugins.datasource.metadata.DatasourcePluginProperties;
 import org.huangpu.mydog.web.exception.MyDogParamsParserException;
 import org.huangpu.mydog.web.status.DataBaseTypeEnum;
 import org.huangpu.mydog.web.util.PathUtils;
-import org.springframework.util.StringUtils;
 
 import com.alibaba.fastjson.JSON;
 
@@ -105,23 +105,34 @@ public class MyDogDataSourceParams extends AbstractMyDogParams{
 			throw new MyDogParamsParserException(String.format("将 {%s} 强制转换成{%s} 出错", myDogParams.getClass().getName(),this.getClass().getName())) ;
 		}
 		MyDogDataSourceParams params = (MyDogDataSourceParams)myDogParams;
-		DatasourcePluginMetaData metaData = new DatasourcePluginMetaData();
+		MyDogPluginMetaData metaData = new MyDogPluginMetaData();
+		DatasourcePluginProperties properties = new DatasourcePluginProperties();
 		// 必须字段
-		switch (DataBaseTypeEnum.getByValue(params.getDataType())) {
-		case MYSQL:
-			metaData.setDatasourceDriverClassName("com.mysql.jdbc.Driver");
-			metaData.setDatasourceUrl(PathUtils.parserMysqlPath(params.getUrl(), params.getDatabase()));
-			break;
-
-		default:
-			break;
-		}
-		metaData.setDatasourceUsername(params.getUser());
-		metaData.setDatasourcePassword(params.getPassword());
-		metaData.setDriverJarPath(params.getJarPath());
+		setProperties(properties,params);
+		
+		//metaData
+		metaData.setProperties(properties);
+		
 		return metaData;
 	}
 
+	
+	private DatasourcePluginProperties setProperties(DatasourcePluginProperties properties,MyDogDataSourceParams params) {
+		properties.setDatasourceUsername(params.getUser());
+		properties.setDatasourcePassword(params.getPassword());
+		properties.setDriverJarPath(params.getJarPath());
+		switch (DataBaseTypeEnum.getByValue(params.getDataType())) {
+		case MYSQL:
+			properties.setDatasourceDriverClassName("com.mysql.jdbc.Driver");
+			properties.setDatasourceUrl(PathUtils.parserMysqlPath(params.getUrl(), params.getDatabase()));
+			break;
+		default:
+			break;
+		}
+		return properties;
+	}
+	
+	
 	public static void main(String[] args) {
 		
 		MyDogDataSourceParams myDogDataSourceParams = new MyDogDataSourceParams();

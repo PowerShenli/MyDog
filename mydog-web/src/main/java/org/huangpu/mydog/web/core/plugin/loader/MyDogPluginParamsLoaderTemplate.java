@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.huangpu.mydog.core.Metadata;
 import org.huangpu.mydog.core.plugins.GenerateContext;
-import org.huangpu.mydog.core.plugins.metadata.MyDogPluginMetaData;
+import org.huangpu.mydog.core.plugins.metadata.MyDogPluginProperties;
 import org.huangpu.mydog.web.vo.AbstractMyDogParams;
 
 /**
@@ -16,7 +16,7 @@ import org.huangpu.mydog.web.vo.AbstractMyDogParams;
 public class MyDogPluginParamsLoaderTemplate implements MyDogPluginParamsLoader{
 	
 	@Override
-	public MyDogPluginMetaData loadMyDogPluginParams(AbstractMyDogParams MyDogParams) {
+	public MyDogPluginProperties loadMyDogPluginParams(AbstractMyDogParams MyDogParams) {
 		
 		return null;
 	}
