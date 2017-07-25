@@ -9,33 +9,36 @@
     var editModal = $('#${l_ent_name}Modal');
     var delModal = $('#${l_ent_name}DelModal');
     <#if pagination.enabled >
-    var currentPage = 1;
-    var pageSize = ${pagination.pageSize}
+    var Pages = {
+        pageNum: 1,
+        pageSize: ${pagination.pageSize},
+        total: 0,
+        pages: 0
+    };
     </#if>
 
     function init() {
-
         <#if pagination.enabled >
-        getPage(1, pageSize);
         // 分页事件
         $(".${l_ent_name}Box").find('.pagination').on('click','.p-item',function(e){
             e.preventDefault();
             var _this = $(e.target);
-            getPage(_this.html(),pageSize);
+            getPage(_this.html(),Pages.pageSize);
         });
         $(".${l_ent_name}Box").find('.pagination').on('click','.p-prev',function(e){
             e.preventDefault();
             // 当前页码 － 1
-            getPage(currentPage - 1,pageSize);
+            getPage(Pages.pageNum - 1,Pages.pageSize);
         });
         $(".${l_ent_name}Box").find('.pagination').on('click','.p-next',function(e){
             e.preventDefault();
             // 当前页码 ＋ 1
-            getPage(currentPage + 1,pageSize);
+            getPage(Pages.pageNum + 1,Pages.pageSize);
         });
-        <#else>
-        getAll();
         </#if>
+
+        // fetch data
+        fetchData();
 
         // 新增 ｜ 编辑
         editModal.on('show.bs.modal', function (e) {
@@ -131,20 +134,10 @@
                         }
                         </#if><#if v_has_next>,</#if>
                         </#list>
-
-                        <#--<#if res>-->
-                        <#--<#if res?groups[1] == "@NotNull">-->
-                        <#--notEmpty: {-->
-                            <#--message: "${f.label}是必填的,不能为空"-->
-                        <#--}-->
-                        <#--</#if>-->
-
-                        <#--</#if>-->
                     </#list>
                     }
                 </#if>
-                }
-                <#if f_has_next>,</#if>
+                }<#if f_has_next>,</#if>
                 </#list>
             }
         });
@@ -170,7 +163,13 @@
 
     }
 
-
+    function fetchData(){
+        <#if pagination.enabled >
+        getPage(Pages.pageNum, Pages.pageSize);
+        <#else>
+        getAll();
+        </#if>
+    }
     function getAll() {
         $_ajax.get('/${l_ent_name}').then(function (res) {
             if(res.resCode == 200 && res.data){
@@ -192,31 +191,49 @@
             if(res && res.resCode == 200){
                 var d = res.data;
                 var lists = [];
+
                 if(Utils.isArray(d) && d.length>0){
                     for(var i=0,l=d.length;i<l;i++){
                         lists.push(Utils.parseTemplate(tpl,d[i]));
                     }
 
                     ${l_ent_name}Table.find('tbody').html(lists.join(''));
-
-                    // 处理分页
-                    refreshPagination(res.pageNum || 1,res.pageSize || 10,res.total || 0,res.pages || 0)
+                } else {
+                    if(res.total == 0 && (res.pageNum == 0 || res.pageNum == 1)){
+                        ${l_ent_name}Table.find('tbody').html('<tr><td colspan="${entity.fields?size}">暂无数据</td></tr>');
+                    }
                 }
+
+                // 处理分页
+                Pages.pageNum = res.pageNum == 0 ? 1: res.pageNum;
+                Pages.total = res.total;
+                Pages.pages = res.pages;
+                refreshPagination()
+
             }
         });
     }
+    // 重新计算分页
+    function calPages(total){
+        Pages.total = total;
+        Pages.pages = Math.ceil(Pages.total / Pages.pageSize);
+        if(Pages.pages <= 0) Pages.pageNum = 1;
+        if(Pages.pageNum > Pages.pages) Pages.pageNum = Pages.pages;
+    }
     // 刷新分页
-    function refreshPagination(pageIndex,pageS,total,pages){
-        if(total == 0 || pages == 0) return;
-        currentPage = pageIndex;
-        pageSize = pageS;
+    function refreshPagination(){
         var pagin = $('#pagination');
-        var pas = [];
-        pas.push('<li'+(pageIndex==1?' class="disabled"':'')+'><a href="#" aria-label="Previous" class="p-prev"><span aria-hidden="true">&laquo;</span></a></li>');
-        for(var i=1;i<=pages;i++){
-            pas.push('<li'+(i == pageIndex?' class="active"':'')+'><a href="#" class="p-item">'+i+'</a></li>');
+        if(Pages.total == 0 || Pages.pages == 0) {
+            if(Pages.pageNum == 1 ) pagin.html('');
+            return;
         }
-        pas.push('<li'+(pageIndex==pages?' class="disabled"':'')+'><a href="#" aria-label="Next" class="p-next"><span aria-hidden="true">&raquo;</span></a></li>');
+
+        var pas = [];
+        pas.push('<li'+(Pages.pageNum==1?' class="disabled"':'')+'><a href="#" aria-label="Previous" class="p-prev"><span aria-hidden="true">&laquo;</span></a></li>');
+        for(var i=1;i<=Pages.pages;i++){
+            pas.push('<li'+(i == Pages.pageNum?' class="active"':'')+'><a href="#" class="p-item">'+i+'</a></li>');
+        }
+        pas.push('<li'+(Pages.pageNum==Pages.pages?' class="disabled"':'')+'><a href="#" aria-label="Next" class="p-next"><span aria-hidden="true">&raquo;</span></a></li>');
         pagin.html(pas.join(''));
     }
 
@@ -227,13 +244,10 @@
         }
         $_ajax.post('/${l_ent_name}',obj).then(function (res) {
             if(res && res.resCode == 200){
-                // 刷新数据
-                <#if pagination.enabled >
-                getPage(currentPage,pageSize)
-                <#else>
-                getAll();
-                </#if>
-                editModal.find('input').val('');
+                // 重新计算分页，刷新数据
+                calPages(Pages.total + 1);
+                fetchData();
+                editModal.find('input:not([name=button])').val('');
                 editModal.modal('hide');
             }
         });
@@ -245,12 +259,8 @@
         $_ajax.put('/${l_ent_name}/',obj).then(function (res) {
             if(res && res.resCode == 200){
                 // 刷新数据
-                <#if pagination.enabled >
-                getPage(currentPage,pageSize)
-                <#else>
-                getAll();
-                </#if>
-                editModal.find('input').val('');
+                fetchData();
+                editModal.find('input:not([name=button])').val('');
                 editModal.modal('hide');
             }
         });
@@ -258,12 +268,10 @@
     function del(id) {
         $_ajax.del('/${l_ent_name}/'+id).then(function (res) {
             if(res && res.resCode == 200){
-                // 刷新数据
-                <#if pagination.enabled >
-                getPage(currentPage,pageSize)
-                <#else>
-                getAll();
-                </#if>
+                // 重新计算分页，刷新数据
+                calPages(Pages.total - 1);
+                fetchData();
+                editModal.find('input:not([name=button])').val('');
                 delModal.modal('hide');
             }
         });
@@ -275,3 +283,6 @@
 
 }(window,undefined))
 
+
+// TODO:
+// 转化验证规则为前端
