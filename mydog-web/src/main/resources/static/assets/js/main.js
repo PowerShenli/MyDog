@@ -455,7 +455,23 @@ $.fn.serializeObject = function()
 function mydogSubmit(){
     var myDogProjectParams = $("form[name='myDogProjectParams']").serializeObject();
     var myDogDataSourceParams = $("form[name='myDogDataSourceParams']").serializeObject();
-    var myDogEntityParams = $("form[name='myDogEntityParams']").serializeObject();
+    /*document.myDogEntityParams.forEach(function (val,index,arr) {
+        console.log(arr[index]);
+    });*/
+
+    var entityArr = [];
+
+    var dos = document.myDogEntityParams;
+    for (var i=0;i<dos.length;i++){
+        console.log(dos[i]);
+        entityArr.push(dos[i]);
+    }
+    console.log(entityArr);
+    ///console.log(document.myDogEntityParams);
+    //console.log(document.forms['myDogEntityParams']);
+    //console.log(document.forms['myDogEntityParams']);
+    var myDogEntityParams = $(entityArr).serializeObject();
+    console.log(JSON.stringify(myDogEntityParams));
     var myDogEntityUIParams = $("form[name='myDogEntityUIParams']").serializeObject();
     var myDogPluginsParams = {
             myDogProjectParams: myDogProjectParams,
@@ -468,6 +484,6 @@ function mydogSubmit(){
     /*var extra={
         contentType:"application/x-www-form-urlencoded"
     }*/
-    $_ajax.post('http://localhost:8985/v1/mydog/plugin/mydogPlugins',data)
+    //$_ajax.post('http://localhost:8985/v1/mydog/plugin/mydogPlugins',data)
 
 }

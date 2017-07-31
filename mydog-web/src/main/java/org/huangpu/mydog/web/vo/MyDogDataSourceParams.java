@@ -98,7 +98,10 @@ public class MyDogDataSourceParams extends AbstractMyDogParams{
 		return "MyDogDataSourceParams [database=" + database + ", url=" + url + ", user=" + user + ", password="
 				+ password + ", dataType=" + dataType + ", jarPath=" + jarPath + "]";
 	}
-
+	@Override
+	public MyDogPluginMetaData parser() {
+		return parser(this);
+	}
 	@Override
 	public MyDogPluginMetaData parser(AbstractMyDogParams myDogParams) {
 		if (!(myDogParams instanceof  MyDogDataSourceParams)) {

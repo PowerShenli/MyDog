@@ -1,6 +1,7 @@
 package org.huangpu.mydog.web.ctrl;
 
 import org.huangpu.mydog.web.AjaxResult;
+import org.huangpu.mydog.web.service.MyDogPluginService;
 import org.huangpu.mydog.web.vo.MyDogDataSourceParams;
 import org.huangpu.mydog.web.vo.MyDogEntityParams;
 import org.huangpu.mydog.web.vo.MyDogEntityUIParams;
@@ -8,6 +9,7 @@ import org.huangpu.mydog.web.vo.MyDogPluginsParams;
 import org.huangpu.mydog.web.vo.MyDogProjectParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/v1/mydog/plugin")
 public class PluginController {
+	
+	@Autowired
+	MyDogPluginService myDogPluginService;
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -54,6 +59,7 @@ public class PluginController {
 	public AjaxResult buildJsonDemo(@RequestBody() MyDogPluginsParams myDogPluginsParams) {
 		AjaxResult result = AjaxResult.prepare();
 		System.out.println(myDogPluginsParams);
+		myDogPluginService.parsePluginParams(myDogPluginsParams);
 		return result;
 	}
 	

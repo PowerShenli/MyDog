@@ -7,6 +7,8 @@ import org.huangpu.mydog.core.plugins.metadata.MyDogPluginMetaData;
  */
 public abstract class AbstractMyDogParams {
 	
+	public abstract MyDogPluginMetaData parser();
+	
 	public abstract MyDogPluginMetaData parser(AbstractMyDogParams myDogParams);
 	
 }

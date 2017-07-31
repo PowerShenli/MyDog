@@ -8,7 +8,10 @@ import org.huangpu.mydog.web.exception.MyDogParamsParserException;
  * @author xusihan on 2017.07.11
  */
 public class MyDogEntityUIParams extends AbstractMyDogParams{
-
+	@Override
+	public MyDogPluginMetaData parser() {
+		return parser(this);
+	}
 	@Override
 	public MyDogPluginMetaData parser(AbstractMyDogParams myDogParams) {
 		if (!(myDogParams instanceof MyDogEntityUIParams)) {

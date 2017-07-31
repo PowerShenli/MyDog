@@ -152,6 +152,11 @@ public class MyDogProjectParams extends AbstractMyDogParams{
 	}
 
 	@Override
+	public MyDogPluginMetaData parser() {
+		return parser(this);
+	}
+	
+	@Override
 	public MyDogPluginMetaData parser(AbstractMyDogParams myDogParams) {
 		if (!(myDogParams instanceof MyDogProjectParams)) {
 			throw new MyDogParamsParserException(String.format("将 {%s} 强制转换成{%s} 出错", myDogParams.getClass().getName(),this.getClass().getName())) ;
@@ -191,5 +196,7 @@ public class MyDogProjectParams extends AbstractMyDogParams{
 		myDogProjectParams.setVersion("3.2");
 		System.out.println(JSON.toJSON(myDogProjectParams.parser(myDogProjectParams)).toString());
 	}
+
+	
 	
 }
