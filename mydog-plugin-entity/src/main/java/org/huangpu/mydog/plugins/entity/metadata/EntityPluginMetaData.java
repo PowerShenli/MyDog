@@ -5,18 +5,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.huangpu.mydog.core.plugins.metadata.AbstractMyDogPluginMetaData;
+import org.huangpu.mydog.core.plugins.metadata.AbstractMyDogPluginProperties;
 
 /**
  * 
  * @author xusihan on 2017.07.17
  *
  */
-public class EntityPluginMetaData extends AbstractMyDogPluginMetaData {
+class EntityPluginProperties extends AbstractMyDogPluginProperties {
 
 	private static final long serialVersionUID = 2411937820328948001L;
 	
-	public EntityPluginMetaData() {
+	protected EntityPluginProperties() {
 		super();
 		id = new HashMap<>();
 		fields = new ArrayList<>();

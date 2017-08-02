@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author xusihan on 2017.07.04
  *
  */
-public abstract class AbstractMyDogPluginMetaData implements MyDogPluginMetaData,Serializable{
+public abstract class AbstractMyDogPluginProperties implements MyDogPluginProperties,Serializable{
 	//public abstract void resolvePlugin();
 	
 }

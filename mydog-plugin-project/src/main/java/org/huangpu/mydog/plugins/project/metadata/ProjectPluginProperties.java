@@ -3,18 +3,18 @@ package org.huangpu.mydog.plugins.project.metadata;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.huangpu.mydog.core.plugins.metadata.AbstractMyDogPluginMetaData;
+import org.huangpu.mydog.core.plugins.metadata.AbstractMyDogPluginProperties;
 
 /**
  * 
  * @author xusihan on 2017.07.17
  *
  */
-public class ProjectPluginMetaData extends AbstractMyDogPluginMetaData{
+public class ProjectPluginProperties extends AbstractMyDogPluginProperties{
 
 	private static final long serialVersionUID = 7037011594288798410L;
 	
-	public ProjectPluginMetaData() {
+	public ProjectPluginProperties() {
 		super();
 		project = new HashMap<>();
 		appProp = new HashMap<>();
