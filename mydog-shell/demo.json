@@ -251,11 +251,10 @@
         "generateSQL" : false,
         "mapperType"  : "XMLMAPPER",//"ANNOTATEDMAPPER"
         "transaction":{
-          "on":false,
-          "defaultStrategy":true
+          "on":true, //工程是否开启事务
+          "defaultStrategy":true //工程是否采用默认事务策略
         }
       }
-
     },
     {
       "properties": {
