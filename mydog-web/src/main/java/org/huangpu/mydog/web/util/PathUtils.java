@@ -22,15 +22,11 @@ public class PathUtils {
 	}
 
 	public static String formatBasePath(String path) {
-		return path.replace("/", ".");
+		return path.replace(".", "/");
 	}
 	
-	public static void main(String[] args) {
-		String url = "http://haha/cpm";
-		Pattern pattern = Pattern.compile("^(\\/(\\w+))*\\/?(\\.\\w{5,})?\\??([^.]+)?$");
-		Matcher matcher = pattern.matcher(url);
-		if (matcher.find()) {
-			System.out.println(matcher.group(1));
-		}
+	public static String formatOutPath(String path) {
+		return path.endsWith("/")?"path":path+"/";
 	}
+	
 }

@@ -7712,6 +7712,7 @@ body.md-skin {
   left: -270px;
 }
 .mydog-plugins-add .dropdown-messages-box .plugin-add{
+  float: right;
   padding: 5px 5px;
 }
 /*.mydog-plugins-add .dropdown-menu .media-body{
@@ -7719,6 +7720,7 @@ body.md-skin {
 }*/
 .mydog-plugins-add .dropdown-messages-box .media-body{
   width: 120px;
+  padding-left: 10px;
   float: left;
 }
 .mydog-plugins-properties .media-heading{
@@ -7742,4 +7744,7 @@ body.md-skin {
 }
 .mydog-introduce{
   padding: 10px 0;
+}
+.plugin-add-select{
+  padding: 5px 5px;
 }

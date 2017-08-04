@@ -1,10 +1,10 @@
 package org.huangpu.mydog.web.vo;
 
 import org.huangpu.mydog.core.plugins.metadata.MyDogPluginMetaData;
-import org.huangpu.mydog.core.plugins.metadata.MyDogPluginProperties;
 import org.huangpu.mydog.plugins.datasource.metadata.DatasourcePluginProperties;
 import org.huangpu.mydog.web.exception.MyDogParamsParserException;
 import org.huangpu.mydog.web.status.DataBaseTypeEnum;
+import org.huangpu.mydog.web.status.MetaDataTypeEnum;
 import org.huangpu.mydog.web.util.PathUtils;
 
 import com.alibaba.fastjson.JSON;
@@ -112,10 +112,10 @@ public class MyDogDataSourceParams extends AbstractMyDogParams{
 		DatasourcePluginProperties properties = new DatasourcePluginProperties();
 		// 必须字段
 		setProperties(properties,params);
-		
 		//metaData
 		metaData.setProperties(properties);
-		
+		metaData.setMetadataType(MetaDataTypeEnum.DATASOURCE.value());
+		metaData.setInstanceName(params.getInstanceName());
 		return metaData;
 	}
 

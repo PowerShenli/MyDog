@@ -245,7 +245,7 @@
                                 <img alt="image" class=" img-circle " src="assets/img/entity.jpg">
                             </a>
                             <div class="media-body">
-                                <strong>mydog entity</strong> <br><span class="label label-warning label-min">唯一</span><br>
+                                <strong>mydog entity</strong> <br><span class="label label-info label-min">多个</span><br>
                                 <small class="text-muted">用于生成 entity</small>
                             </div>
                             <a href="profile.html" class="plugin-add">
@@ -269,6 +269,20 @@
                         </div>
                     </li>
                     <li class="divider"></li>
+                    <li>
+                        <div class="dropdown-messages-box clearfix">
+                            <a href="profile.html" class="pull-left">
+                                <img alt="image" class=" img-circle " src="assets/img/ormming.png">
+                            </a>
+                            <div class="media-body">
+                                <strong>mydog ormapping</strong> <br><span class="label label-warning label-min">唯一</span><br>
+                                <small class="text-muted">用于生成数据库框架</small>
+                            </div>
+                            <a href="profile.html" class="plugin-add">
+                                <img alt="image" class=" img-circle " src="assets/img/add.png">
+                            </a>
+                        </div>
+                    </li>
                 </ul>
             </div>
 
@@ -315,33 +329,61 @@
                                                 <label for="inputVersion">version</label>
                                                 <input type="text" class="form-control" name="version" id="inputVersion" placeholder="version">
                                             </div>
+                                            <div class="form-group">
+                                                <label >请选择生成方式:</label>
+                                                <div>
+                                                    <select name="outputType" class="plugin-add-select" id="selectOutputType">
+                                                        <option selected value="file" >目录生成</option>
+                                                        <!--<option  value="download">下载JAR</option>-->
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" id="outPutByFile">
+                                                <label for="inputOutputPath" style="font-size:12px;">请输入生成路径</label>
+                                                <input type="text" class="form-control" name="outputPath" id="inputOutputPath" placeholder="D:/mydog/ouput/">
+                                            </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="inputOutputPath">outputpath</label>
-                                                <input type="text" class="form-control" name="outputPath" id="inputOutputPath" placeholder="D:/mydog/ouput/">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputAppPort">port</label>
+                                                <label for="inputAppPort">端口</label>
                                                 <input type="text" class="form-control" name="port" id="inputAppPort" placeholder="8082">
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputSpringbootVersion">springboot version</label>
-                                                <input type="text" class="form-control" name="springbootVersion" id="inputSpringbootVersion" placeholder="1.4.2.RELEASE">
+                                                <label for="inputSpringbootVersion">springboot版本</label>
+                                                <div>
+                                                    <select name="springbootVersion"  class="plugin-add-select" id="inputSpringbootVersion">
+                                                        <option value="1.4.2.RELEASE" selected>1.4.2.RELEASE</option>
+                                                        <option value="1.4.7.RELEASE">1.4.7.RELEASE</option>
+                                                        <option value="1.5.6.RELEASE">1.5.6.RELEASE</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group ">
+                                                <label for="ProjectName">网页Brand名称</label>
+                                                <input type="text" class="form-control" name="projectName" id="ProjectName" placeholder="mydog测试项目">
+                                            </div>
+                                            <div class="form-group">
+                                                <label >请选择日志类型:</label>
+                                                <div>
+                                                    <select name="logType" class="plugin-add-select">
+                                                        <option selected value="logback" >logback</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputOutputPath" style="font-size:12px;">请输入生成路径</label>
+                                                <input type="text" class="form-control" name="loggingPath" value="classpath:logback.xml">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group ">
-                                                <label for="ProjectName">brand name</label>
-                                                <input type="text" class="form-control" name="projectName" id="ProjectName" placeholder="mydog测试项目">
+                                                <label>基础package结构</label>
+                                                <input type="text" class="form-control" name="basePackage"  placeholder="com.mycat.mydog.project">
                                             </div>
                                             <div class="form-group ">
-                                                <label for="ProjectInstanceName">project name</label>
-                                                <input type="text" class="form-control" name="instanceName" id="ProjectInstanceName" placeholder="MydogPro">
+                                                <label>生成项目文件夹名称</label>
+                                                <input type="text" class="form-control" name="instanceName"  placeholder="mydogPro">
                                             </div>
-                                           <!-- <div class="form-group center-block">
-                                                <input type="submit" value="配  置" class="form-control-submit-min btn btn-success"/>
-                                            </div>-->
                                         </div>
                                     </form>
                                 </div>
@@ -393,14 +435,24 @@
                                                         <i></i>
                                                         MySQL
                                                     </label>
-                                                    <label class="">
+                                                    <!--<label class="">
                                                         <div class="iradio_square-green" style="position: relative;">
-                                                            <input type="radio" value="1" name="dataType" style="position: absolute; opacity: 0;">
+                                                            <input type="radio" value="1" name="dataType" disabled style="position: absolute; opacity: 0;">
                                                             <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
                                                         </div>
                                                         <i></i>
                                                         Oracle
-                                                    </label>
+                                                    </label>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="inputSpringbootVersion">数据源类型</label>
+                                                <div>
+                                                    <select name="instanceName"  class="plugin-add-select">
+                                                        <option value="tomcatDatasource" selected>Tomcat Datasource</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -441,7 +493,7 @@
                                                 <div class="i-checks">
                                                     <label class="">
                                                         <div class="icheckbox_square-green" style="position: relative;">
-                                                            <input type="checkbox" value="" name="datasource" style="position: absolute; opacity: 0;">
+                                                            <input type="checkbox" value="1" name="datasource" style="position: absolute; opacity: 0;">
                                                             <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
                                                         </div>
                                                         <i></i>
@@ -453,17 +505,17 @@
                                         <div class="col-md-6">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="">表名</label>
-                                                    <input type="text" class="form-control" name="jarPath" id="" placeholder="User">
+                                                    <label >表名</label>
+                                                    <input type="text" class="form-control" name="jarPath" placeholder="User">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="">功能</label>
+                                                    <label >功能</label>
                                                     <div class="i-checks">
                                                         <label>
                                                             <div class="icheckbox_square-green" style="position: relative;">
-                                                                <input type="checkbox" value="" name="page" style="position: absolute; opacity: 0;">
+                                                                <input type="checkbox" value="1" name="page" style="position: absolute; opacity: 0;">
                                                                 <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
                                                             </div>
                                                             <i></i>
@@ -471,7 +523,7 @@
                                                         </label>
                                                         <label>
                                                             <div class="icheckbox_square-green" style="position: relative;margin-left: 10px;">
-                                                                <input type="checkbox" value="" name="validate" style="position: absolute; opacity: 0;">
+                                                                <input type="checkbox" value="1" name="validate" style="position: absolute; opacity: 0;">
                                                                 <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px;padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
                                                             </div>
                                                             <i></i>
@@ -483,84 +535,7 @@
                                         </div>
                                         <div class="col-md-9">
                                             <div class="form-group">
-                                                <label for="">自定义SQL</label>
-                                                <textarea type="text" class="form-control" name="jarPath" placeholder="请确保连表查询的时候表是存在的！"></textarea>
-                                            </div>
-                                        </div>
-                                        <!--<div class="col-md-9">
-                                            <div class="form-group ">
-                                                <input type="submit" value="配  置" class=" form-control-submit-min btn btn-success "/>
-                                            </div>
-                                        </div>-->
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="widget white-bg p-lg mydog-plugins-properties">
-                            <div class="media">
-                                <h4 class="media-heading">Mydog Entity
-                                    <a class="close-link pull-right">
-                                        <i class="fa fa-times "></i>
-                                    </a>
-                                </h4>
-                                <div class="media-left  media-mini col-md-2 text-center">
-                                    <a href="#">
-                                        <img class="media-object" src="assets/img/entity.jpg" alt="mydog-entity">
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <form name="myDogEntityParams">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>选择功能</label>
-                                                <div class="i-checks">
-                                                    <label class="">
-                                                        <div class="icheckbox_square-green" style="position: relative;">
-                                                            <input type="checkbox" value="" name="datasource" style="position: absolute; opacity: 0;">
-                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                                                        </div>
-                                                        <i></i>
-                                                        security
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="">表名</label>
-                                                    <input type="text" class="form-control" name="jarPath" id="" placeholder="User">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="">功能</label>
-                                                    <div class="i-checks">
-                                                        <label>
-                                                            <div class="icheckbox_square-green" style="position: relative;">
-                                                                <input type="checkbox" value="" name="page" style="position: absolute; opacity: 0;">
-                                                                <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                                                            </div>
-                                                            <i></i>
-                                                            分页
-                                                        </label>
-                                                        <label>
-                                                            <div class="icheckbox_square-green" style="position: relative;margin-left: 10px;">
-                                                                <input type="checkbox" value="" name="validate" style="position: absolute; opacity: 0;">
-                                                                <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px;padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                                                            </div>
-                                                            <i></i>
-                                                            验证
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <div class="form-group">
-                                                <label for="">自定义SQL</label>
+                                                <label >自定义SQL</label>
                                                 <textarea type="text" class="form-control" name="jarPath" placeholder="请确保连表查询的时候表是存在的！"></textarea>
                                             </div>
                                         </div>
@@ -591,22 +566,69 @@
                                     <form name="myDogEntityUIParams">
                                         <div class="col-md-9">
                                             <div class="form-group">
-                                                <label>选择功能</label>
-                                                <div class="i-checks">
-                                                    <label class="">
-                                                        <div class="icheckbox_square-green" style="position: relative;">
-                                                            <input type="checkbox" value="" name="datasource" style="position: absolute; opacity: 0;">
-                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                                                        </div>
-                                                        <i></i>
-                                                        jquery + ajax
-                                                    </label>
+                                                <div class="form-group">
+                                                    <label>选择前端框架</label>
+                                                    <div>
+                                                        <select name="instanceName" class="plugin-add-select">
+                                                            <option value="bootstrap+jquery" selected>Bootstrap</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--<div class="col-md-9">
-                                            <div class="form-group ">
-                                                <input type="button" value="配  置" class=" form-control-submit-min btn btn-success "/>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="widget white-bg p-lg mydog-plugins-properties">
+                            <div class="media">
+                                <h4 class="media-heading">Mydog Ormapping
+                                    <a class="close-link pull-right">
+                                        <i class="fa fa-times "></i>
+                                    </a>
+                                </h4>
+                                <div class="media-left  media-mini col-md-2 text-center">
+                                    <a href="#">
+                                        <img class="media-object" src="assets/img/ormming.png" alt="mydog-ormapping">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <form name="myDogOrmappingParams">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>数据库框架类型</label>
+                                                <div>
+                                                    <select name="instanceName" id="dataSelect" class="plugin-add-select">
+                                                        <option value="mybatis" selected>mybatis</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" id="mybatisGeneratorType">
+                                                <label>选择SQL生成方式</label>
+                                                <div>
+                                                    <select name="mapperType" class="plugin-add-select">
+                                                        <option value="XMLMAPPER" selected>XML方式</option>
+                                                        <option value="ANNOTATEDMAPPER">注解方式</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--<div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>选择功能</label>
+                                                <div class="i-checks">
+                                                    <label class="" for="ui">
+                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                            <input type="checkbox" value="on" name="transaction" style="position: absolute; opacity: 0;">
+                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                                                        </div>
+                                                        <i></i>
+                                                        开启事务
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>-->
                                     </form>
@@ -614,6 +636,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
 

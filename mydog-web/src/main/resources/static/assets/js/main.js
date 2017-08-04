@@ -426,11 +426,39 @@ function getParent($this) {
 }
 
 // register mydog plugin ajax request
-(function ($,$_ajax) {
+(function ($) {
     'use strict';
     // mydog
-
-})(jQuery,$_ajax)
+    $('#outPutByFile').hide();
+    var selectText = $("#selectOutputType").find('option:selected').val();
+    if (selectText === "file"){
+        $('#outPutByFile').show();
+    };
+    console.log(selectText);
+    $("#selectOutputType").on('change',function () {
+        var selectText = $(this).find('option:selected').val();
+        console.log(selectText);
+        if (selectText === "file"){
+            $('#outPutByFile').show();
+        }else{
+            $('#outPutByFile').hide();
+        }
+    });
+    $('#mybatisGeneratorType').hide();
+    var generatorText = $("#dataSelect").find('option:selected').val();
+    if (generatorText === "mybatis"){
+        $('#mybatisGeneratorType').show();
+    }
+    $("#dataSelect").on('change',function () {
+        var selectText = $(this).find('option:selected').val();
+        console.log(selectText);
+        if (selectText === "mybatis"){
+            $('#mybatisGeneratorType').show();
+        }else{
+            $('#mybatisGeneratorType').hide();
+        }
+    });
+})(jQuery)
 
 /*
     序列化form表单的数据
@@ -453,37 +481,30 @@ $.fn.serializeObject = function()
 };
 
 function mydogSubmit(){
+    
     var myDogProjectParams = $("form[name='myDogProjectParams']").serializeObject();
     var myDogDataSourceParams = $("form[name='myDogDataSourceParams']").serializeObject();
-    /*document.myDogEntityParams.forEach(function (val,index,arr) {
-        console.log(arr[index]);
-    });*/
-
-    var entityArr = [];
-
-    var dos = document.myDogEntityParams;
+    var myDogOrmappingParams = $("form[name='myDogOrmappingParams']").serializeObject();
+    var myDogEntityParamsArr = [];
+    var dos = $("form[name='myDogEntityParams']");
+    //获取所有的entityParams
     for (var i=0;i<dos.length;i++){
-        console.log(dos[i]);
-        entityArr.push(dos[i]);
+        myDogEntityParamsArr.push($(dos[i]).serializeObject());
     }
-    console.log(entityArr);
-    ///console.log(document.myDogEntityParams);
-    //console.log(document.forms['myDogEntityParams']);
-    //console.log(document.forms['myDogEntityParams']);
-    var myDogEntityParams = $(entityArr).serializeObject();
-    console.log(JSON.stringify(myDogEntityParams));
+    console.log(JSON.stringify(myDogEntityParamsArr));
     var myDogEntityUIParams = $("form[name='myDogEntityUIParams']").serializeObject();
     var myDogPluginsParams = {
-            myDogProjectParams: myDogProjectParams,
-            myDogDataSourceParams:myDogDataSourceParams,
-            myDogEntityParams:myDogEntityParams,
-            myDogEntityUIParams:myDogEntityUIParams
+        myDogProjectParams: myDogProjectParams,
+        myDogDataSourceParams:myDogDataSourceParams,
+        myDogEntityParams:myDogEntityParamsArr,
+        myDogEntityUIParams:myDogEntityUIParams,
+        myDogOrmappingParams:myDogOrmappingParams
     }
     console.log(JSON.stringify(myDogPluginsParams));
     var data = JSON.stringify(myDogPluginsParams);
     /*var extra={
         contentType:"application/x-www-form-urlencoded"
     }*/
-    //$_ajax.post('http://localhost:8985/v1/mydog/plugin/mydogPlugins',data)
+    $_ajax.post('http://localhost:8985/v1/mydog/plugin/mydogPlugins',data)
 
 }

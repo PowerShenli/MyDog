@@ -96,11 +96,19 @@ public class ProjectPluginProperties extends AbstractMyDogPluginProperties{
 	//setter
 	/////////////////////////////////////////////
 	
+	
 	/** name */
 	public void setProjectName(String name) {
 		this.name = name;
 	}
-	
+	/**
+	 * outputType
+	 * @param outputType
+	 */
+	public void setOutputType(String outputType) {
+		this.outputType = outputType;
+	}
+
 	/** springBootVersion */
 	public void setSpringBootVersion(String springBootVersion) {
 		this.springBootVersion = springBootVersion;
