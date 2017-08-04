@@ -277,7 +277,7 @@
           "version": "1.0.0-SNAPSHOT"
         },
         "basePath": "com/power/test/project",
-        "outputPath": "/Users/xqy/projects/MyDogPrj/",
+        "outputPath": "/tmp/myDog_2/",
         "outputType":"file",//download
         "basePackage": "com.power.test.project",
         "appProp":{
@@ -294,7 +294,7 @@
           "datasourceName":"default",
           "spring.datasource.url":"jdbc:mysql://localhost:3306/mydog?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false",
           "spring.datasource.username":"root",
-          "spring.datasource.password":"123456",
+          "spring.datasource.password":"",
           "spring.datasource.driver-class-name":"com.mysql.jdbc.Driver",
           "spring.datasource.test-on-borrow": "false",
           "spring.datasource.max-wait-millis": "30000",
@@ -307,7 +307,7 @@
           "spring.datasource.test-while-idle": "true",
           "spring.datasource.validation-query": "SELECT 1"
         },
-        "driverJarPath":"/Users/xqy/.m2/repository/mysql/mysql-connector-java/5.1.40/mysql-connector-java-5.1.40.jar"
+        "driverJarPath":"/Users/shenli/mvn/repo/m2/mysql/mysql-connector-java/5.1.40/mysql-connector-java-5.1.40.jar"
       },
       "metadataType": "datasource",
       "instanceName": "tomcatDatasource"
