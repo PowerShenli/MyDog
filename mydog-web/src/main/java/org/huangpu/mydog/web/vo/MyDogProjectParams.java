@@ -3,9 +3,8 @@ package org.huangpu.mydog.web.vo;
 import org.huangpu.mydog.core.plugins.metadata.MyDogPluginMetaData;
 import org.huangpu.mydog.plugins.project.metadata.ProjectPluginProperties;
 import org.huangpu.mydog.web.exception.MyDogParamsParserException;
+import org.huangpu.mydog.web.status.MetaDataTypeEnum;
 import org.huangpu.mydog.web.util.PathUtils;
-
-import com.alibaba.fastjson.JSON;
 
 /**
  * 
@@ -64,6 +63,32 @@ public class MyDogProjectParams extends AbstractMyDogParams{
 	 */
 	private Byte loggingType;
 	
+	/**
+	 * outPut type
+	 */
+	private String outputType;
+	
+	/**
+	 * logging config
+	 */
+	private String loggingPath;
+	
+	public String getLoggingPath() {
+		return loggingPath;
+	}
+
+	public void setLoggingPath(String loggingPath) {
+		this.loggingPath = loggingPath;
+	}
+
+	public String getOutputType() {
+		return outputType;
+	}
+
+	public void setOutputType(String outputType) {
+		this.outputType = outputType;
+	}
+
 	public String getInstanceName() {
 		return instanceName;
 	}
@@ -166,6 +191,8 @@ public class MyDogProjectParams extends AbstractMyDogParams{
 		ProjectPluginProperties properties = new ProjectPluginProperties();
 		setProperties(properties,myDogProjectParams);
 		medadata.setProperties(properties);
+		medadata.setInstanceName(myDogProjectParams.getInstanceName());
+		medadata.setMetadataType(MetaDataTypeEnum.PROJECT.value());
 		return medadata;
 	}
 	
@@ -176,27 +203,13 @@ public class MyDogProjectParams extends AbstractMyDogParams{
 		properties.setGroupId(params.getGroupId());
 		properties.setOutputPath(params.getOutputPath());
 		properties.setProjectName(params.getProjectName());
-		properties.setServerPort(params.getProjectName());
 		properties.setSpringBootVersion(params.getSpringbootVersion());
 		properties.setVersion(params.getVersion());
+		properties.setOutputType(params.getOutputType());
+		properties.setLoggingConfig(params.getLoggingPath());
+		properties.setServerPort(""+params.getPort());
 		return properties;
 	}
-	
-	
-	public static void main(String[] args) {
-		MyDogProjectParams myDogProjectParams = new MyDogProjectParams();
-		myDogProjectParams.setArtifactId("sdfafsf");
-		myDogProjectParams.setBasePackage("/a/sd/d/f");
-		myDogProjectParams.setGroupId("raindrops");
-		myDogProjectParams.setLoggingType((byte)0);
-		myDogProjectParams.setOutputPath("/R/A/S/Z/X/");
-		myDogProjectParams.setPort(3304);
-		myDogProjectParams.setProjectName("ahahha");
-		myDogProjectParams.setSpringbootVersion("4.2.1.2");
-		myDogProjectParams.setVersion("3.2");
-		System.out.println(JSON.toJSON(myDogProjectParams.parser(myDogProjectParams)).toString());
-	}
-
 	
 	
 }
