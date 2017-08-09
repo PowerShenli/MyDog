@@ -23,3 +23,6 @@ Thumbs.db
 .idea/
 overlays
 bin
+
+# vs code #
+.vs/

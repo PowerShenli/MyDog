@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 
@@ -371,7 +371,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputOutputPath" style="font-size:12px;">请输入生成路径</label>
+                                                <label for="inputOutputPath" style="font-size:12px;">请输入日志路径</label>
                                                 <input type="text" class="form-control" name="loggingPath" value="classpath:logback.xml">
                                             </div>
                                         </div>
@@ -428,7 +428,7 @@
                                                 <label>数据源</label>
                                                 <div class="i-checks">
                                                     <label class="">
-                                                        <div class="iradio_square-green" style="position: relative;">
+                                                        <div class="" style="position: relative;">
                                                             <input type="radio" value="0" checked="checked" name="dataType" style="position: absolute; opacity: 0;">
                                                             <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
                                                         </div>
@@ -489,55 +489,63 @@
                                     <form name="myDogEntityParams">
                                         <div class="col-md-3">
                                             <div class="form-group">
+                                                <label>Entity包目录</label>
+                                                <input type="text" class="form-control" placeholder="org.huangpu.mydog.demo" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label>主键字段</label>
+                                                <input type="text" class="form-control" placeholder="id" />
+                                            </div>
+                                            <div class="form-group">
                                                 <label>选择功能</label>
                                                 <div class="i-checks">
-                                                    <label class="">
+                                                    <label class="" id="pageCheckbox">
                                                         <div class="icheckbox_square-green" style="position: relative;">
-                                                            <input type="checkbox" value="1" name="datasource" style="position: absolute; opacity: 0;">
+                                                            <input type="checkbox" value="1"  name="isPage" style="position: absolute; opacity: 0;">
                                                             <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
                                                         </div>
                                                         <i></i>
-                                                        security
+                                                        分页
+                                                    </label>
+                                                    <label id="colPageSize">
+                                                        页面大小(pageSize)
+                                                        <input type="text" value="20" />
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label >表名</label>
-                                                    <input type="text" class="form-control" name="jarPath" placeholder="User">
-                                                </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Entity类名</label>
+                                                <input type="text" class="form-control" placeholder="如：User (user表)" />
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label >功能</label>
-                                                    <div class="i-checks">
-                                                        <label>
-                                                            <div class="icheckbox_square-green" style="position: relative;">
-                                                                <input type="checkbox" value="1" name="page" style="position: absolute; opacity: 0;">
-                                                                <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                                                            </div>
-                                                            <i></i>
-                                                            分页
-                                                        </label>
-                                                        <label>
-                                                            <div class="icheckbox_square-green" style="position: relative;margin-left: 10px;">
-                                                                <input type="checkbox" value="1" name="validate" style="position: absolute; opacity: 0;">
-                                                                <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px;padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                                                            </div>
-                                                            <i></i>
-                                                            验证
-                                                        </label>
-                                                    </div>
+                                            <div class="form-group">
+                                                <label>字段类型</label>
+                                                <input type="text" class="form-control" placeholder="Integer (Java 类型)" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>备注</label>
+                                                <input type="text" class="form-control" placeholder="用户" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label>是否自增</label>
+                                                <div class="i-checks">
+                                                    <label class="" id="pageCheckbox">
+                                                        <div class="icheckbox_square-green" style="position: relative;">
+                                                            <input type="checkbox" value="1" checked  name="isPage" style="position: absolute; opacity: 0;">
+                                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                                                        </div>
+                                                        <i></i>
+                                                        自增
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-9">
-                                            <div class="form-group">
-                                                <label >自定义SQL</label>
-                                                <textarea type="text" class="form-control" name="jarPath" placeholder="请确保连表查询的时候表是存在的！"></textarea>
-                                            </div>
+                                        <div class="col-md-12">
+                                            <lable>添加字段</lable>
+                                              <a class="filedAdd"><img class="img-responsive" src="assets/img/add.png"></a>  
                                         </div>
                                         <!--<div class="col-md-9">
                                             <div class="form-group ">
@@ -602,7 +610,7 @@
                                                 <label>数据库框架类型</label>
                                                 <div>
                                                     <select name="instanceName" id="dataSelect" class="plugin-add-select">
-                                                        <option value="mybatis" selected>mybatis</option>
+                                                        <option value="mybatis" selected>MyBatis</option>
                                                     </select>
                                                 </div>
                                             </div>

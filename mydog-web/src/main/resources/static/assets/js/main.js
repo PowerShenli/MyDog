@@ -458,7 +458,34 @@ function getParent($this) {
             $('#mybatisGeneratorType').hide();
         }
     });
-})(jQuery)
+    $("#colPageSize").hide();
+    $("#pageCheckbox").on('click',function(){
+        var checkIspageVal = $(this).find("input[name=isPage]:checked").val();
+        if(checkIspageVal===undefined){
+            $('#colPageSize').show();
+        }else{
+            $("#colPageSize").hide();
+        }
+    });
+    $(".filedAdd").on('click',function(){
+        var mdBody = $(this).parents('.media-body');
+        console.log(mdBody);
+        $(mdBody).append(appendHtmlTemplate.fieldAddTemplate);
+    });
+    $(".mydog-plugins-wrapper").on('click','a[class="fieldRemove"]',function(){
+        var rmDiv = $(this).parents('.mydog-entity-add').remove();
+    });
+})(jQuery);
+
+
+// append的 html
+(function (global,$) {
+    'use strict';
+    var appendHtmlTemplate ={
+        fieldAddTemplate: '<div class="col-md-12 mydog-entity-add"><div class="col-md-2"><div class="form-group"><label>字段名</label><input type="text" name="fieldName" class="form-control"></div></div><div class="col-md-2"><div class="form-group"><label>字段说明</label><input type="text" name="fieldLabel" class="form-control"></div></div><div class="col-md-2"><div class="form-group"><label>字段类型</label><input type="text" name="fieldType" class="form-control"></div></div><div class="col-md-2"><div class="form-group"><label>长度</label><input type="text" name="fieldLength" class="form-control"></div></div><div class="col-md-2"><div class="form-group"><label>显示类型:</label><div><select class="plugin-add-select" name="fieldViewProp"><option selected value="1">text</option><option selected value="2">password</option><option selected value="3">number</option></select></div></div></div><div class="col-md-2"><div class="form-group"><label></label><a class="fieldRemove"><img src="assets/img/remove.png"></a></div></div><div class="col-md-1"><div class="form-group"><label>为空<div><input type="checkbox" value="1" style="height:22px;width:22px" name="fieldValidateNull"> <b></b></div></label></div></div><div class="col-md-2"><div class="form-group"><label>最小值验证</label><input type="text" name="fieldValidateMin" class="form-control"></div></div><div class="col-md-2"><div class="form-group"><label>最大值验证</label><input type="text" name="fieldValidateMax" class="form-control"></div></div><div class="col-md-2"><div class="form-group"><label>正则表达式验证</label><input type="text" name="fieldValidateRegexp" class="form-control"></div></div></div>'
+    };
+    global.appendHtmlTemplate = appendHtmlTemplate;
+})(window,jQuery);
 
 /*
     序列化form表单的数据
@@ -507,4 +534,4 @@ function mydogSubmit(){
     }*/
     $_ajax.post('http://localhost:8985/v1/mydog/plugin/mydogPlugins',data)
 
-}
+};
