@@ -34,16 +34,15 @@ public class MyDogOrmappingParams extends AbstractMyDogParams{
 		MyDogOrmappingParams myDogOrmappingParams = (MyDogOrmappingParams) myDogParams;
 		MyDogPluginMetaData metadata = new MyDogPluginMetaData();
 		OrmappingPluginProperties properties = new OrmappingPluginProperties();
-		properties = setProperties(properties, myDogOrmappingParams);
+		setProperties(properties, myDogOrmappingParams);
 		metadata.setInstanceName(myDogOrmappingParams.getInstanceName());
 		metadata.setProperties(properties);
 		metadata.setMetadataType(MetaDataTypeEnum.ORMAPPING.value());
 		return metadata;
 	}
 	
-	private OrmappingPluginProperties setProperties(OrmappingPluginProperties properties,MyDogOrmappingParams params) {
+	private void setProperties(OrmappingPluginProperties properties,MyDogOrmappingParams params) {
 		properties.setMapperType(params.getMapperType());
-		return properties;
 	}
 	
 	

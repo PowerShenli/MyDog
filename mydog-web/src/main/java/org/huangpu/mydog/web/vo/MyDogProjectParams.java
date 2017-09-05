@@ -196,7 +196,7 @@ public class MyDogProjectParams extends AbstractMyDogParams{
 		return medadata;
 	}
 	
-	private ProjectPluginProperties setProperties(ProjectPluginProperties properties,MyDogProjectParams params) {
+	private void setProperties(ProjectPluginProperties properties,MyDogProjectParams params) {
 		properties.setArtifactId(params.getArtifactId());
 		properties.setBasePackage(params.getBasePackage());
 		properties.setBasePath(PathUtils.formatBasePath(params.getBasePackage()));
@@ -208,7 +208,6 @@ public class MyDogProjectParams extends AbstractMyDogParams{
 		properties.setOutputType(params.getOutputType());
 		properties.setLoggingConfig(params.getLoggingPath());
 		properties.setServerPort(""+params.getPort());
-		return properties;
 	}
 	
 	

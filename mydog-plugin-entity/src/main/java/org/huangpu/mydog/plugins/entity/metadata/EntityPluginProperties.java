@@ -12,11 +12,11 @@ import org.huangpu.mydog.core.plugins.metadata.AbstractMyDogPluginProperties;
  * @author xusihan on 2017.07.17
  *
  */
-class EntityPluginProperties extends AbstractMyDogPluginProperties {
+public class EntityPluginProperties extends AbstractMyDogPluginProperties {
 
 	private static final long serialVersionUID = 2411937820328948001L;
 	
-	protected EntityPluginProperties() {
+	public EntityPluginProperties() {
 		super();
 		id = new HashMap<>();
 		fields = new ArrayList<>();

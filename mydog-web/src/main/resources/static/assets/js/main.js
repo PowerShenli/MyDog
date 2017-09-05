@@ -434,7 +434,6 @@ function getParent($this) {
     if (selectText === "file"){
         $('#outPutByFile').show();
     };
-    console.log(selectText);
     $("#selectOutputType").on('change',function () {
         var selectText = $(this).find('option:selected').val();
         console.log(selectText);
@@ -468,8 +467,8 @@ function getParent($this) {
         }
     });
     $(".filedAdd").on('click',function(){
-        var mdBody = $(this).parents('.media-body');
-        console.log(mdBody);
+        var mdBody = $(this).parents('.media-body').find('#otherFields');
+        //console.log(mdBody);
         $(mdBody).append(appendHtmlTemplate.fieldAddTemplate);
     });
     $(".mydog-plugins-wrapper").on('click','a[class="fieldRemove"]',function(){
@@ -508,17 +507,24 @@ $.fn.serializeObject = function()
 };
 
 function mydogSubmit(){
-    
-    var myDogProjectParams = $("form[name='myDogProjectParams']").serializeObject();
-    var myDogDataSourceParams = $("form[name='myDogDataSourceParams']").serializeObject();
-    var myDogOrmappingParams = $("form[name='myDogOrmappingParams']").serializeObject();
+    var myDogProjectParams = $("form[name='myDogProjectParams']").serializeObject();//project fields
+    var myDogDataSourceParams = $("form[name='myDogDataSourceParams']").serializeObject();//datasource fields
+    var myDogOrmappingParams = $("form[name='myDogOrmappingParams']").serializeObject();//ormapping fields
     var myDogEntityParamsArr = [];
-    var dos = $("form[name='myDogEntityParams']");
+    var dos = $("form[name='myDogEntityParams']");//entity params
     //获取所有的entityParams
-    for (var i=0;i<dos.length;i++){
-        myDogEntityParamsArr.push($(dos[i]).serializeObject());
+    for (var i=0;i<dos.length;i++){//foreach
+        var mydogParam = $(dos[i]).serializeObject();
+        var fieldWrapper = $(dos[i]).parents('.media-body').find('#otherFields .mydog-entity-add');//get wrapper
+        var fieldArr = [];//init fields array
+        for (var j=0;j<fieldWrapper.length;j++){//wrapper fields
+            var fields = $(fieldWrapper[j]).find('input');
+            fieldArr.push(fields.serializeObject());//put fields
+        }
+        var mydogParamResult = new Object(mydogParam);
+        mydogParamResult.validateParams=fieldArr;
+        myDogEntityParamsArr.push(mydogParamResult)//put result into array
     }
-    console.log(JSON.stringify(myDogEntityParamsArr));
     var myDogEntityUIParams = $("form[name='myDogEntityUIParams']").serializeObject();
     var myDogPluginsParams = {
         myDogProjectParams: myDogProjectParams,
@@ -527,11 +533,10 @@ function mydogSubmit(){
         myDogEntityUIParams:myDogEntityUIParams,
         myDogOrmappingParams:myDogOrmappingParams
     }
-    console.log(JSON.stringify(myDogPluginsParams));
     var data = JSON.stringify(myDogPluginsParams);
     /*var extra={
         contentType:"application/x-www-form-urlencoded"
     }*/
-    $_ajax.post('http://localhost:8985/v1/mydog/plugin/mydogPlugins',data)
-
+    console.log(data);
+    $_ajax.post('http://localhost:8985/v1/mydog/plugin/mydogPlugins',data);
 };
