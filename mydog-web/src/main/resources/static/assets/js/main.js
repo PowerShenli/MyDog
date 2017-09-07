@@ -481,7 +481,7 @@ function getParent($this) {
 (function (global,$) {
     'use strict';
     var appendHtmlTemplate ={
-        fieldAddTemplate: '<div class="col-md-12 mydog-entity-add"><div class="col-md-2"><div class="form-group"><label>字段名</label><input type="text" name="fieldName" class="form-control"></div></div><div class="col-md-2"><div class="form-group"><label>字段说明</label><input type="text" name="fieldLabel" class="form-control"></div></div><div class="col-md-2"><div class="form-group"><label>字段类型</label><input type="text" name="fieldType" class="form-control"></div></div><div class="col-md-2"><div class="form-group"><label>长度</label><input type="text" name="fieldLength" class="form-control"></div></div><div class="col-md-2"><div class="form-group"><label>显示类型:</label><div><select class="plugin-add-select" name="fieldViewProp"><option selected value="1">text</option><option selected value="2">password</option><option selected value="3">number</option></select></div></div></div><div class="col-md-2"><div class="form-group"><label></label><a class="fieldRemove"><img src="assets/img/remove.png"></a></div></div><div class="col-md-1"><div class="form-group"><label>为空<div><input type="checkbox" value="1" style="height:22px;width:22px" name="fieldValidateNull"> <b></b></div></label></div></div><div class="col-md-2"><div class="form-group"><label>最小值验证</label><input type="text" name="fieldValidateMin" class="form-control"></div></div><div class="col-md-2"><div class="form-group"><label>最大值验证</label><input type="text" name="fieldValidateMax" class="form-control"></div></div><div class="col-md-2"><div class="form-group"><label>正则表达式验证</label><input type="text" name="fieldValidateRegexp" class="form-control"></div></div></div>'
+        fieldAddTemplate: '<div class="col-md-12 mydog-entity-add"><div class="col-md-2"><div class="form-group"><label>字段名</label><input type="text" name="fieldName" class="form-control"></div></div><div class="col-md-2"><div class="form-group"><label>字段说明</label><input type="text" name="fieldLabel" class="form-control"></div></div><div class="col-md-2"><div class="form-group"><label>字段类型</label><input type="text" name="fieldType" class="form-control"></div></div><div class="col-md-2"><div class="form-group"><label>长度</label><input type="text" name="fieldLength" class="form-control"></div></div><div class="col-md-2"><div class="form-group"><label>显示类型:</label><div><select class="plugin-add-select" name="fieldViewProp"><option selected value="1">text</option><option selected value="2">password</option><option selected value="3">number</option></select></div></div></div><div class="col-md-2"><div class="form-group"><label></label><a class="fieldRemove"><img src="assets/img/remove.png"></a></div></div><div class="col-md-1"><div class="form-group"><label>为空<div><input type="checkbox" value="1" style="height:22px;width:22px" name="fieldValidateNull"> <b></b></div></label>&nbsp;<label>主键<div><input type="checkbox" value="1" style="height:22px;width:22px" name="fieldIsId"> <b></b></div></label></div></div><div class="col-md-2"><div class="form-group"><!--<label>最小值验证</label><input type="text" name="fieldValidateMin" class="form-control"></div>--></div><div class="col-md-2"><div class="form-group"><!--<label>最大值验证</label><input type="text" name="fieldValidateMax" class="form-control"></div>--></div><div class="col-md-2"><div class="form-group"><!--<label>正则表达式验证</label>--><!--<input type="text" name="fieldValidateRegexp" class="form-control">--></div></div></div>'
     };
     global.appendHtmlTemplate = appendHtmlTemplate;
 })(window,jQuery);
@@ -506,6 +506,22 @@ $.fn.serializeObject = function()
     return o;
 };
 
+$.fn.serializeObjectAdd = function(J)
+{
+    var o = J;
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name]) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
 function mydogSubmit(){
     var myDogProjectParams = $("form[name='myDogProjectParams']").serializeObject();//project fields
     var myDogDataSourceParams = $("form[name='myDogDataSourceParams']").serializeObject();//datasource fields
@@ -518,8 +534,11 @@ function mydogSubmit(){
         var fieldWrapper = $(dos[i]).parents('.media-body').find('#otherFields .mydog-entity-add');//get wrapper
         var fieldArr = [];//init fields array
         for (var j=0;j<fieldWrapper.length;j++){//wrapper fields
-            var fields = $(fieldWrapper[j]).find('input');
-            fieldArr.push(fields.serializeObject());//put fields
+            var inputs = $(fieldWrapper[j]).find('input');
+            var selects = $(fieldWrapper[j]).find('select');
+            var o = inputs.serializeObject();
+            o = selects.serializeObjectAdd(o);
+            fieldArr.push(o);//put fields
         }
         var mydogParamResult = new Object(mydogParam);
         mydogParamResult.validateParams=fieldArr;

@@ -10,7 +10,8 @@ public enum MetaDataTypeEnum {
 	PROJECT("project"),
 	DATASOURCE("datasource"),
 	ORMAPPING("ormapping"),
-	ENTITYUI("entityui");
+	ENTITYUI("entityui"),
+	ENTITY("entity");
 
 	private String value;
 

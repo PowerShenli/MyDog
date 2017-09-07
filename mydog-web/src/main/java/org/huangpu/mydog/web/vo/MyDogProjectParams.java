@@ -47,11 +47,6 @@ public class MyDogProjectParams extends AbstractMyDogParams{
 	 * project name
 	 */
 	private String projectName;
-
-	/**
-	 * 项目名称
-	 */
-	private String instanceName;
 	
 	/**
 	 * base package
@@ -191,7 +186,7 @@ public class MyDogProjectParams extends AbstractMyDogParams{
 		ProjectPluginProperties properties = new ProjectPluginProperties();
 		setProperties(properties,myDogProjectParams);
 		medadata.setProperties(properties);
-		medadata.setInstanceName(myDogProjectParams.getInstanceName());
+		medadata.setInstanceName("mydogProj");
 		medadata.setMetadataType(MetaDataTypeEnum.PROJECT.value());
 		return medadata;
 	}

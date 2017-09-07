@@ -11,6 +11,7 @@ import org.huangpu.mydog.web.exception.MyDogParamsNullPointException;
 /**
  * 
  * 主要接收前端所有用于生成json的mydog plugin定义
+ * TODO:考虑到参数太多 后续版本要进行异步保存和修改
  * @author xusihan on 2017.07.10
  *
  */

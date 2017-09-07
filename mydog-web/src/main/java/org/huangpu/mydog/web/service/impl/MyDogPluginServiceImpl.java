@@ -1,5 +1,6 @@
 package org.huangpu.mydog.web.service.impl;
 
+import org.huangpu.mydog.core.flow.FlowController;
 import org.huangpu.mydog.web.core.plugin.loader.MyDogPluginParamsLoaderTemplate;
 import org.huangpu.mydog.web.service.MyDogPluginService;
 import org.huangpu.mydog.web.vo.MyDogPluginsParams;
@@ -16,7 +17,10 @@ public class MyDogPluginServiceImpl implements MyDogPluginService{
 		MyDogPluginParamsLoaderTemplate template = new MyDogPluginParamsLoaderTemplate();
 		template.loadMyDogPluginParams(myDogPluginsParams);
 		String demoJson = template.getParamsJsonData();
+		demoJson = "{\"metadatas\":"+demoJson+"}";
 		System.out.println(demoJson);
+		String s = new FlowController().startGenerate(demoJson);
+	    System.out.println("execute " + s);
 	}
 	
 }

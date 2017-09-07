@@ -2,9 +2,17 @@ package org.huangpu.mydog.web.vo;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.huangpu.mydog.core.plugins.metadata.MyDogPluginMetaData;
+import org.huangpu.mydog.plugins.entity.metadata.EntityPluginField;
 import org.huangpu.mydog.plugins.entity.metadata.EntityPluginProperties;
 import org.huangpu.mydog.web.exception.MyDogParamsParserException;
+import org.huangpu.mydog.web.status.EntityIsPageEnum;
+import org.huangpu.mydog.web.status.FieldGenerateType;
+import org.huangpu.mydog.web.status.FieldNullType;
+import org.huangpu.mydog.web.status.MetaDataTypeEnum;
+import org.huangpu.mydog.web.status.ViewPropEnum;
+import org.springframework.util.StringUtils;
 
 /**
  * mydog entity
@@ -99,16 +107,48 @@ public class MyDogEntityParams extends AbstractMyDogParams{
 		}
 		MyDogEntityParams myDogEntityParams = (MyDogEntityParams)myDogParams;
 		MyDogPluginMetaData metaData = new MyDogPluginMetaData();
-		EntityPluginProperties prope rties = new EntityPluginProperties();
+		EntityPluginProperties properties = new EntityPluginProperties();
 		setProperties(properties, myDogEntityParams);
+		metaData.setInstanceName(entityName);
+		metaData.setMetadataType(MetaDataTypeEnum.ENTITY.value());
 		metaData.setProperties(properties);
 		return metaData;
 	}
 	
+	private void setProperties(EntityPluginProperties properties,MyDogEntityParams params) {
+		properties.setEntityName(params.getEntityName());
+		properties.setFieldName(params.getId());
+		properties.setFieldType(params.getFieldType());
+		properties.setGenerate(FieldGenerateType.INCREMENT.sValue());
+		properties.setIdType(params.getFieldType());
+		properties.setLabel(params.getLabel());
+		properties.setPackageName(params.getPackageName());
+		properties.setQuery(null);
+		properties.setEnabled(EntityIsPageEnum.getByValue(params.getIsPage()).sValue());
+		properties.setPageSize(Integer.toString(params.getPageSize()));
+		setFields(properties,params);
+	}
 	
-	private void setProperties(EntityPluginProperties properties,MyDogEntityParams myDogEntityParams) {
-		
-		
+	private void setFields(EntityPluginProperties properties, MyDogEntityParams params) {
+		if (!CollectionUtils.isEmpty(params.getValidateParams())) {
+			params.getValidateParams().forEach(p->{
+				EntityPluginField field = new EntityPluginField();
+				field.setFieldName(p.getFieldName());
+				field.setFieldType(p.getFieldType());
+				field.setIsId(FieldNullType.getByValue(p.getFieldIsId()).sValue());
+				field.setIsNull(FieldNullType.getByValue(p.getFieldValidateNull()).sValue());
+				field.setLabel(p.getFieldLabel());
+				field.setLength(p.getFieldLength());
+				field.setViewPropType(ViewPropEnum.getByValue(p.getFieldViewProp()).sValue());
+				/*if (!StringUtils.isEmpty(p.getFieldValidateNull())) {
+					field.setValidate("@NotNull");
+				}
+				if (!StringUtils.isEmpty(p.getFieldValidateMin())) {
+					field.setValidate("");
+				}*/
+				properties.addField(field);
+			});
+		}
 	}
 	
 	

@@ -42,6 +42,45 @@ public class ValidateParams {
 	 */
 	private String fieldValidateRegexp;
 
+	/**
+	 * 是否为空
+	 */
+	private byte fieldValidateNull;
+	
+	/**
+	 * 是否ID
+	 */
+	private byte fieldIsId;
+	
+	/**
+	 * 显示的类型
+	 */
+	private byte fieldViewProp;
+	
+	public byte getFieldIsId() {
+		return fieldIsId;
+	}
+
+	public void setFieldIsId(byte fieldIsId) {
+		this.fieldIsId = fieldIsId;
+	}
+
+	public byte getFieldViewProp() {
+		return fieldViewProp;
+	}
+
+	public void setFieldViewProp(byte fieldViewProp) {
+		this.fieldViewProp = fieldViewProp;
+	}
+
+	public byte getFieldValidateNull() {
+		return fieldValidateNull;
+	}
+
+	public void setFieldValidateNull(byte fieldValidateNull) {
+		this.fieldValidateNull = fieldValidateNull;
+	}
+
 	public String getFieldName() {
 		return fieldName;
 	}
