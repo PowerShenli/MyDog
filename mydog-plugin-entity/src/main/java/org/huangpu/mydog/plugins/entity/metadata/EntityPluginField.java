@@ -1,7 +1,12 @@
 package org.huangpu.mydog.plugins.entity.metadata;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 
@@ -10,21 +15,26 @@ import java.util.Map;
  */
 public class EntityPluginField implements Serializable{
 	
+	public EntityPluginField() {
+		validates = new HashSet<>();
+		viewProp = new HashMap<>();
+	}
+	
 	private static final long serialVersionUID = -2995460197231515120L;
 
 	private String fieldName;
 	
 	private String label;
 	
-	private String isId;
+	private boolean isId;
 	
-	private Map<String, String> validates;
+	private Set<String> validates;
 	
 	private String fieldType;
 	
 	private String length;
 	
-	private String isNull;
+	private boolean isNull;
 	
 	private Map<String, String> viewProp;
 
@@ -36,11 +46,11 @@ public class EntityPluginField implements Serializable{
 		return label;
 	}
 
-	public String getIsId() {
+	public boolean getIsId() {
 		return isId;
 	}
 
-	public Map<String, String> getValidates() {
+	public Set<String> getValidates() {
 		return validates;
 	}
 
@@ -52,7 +62,7 @@ public class EntityPluginField implements Serializable{
 		return length;
 	}
 
-	public String getIsNull() {
+	public boolean getIsNull() {
 		return isNull;
 	}
 
@@ -68,7 +78,7 @@ public class EntityPluginField implements Serializable{
 		this.label = label;
 	}
 
-	public void setIsId(String isId) {
+	public void setIsId(boolean isId) {
 		this.isId = isId;
 	}
 
@@ -80,11 +90,15 @@ public class EntityPluginField implements Serializable{
 		this.length = length;
 	}
 
-	public void setIsNull(String isNull) {
+	public void setIsNull(boolean isNull) {
 		this.isNull = isNull;
 	}
 	
-	public void setValidate(String validateType,String validate) {
-		validates.put(validateType, validate);
+	public void setValidate(String validate) {
+		validates.add(validate);
+	}
+	
+	public void setViewPropType(String type) {
+		viewProp.put("type", type);
 	}
 }

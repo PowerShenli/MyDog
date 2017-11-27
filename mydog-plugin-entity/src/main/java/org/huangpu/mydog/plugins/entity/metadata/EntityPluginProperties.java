@@ -12,14 +12,15 @@ import org.huangpu.mydog.core.plugins.metadata.AbstractMyDogPluginProperties;
  * @author xusihan on 2017.07.17
  *
  */
-class EntityPluginProperties extends AbstractMyDogPluginProperties {
+public class EntityPluginProperties extends AbstractMyDogPluginProperties {
 
 	private static final long serialVersionUID = 2411937820328948001L;
 	
-	protected EntityPluginProperties() {
+	public EntityPluginProperties() {
 		super();
 		id = new HashMap<>();
 		fields = new ArrayList<>();
+		pagination = new HashMap<>();
 	}
 
 	private String entityName;
@@ -36,6 +37,8 @@ class EntityPluginProperties extends AbstractMyDogPluginProperties {
 	
 	private EntityQuery query;
 
+	private Map<String, Object> pagination;
+	
 	public String getEntityName() {
 		return entityName;
 	}
@@ -52,6 +55,10 @@ class EntityPluginProperties extends AbstractMyDogPluginProperties {
 		return idType;
 	}
 
+	public Map<String, Object> getPagination() {
+		return pagination;
+	}
+	
 	public String getPackageName() {
 		return packageName;
 	}
@@ -103,6 +110,14 @@ class EntityPluginProperties extends AbstractMyDogPluginProperties {
 	/** fields */
 	public void addField(EntityPluginField entityPluginField) {
 		fields.add(entityPluginField);
+	}
+	
+	public void setEnabled(boolean enabled) {
+		pagination.put("enabled", enabled);
+	}
+	
+	public void setPageSize(String pageSize) {
+		pagination.put("pageSize", pageSize);
 	}
 	
 }

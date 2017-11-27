@@ -12,17 +12,17 @@ import java.io.IOException;
 public class ShellTools {
 
     public static void main(String[] args) throws IOException {
-        if (args == null || args.length < 1) {
+       /* if (args == null || args.length < 1) {
 
             System.err.println("please input the metadata json path. [java -jar mydog-shell-1.0-SNAPSHOT.jar /xxx/xxx.json]");
             System.exit(1);
-        }
+        }*/
 //        args = new String[]{
 //                "/Users/shenli/knowledge/spring/github/MyDog/mydog-shell/demo.json"
 //        };
 
-        String metadataJson = args[0];
-        File metaDataFile = new File(metadataJson);
+        String metadataJson = "";
+        File metaDataFile = new File("G:\\project\\github\\MyDog\\mydog-shell\\demo.json");
         if (!metaDataFile.exists()) {
             System.err.println("the config file [" + metadataJson + "] is not exist.");
             System.exit(1);

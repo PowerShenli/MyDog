@@ -14,8 +14,8 @@ public class PathUtils {
 		if (!url.endsWith("/")) {
 			url = url +"/";
 		}
-		if (!url.startsWith("http")) {
-			url = "http://"+url;
+		if (!url.startsWith("jdbc:mysql://")) {
+			url = "jdbc:mysql://"+url;
 		}
 		url = url + database +"?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false";
 		return url;

@@ -120,7 +120,7 @@ public class MyDogDataSourceParams extends AbstractMyDogParams{
 	}
 
 	
-	private DatasourcePluginProperties setProperties(DatasourcePluginProperties properties,MyDogDataSourceParams params) {
+	private void setProperties(DatasourcePluginProperties properties,MyDogDataSourceParams params) {
 		properties.setDatasourceUsername(params.getUser());
 		properties.setDatasourcePassword(params.getPassword());
 		properties.setDriverJarPath(params.getJarPath());
@@ -132,7 +132,6 @@ public class MyDogDataSourceParams extends AbstractMyDogParams{
 		default:
 			break;
 		}
-		return properties;
 	}
 	
 	

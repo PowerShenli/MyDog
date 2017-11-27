@@ -434,7 +434,6 @@ function getParent($this) {
     if (selectText === "file"){
         $('#outPutByFile').show();
     };
-    console.log(selectText);
     $("#selectOutputType").on('change',function () {
         var selectText = $(this).find('option:selected').val();
         console.log(selectText);
@@ -458,7 +457,34 @@ function getParent($this) {
             $('#mybatisGeneratorType').hide();
         }
     });
-})(jQuery)
+    $("#colPageSize").hide();
+    $("#pageCheckbox").on('click',function(){
+        var checkIspageVal = $(this).find("input[name=isPage]:checked").val();
+        if(checkIspageVal===undefined){
+            $('#colPageSize').show();
+        }else{
+            $("#colPageSize").hide();
+        }
+    });
+    $(".filedAdd").on('click',function(){
+        var mdBody = $(this).parents('.media-body').find('#otherFields');
+        //console.log(mdBody);
+        $(mdBody).append(appendHtmlTemplate.fieldAddTemplate);
+    });
+    $(".mydog-plugins-wrapper").on('click','a[class="fieldRemove"]',function(){
+        var rmDiv = $(this).parents('.mydog-entity-add').remove();
+    });
+})(jQuery);
+
+
+// append的 html
+(function (global,$) {
+    'use strict';
+    var appendHtmlTemplate ={
+        fieldAddTemplate: '<div class="col-md-12 mydog-entity-add"><div class="col-md-2"><div class="form-group"><label>字段名</label><input type="text" name="fieldName" class="form-control"></div></div><div class="col-md-2"><div class="form-group"><label>字段说明</label><input type="text" name="fieldLabel" class="form-control"></div></div><div class="col-md-2"><div class="form-group"><label>字段类型</label><input type="text" name="fieldType" class="form-control"></div></div><div class="col-md-2"><div class="form-group"><label>长度</label><input type="text" name="fieldLength" class="form-control"></div></div><div class="col-md-2"><div class="form-group"><label>显示类型:</label><div><select class="plugin-add-select" name="fieldViewProp"><option selected value="1">text</option><option selected value="2">password</option><option selected value="3">number</option></select></div></div></div><div class="col-md-2"><div class="form-group"><label></label><a class="fieldRemove"><img src="assets/img/remove.png"></a></div></div><div class="col-md-1"><div class="form-group"><label>为空<div><input type="checkbox" value="1" style="height:22px;width:22px" name="fieldValidateNull"> <b></b></div></label>&nbsp;<label>主键<div><input type="checkbox" value="1" style="height:22px;width:22px" name="fieldIsId"> <b></b></div></label></div></div><div class="col-md-2"><div class="form-group"><!--<label>最小值验证</label><input type="text" name="fieldValidateMin" class="form-control"></div>--></div><div class="col-md-2"><div class="form-group"><!--<label>最大值验证</label><input type="text" name="fieldValidateMax" class="form-control"></div>--></div><div class="col-md-2"><div class="form-group"><!--<label>正则表达式验证</label>--><!--<input type="text" name="fieldValidateRegexp" class="form-control">--></div></div></div>'
+    };
+    global.appendHtmlTemplate = appendHtmlTemplate;
+})(window,jQuery);
 
 /*
     序列化form表单的数据
@@ -480,18 +506,44 @@ $.fn.serializeObject = function()
     return o;
 };
 
+$.fn.serializeObjectAdd = function(J)
+{
+    var o = J;
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name]) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
 function mydogSubmit(){
-    
-    var myDogProjectParams = $("form[name='myDogProjectParams']").serializeObject();
-    var myDogDataSourceParams = $("form[name='myDogDataSourceParams']").serializeObject();
-    var myDogOrmappingParams = $("form[name='myDogOrmappingParams']").serializeObject();
+    var myDogProjectParams = $("form[name='myDogProjectParams']").serializeObject();//project fields
+    var myDogDataSourceParams = $("form[name='myDogDataSourceParams']").serializeObject();//datasource fields
+    var myDogOrmappingParams = $("form[name='myDogOrmappingParams']").serializeObject();//ormapping fields
     var myDogEntityParamsArr = [];
-    var dos = $("form[name='myDogEntityParams']");
+    var dos = $("form[name='myDogEntityParams']");//entity params
     //获取所有的entityParams
-    for (var i=0;i<dos.length;i++){
-        myDogEntityParamsArr.push($(dos[i]).serializeObject());
+    for (var i=0;i<dos.length;i++){//foreach
+        var mydogParam = $(dos[i]).serializeObject();
+        var fieldWrapper = $(dos[i]).parents('.media-body').find('#otherFields .mydog-entity-add');//get wrapper
+        var fieldArr = [];//init fields array
+        for (var j=0;j<fieldWrapper.length;j++){//wrapper fields
+            var inputs = $(fieldWrapper[j]).find('input');
+            var selects = $(fieldWrapper[j]).find('select');
+            var o = inputs.serializeObject();
+            o = selects.serializeObjectAdd(o);
+            fieldArr.push(o);//put fields
+        }
+        var mydogParamResult = new Object(mydogParam);
+        mydogParamResult.validateParams=fieldArr;
+        myDogEntityParamsArr.push(mydogParamResult)//put result into array
     }
-    console.log(JSON.stringify(myDogEntityParamsArr));
     var myDogEntityUIParams = $("form[name='myDogEntityUIParams']").serializeObject();
     var myDogPluginsParams = {
         myDogProjectParams: myDogProjectParams,
@@ -500,11 +552,10 @@ function mydogSubmit(){
         myDogEntityUIParams:myDogEntityUIParams,
         myDogOrmappingParams:myDogOrmappingParams
     }
-    console.log(JSON.stringify(myDogPluginsParams));
     var data = JSON.stringify(myDogPluginsParams);
     /*var extra={
         contentType:"application/x-www-form-urlencoded"
     }*/
-    $_ajax.post('http://localhost:8985/v1/mydog/plugin/mydogPlugins',data)
-
-}
+    console.log(data);
+    $_ajax.post('http://localhost:8985/v1/mydog/plugin/mydogPlugins',data);
+};

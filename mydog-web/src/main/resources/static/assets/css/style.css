@@ -7748,3 +7748,60 @@ body.md-skin {
 .plugin-add-select{
   padding: 5px 5px;
 }
+.mydog-plugins-wrapper .filedAdd img{
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+}
+.mydog-plugins-wrapper .mydog-entity-add label{
+  font-size: 13px;
+}
+.mydog-plugins-wrapper .mydog-entity-add input[type='text']{
+  font-size: 12px;
+  height: 23px;
+  padding: 4px;
+}
+.mydog-plugins-wrapper .mydog-entity-add select{
+  height: 23px;
+  padding: 0 0 0 5px;
+}
+.mydog-plugins-wrapper .mydog-entity-add{
+  border-bottom: 1px solid #E7E7E7;
+  padding:20px 0;
+}
+.mydog-plugins-wrapper .fieldRemove{
+  display: block;
+  height: 35px;
+}
+.mydog-plugins-wrapper .fieldRemove img{
+  width: 25px;
+  height: 25px;
+}
+
+
+input[type="checkbox"]{display: none;}
+
+input[type="checkbox"] + b{
+  margin-top: 5px;
+  display: inline-block;
+  width: 22px;height: 22px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  vertical-align: middle;
+}
+
+input[type="checkbox"]:checked + b{
+  display: inline-block;
+  *display: inline;
+  vertical-align: middle;
+  width: 22px;
+  height: 22px;
+  background: url(./plugins/iCheck/green.png) no-repeat;
+  background-size:cover;
+  background-position: -43px;
+  border: none;
+  cursor: pointer;  
+}

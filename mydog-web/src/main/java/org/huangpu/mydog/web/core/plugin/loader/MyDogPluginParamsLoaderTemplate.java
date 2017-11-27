@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 
 /**
  * 
- * 
  * @author xusihan on 2017.07.01
  */
 public class MyDogPluginParamsLoaderTemplate implements MyDogPluginParamsLoader{
